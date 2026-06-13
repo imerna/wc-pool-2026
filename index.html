@@ -377,14 +377,14 @@
     // static ./data/*.json refreshed every 10 min by GitHub Actions.
     async function fetchStandings() {
       const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/standings` : './data/standings.json';
-      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
+      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : { cache: 'no-cache' };
       const res  = await fetch(url, opts);
       if (!res.ok) throw new Error(`Standings ${res.status}`);
       return res.json();
     }
     async function fetchMatches() {
       const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/matches` : './data/matches.json';
-      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
+      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : { cache: 'no-cache' };
       const res  = await fetch(url, opts);
       if (!res.ok) throw new Error(`Matches ${res.status}`);
       return res.json();
