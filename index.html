@@ -674,11 +674,14 @@
       document.getElementById('refresh-spinner').classList.toggle('hidden', !active);
     }
 
-    function updateLastUpdated() {
-      const now = new Date();
+    function updateLastUpdated(matchesData) {
+      const timestamps = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
+      const date = timestamps.length
+        ? new Date(timestamps.reduce((a, b) => a > b ? a : b))
+        : new Date();
       document.getElementById('last-updated').textContent =
-        `Updated ${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · ` +
-        `${now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+        `Data as of ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · ` +
+        `${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
     }
 
     function showToast(msg) {
@@ -872,13 +875,14 @@
         const teamStats = buildTeamStats(standings, matches);
         buildActivitySets(matches);
         renderLeaderboard(teamStats);
-        updateLastUpdated();
+        updateLastUpdated(matches);
         hideToast();
       } catch (err) {
         console.error('Refresh failed:', err);
         if (lastGoodData) {
           const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
           renderLeaderboard(teamStats);
+          updateLastUpdated(lastGoodData.matches);
           showToast('Could not refresh — showing last known data');
         } else {
           renderErrorState();
