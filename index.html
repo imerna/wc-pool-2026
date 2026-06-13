@@ -285,6 +285,10 @@
             matchPoints:   entry.points,
             groupPosition: entry.position,
             playedGames:   entry.playedGames,
+            won:           entry.won,
+            draw:          entry.draw,
+            lost:          entry.lost,
+            group:         group.group,   // e.g. "Group A"
             totalGoals:    entry.goalsFor,
             reachedQF:     false,
             reachedSF:     false,
@@ -398,7 +402,8 @@
     }
 
     // ── Leaderboard Renderer ──────────────────────────────────────────────────────
-    const GROUP_LABELS = ['', 'Group Winner', 'Runner-Up', '3rd Place', '4th Place'];
+    const GROUP_LABELS   = ['', 'Group Winner', 'Runner-Up', '3rd Place', '4th Place'];
+    const ORDINALS       = ['', '1st', '2nd', '3rd', '4th'];
 
     function teamBadges(stats) {
       const parts = [];
@@ -424,11 +429,18 @@
         const isElim  = eliminatedTeams.has(teamName);
         const liveDot = isLive ? '<span class="live-dot"></span>' : '';
 
+        const wdl = stats.playedGames > 0
+          ? `${stats.won}W ${stats.draw}D ${stats.lost}L &#183; `
+          : '';
+        const standing = stats.playedGames > 0 && stats.playedGames < 3
+          ? ` &#183; ${ORDINALS[stats.groupPosition] ?? stats.groupPosition} in ${stats.group}`
+          : '';
+
         return `<tr class="${isElim ? 'eliminated' : ''}">
           <td>${teamName}${liveDot}</td>
           <td style="color:var(--muted)">&#215;${pot}</td>
           <td style="font-weight:600">${score}</td>
-          <td style="color:var(--muted)">${stats.totalGoals}g &#183; ${stats.matchPoints}pts${teamBadges(stats)}</td>
+          <td style="color:var(--muted)">${wdl}${stats.totalGoals}g &#183; ${stats.matchPoints}pts${standing}${teamBadges(stats)}</td>
         </tr>`;
       });
 
