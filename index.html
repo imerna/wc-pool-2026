@@ -570,7 +570,7 @@
       ['today','results','upcoming'].forEach(f => {
         document.getElementById(`mf-${f}`).classList.toggle('active', f === filter);
       });
-      if (lastGoodData) renderMatchesView(lastGoodData.matches);
+      if (lastGoodData) renderMatchesView(lastGoodData.matches.matches);
     }
 
     function filterMatches(matches) {
