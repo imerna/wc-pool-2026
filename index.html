@@ -559,7 +559,7 @@
       document.getElementById('nav-matches').classList.toggle('active', view === 'matches');
       document.getElementById('view-title').textContent = view === 'standings' ? 'Standings' : 'Matches';
       if (view === 'matches') {
-        if (lastGoodData) renderMatchesView(lastGoodData.matches);
+        if (lastGoodData) renderMatchesView(lastGoodData.matches.matches);
         else document.getElementById('match-list').innerHTML =
           '<p class="match-empty">Loading match data…</p>';
       }
