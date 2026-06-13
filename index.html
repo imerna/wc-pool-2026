@@ -801,12 +801,10 @@
       bar.addEventListener('contextmenu', e => {
         e.preventDefault();
         const raw = lastGoodData?.matches?._fetchedAt;
-        toast.textContent = raw
-          ? 'fetched ' + new Date(raw).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
-          : document.getElementById('fetched-at').textContent || 'fetched time unavailable';
-        toast.classList.add('visible');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('visible'), 2500);
+        const msg = raw
+          ? 'Fetched: ' + new Date(raw).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
+          : 'Fetched time unavailable';
+        alert(msg);
       });
     })();
 
