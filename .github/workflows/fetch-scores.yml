@@ -1,0 +1,33 @@
+name: Fetch WC Scores
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch scores from football-data.org
+        run: |
+          mkdir -p data
+          curl -sf -H "X-Auth-Token: 3f78d135cc954c46bb6b8f1cf10b7205" \
+            "https://api.football-data.org/v4/competitions/WC/standings" \
+            -o data/standings.json
+          curl -sf -H "X-Auth-Token: 3f78d135cc954c46bb6b8f1cf10b7205" \
+            "https://api.football-data.org/v4/competitions/WC/matches" \
+            -o data/matches.json
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/standings.json data/matches.json
+          git diff --cached --quiet || git commit -m "chore: update scores [skip ci]"
+          git push

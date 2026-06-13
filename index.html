@@ -430,6 +430,7 @@
     // ── Config ──────────────────────────────────────────────────────────────────
     const API_KEY  = '3f78d135cc954c46bb6b8f1cf10b7205'; // yes this is visible, yes it's free, go get your own: football-data.org
     const API_BASE = 'https://api.football-data.org/v4';
+    const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
     // ── Static Data ──────────────────────────────────────────────────────────────
     const POTS = {
@@ -537,17 +538,17 @@
 
     // ── API Layer ─────────────────────────────────────────────────────────────────
     async function fetchStandings() {
-      const res = await fetch(`${API_BASE}/competitions/WC/standings`, {
-        headers: { 'X-Auth-Token': API_KEY }
-      });
+      const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/standings` : './data/standings.json';
+      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
+      const res  = await fetch(url, opts);
       if (!res.ok) throw new Error(`Standings ${res.status}`);
       return res.json();
     }
 
     async function fetchMatches() {
-      const res = await fetch(`${API_BASE}/competitions/WC/matches`, {
-        headers: { 'X-Auth-Token': API_KEY }
-      });
+      const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/matches` : './data/matches.json';
+      const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
+      const res  = await fetch(url, opts);
       if (!res.ok) throw new Error(`Matches ${res.status}`);
       return res.json();
     }
@@ -846,7 +847,9 @@
 
     function scheduleNext() {
       clearTimeout(refreshTimer);
-      const delay = liveTeams.size > 0 ? LIVE_INTERVAL : IDLE_INTERVAL;
+      // On GitHub Pages data is served from static files updated every 5 min by CI,
+      // so polling faster than that is pointless.
+      const delay = (IS_LOCAL && liveTeams.size > 0) ? LIVE_INTERVAL : IDLE_INTERVAL;
       refreshTimer = setTimeout(doRefresh, delay);
     }
 
