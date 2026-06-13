@@ -99,8 +99,14 @@
     .pill.active.error { background: rgba(255,68,34,0.16);  color: var(--accent); border-color: var(--accent); }
 
     /* Dev pills hidden until Shift+D */
-    #error-btn { display: none; }
-    .dev-mode #error-btn { display: inline-block; }
+    #mode-btn, #error-btn { display: none; }
+    .dev-mode #mode-btn, .dev-mode #error-btn { display: inline-block; }
+
+    /* Status bar color matches active mode */
+    #last-updated { transition: color 0.3s ease; }
+    #last-updated.state-live  { color: var(--live); }
+    #last-updated.state-demo  { color: var(--gold); }
+    #last-updated.state-error { color: var(--accent); }
 
     /* ── Layout ── */
     main { max-width: 760px; margin: 0 auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 0.95rem; }
@@ -391,6 +397,10 @@
 
     // ── UI Helpers ────────────────────────────────────────────────────────────────
     const setRefreshing = (active) => document.getElementById('refresh-spinner').classList.toggle('hidden', !active);
+    function setStatusColor(state) {
+      const el = document.getElementById('last-updated');
+      el.className = state ? `state-${state}` : '';
+    }
     function updateLastUpdated(matchesData) {
       const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
       const date = ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
@@ -497,6 +507,7 @@
       eliminatedTeams = MOCK_ELIMINATED;
       renderLeaderboard(MOCK_TEAM_STATS);
       document.getElementById('last-updated').textContent = 'Demo · post-final snapshot — France champions';
+      setStatusColor('demo');
       setRefreshing(false);
     }
 
@@ -510,6 +521,7 @@
         buildActivitySets(matches);
         renderLeaderboard(teamStats);
         updateLastUpdated(matches);
+        setStatusColor('live');
         errorActive = false;
       } catch (err) {
         console.error('Refresh failed:', err);
@@ -519,8 +531,10 @@
           renderLeaderboard(teamStats);
           updateLastUpdated(lastGoodData.matches);
           document.getElementById('last-updated').textContent += ' · could not refresh';
+          setStatusColor('error');
         } else {
           renderErrorState();
+          setStatusColor('error');
         }
       } finally {
         setRefreshing(false);
@@ -537,7 +551,7 @@
       btn.textContent = mode === 'live' ? '● Live' : 'Demo data';
       btn.classList.toggle('active', mode === 'live');
       btn.classList.toggle('live', mode === 'live');
-      if (mode === 'live') { document.getElementById('last-updated').textContent = 'Loading…'; doRefresh(); }
+      if (mode === 'live') { document.getElementById('last-updated').textContent = 'Loading…'; setStatusColor(null); doRefresh(); }
       else renderDemo();
     }
 
@@ -550,6 +564,7 @@
       if (errorActive) {
         setRefreshing(false);
         document.getElementById('last-updated').textContent = '';
+        setStatusColor('error');
         renderErrorState();
       } else if (mode === 'live') {
         doRefresh();
