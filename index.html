@@ -225,6 +225,31 @@
     function normalizeName(name) {
       return NAME_MAP[name] ?? name;
     }
+
+    // ── Scoring Engine ────────────────────────────────────────────────────────────
+    function calcTeamScore(teamName, teamStats) {
+      const pot   = TEAM_POT[teamName];
+      const stats = teamStats[teamName];
+      if (!stats || !pot) return 0;
+
+      const groupBonus = [0, 8, 4, 2, 1][stats.groupPosition] ?? 0;
+
+      const knockoutBonus =
+        (stats.reachedQF    ? 12 : 0) +
+        (stats.reachedSF    ? 24 : 0) +
+        (stats.reachedFinal ? 36 : 0) +
+        (stats.isChampion   ? 48 : 0);
+
+      const base = stats.matchPoints + stats.totalGoals + groupBonus + knockoutBonus;
+      return base * pot;
+    }
+
+    function calcPersonScore(participant, teamStats) {
+      return participant.teams.reduce(
+        (sum, team) => sum + calcTeamScore(team, teamStats),
+        0
+      );
+    }
   </script>
 </body>
 </html>
