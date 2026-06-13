@@ -23,6 +23,8 @@ jobs:
           curl -sf -H "X-Auth-Token: 3f78d135cc954c46bb6b8f1cf10b7205" \
             "https://api.football-data.org/v4/competitions/WC/matches" \
             -o data/matches.json
+          jq --arg ts "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '. + {_fetchedAt: $ts}' \
+            data/matches.json > data/matches.tmp && mv data/matches.tmp data/matches.json
 
       - name: Commit and push if changed
         run: |

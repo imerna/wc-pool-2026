@@ -456,8 +456,12 @@
       el.className = state ? `state-${state}` : '';
     }
     function updateLastUpdated(matchesData) {
-      const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
-      const date = ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
+      const date = matchesData?._fetchedAt
+        ? new Date(matchesData._fetchedAt)
+        : (() => {
+            const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
+            return ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
+          })();
       document.getElementById('last-updated').textContent =
         `Data as of ${date.toLocaleDateString('en-US',{month:'short',day:'numeric'})} · ` +
         `${date.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'})}`;
