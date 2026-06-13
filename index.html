@@ -3,412 +3,207 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WC Pool 2026</title>
+  <title>WC Pool 2026 — Standings</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@1,9..144,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* ──────────────────────────────────────────────────────────────────────────
+       "KIT" THEME — brutalist streetwear scoreboard
+       Concrete-paper ground, white cards with thick black outlines + hard offset
+       shadows, square gold/silver/bronze medal blocks, red-orange energy bars,
+       Archivo Black display + Space Grotesk body + Space Mono data.
+    ────────────────────────────────────────────────────────────────────────── */
     :root {
-      --bg:         #d9d2c7;
-      --surface:    #faf8f4;
-      --surface-hi: #f3efe8;
-      --border:     #c8c0b0;
-      --border-hi:  #afa798;
-      --accent:     #8b1a1a;
-      --text:       #1c1917;
-      --muted:      #6b6560;
-      --live:       #15803d;
-      --font-body:  'DM Sans', system-ui, sans-serif;
-      --font-mono:  'JetBrains Mono', monospace;
+      --bg:        #e9e5db;
+      --card:      #ffffff;
+      --ink:       #14110c;
+      --muted:     #6f685b;
+      --accent:    #ff4422;
+      --live:      #0aa34a;
+      --gold:      #ffcf2e;
+      --silver:    #d8d8d4;
+      --bronze:    #ff9a4d;
+      --chip:      #f3f1ea;
+      --f-display: 'Archivo Black', system-ui, sans-serif;
+      --f-body:    'Space Grotesk', system-ui, sans-serif;
+      --f-mono:    'Space Mono', monospace;
+      --radius:    6px;
+      --border-w:  2.5px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-body);
+      color: var(--ink);
+      font-family: var(--f-body);
       min-height: 100vh;
+      padding-bottom: 3.5rem;
     }
 
     /* ── Header ── */
-    header {
-      padding: 2.25rem 1.5rem 1.25rem;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 1.25rem;
-      position: relative;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -1px; left: 30%; right: 30%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    }
+    header { padding: 2.6rem 1.25rem 1.5rem; text-align: center; }
 
     .eyebrow {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
+      font-family: var(--f-display);
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
     }
 
     h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-style: italic;
-      font-weight: 700;
-      font-size: 2.9rem;
-      color: var(--text);
-      letter-spacing: 0.01em;
-      line-height: 1;
-      margin-bottom: 0.8rem;
+      font-family: var(--f-display);
+      font-weight: 800;
+      font-size: clamp(2.7rem, 8vw, 4.2rem);
+      letter-spacing: 0.015em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: var(--ink);
     }
 
     #status-bar {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.04em;
-      color: var(--muted);
+      margin-top: 0.7rem;
       display: flex;
       justify-content: center;
-      gap: 0.75rem;
       align-items: center;
-      min-height: 1.2rem;
+      gap: 0.6rem;
+      min-height: 1.1rem;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+      color: var(--muted);
     }
-
-    .spinner { animation: spin 1s linear infinite; display: inline-block; }
+    .spinner { display: inline-block; font-size: 0.8rem; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Layout ── */
-    main { max-width: 700px; margin: 0 auto; padding: 0 1.25rem 3rem; }
-
-    /* ── Participant rows ── */
-    .participant-row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 3px solid transparent;
-      border-radius: 5px;
-      margin-bottom: 0.35rem;
-      overflow: hidden;
+    .controls { margin-top: 1.15rem; display: flex; justify-content: center; gap: 0.45rem; flex-wrap: wrap; }
+    .pill {
+      font-family: var(--f-display);
+      font-weight: 700;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.42rem 0.92rem;
+      border-radius: 999px;
+      line-height: 1;
       cursor: pointer;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.09), 0 1px 2px rgba(0,0,0,0.06);
-      transition: border-color 0.15s, background 0.15s, border-left-color 0.15s, box-shadow 0.15s;
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--ink);
+      transition: all 0.15s ease;
+    }
+    .pill.active.live  { background: rgba(10,163,74,0.16);  color: var(--live);   border-color: var(--live); }
+    .pill.active.error { background: rgba(255,68,34,0.16);  color: var(--accent); border-color: var(--accent); }
+
+    /* Dev pills hidden until Shift+D */
+    #error-btn { display: none; }
+    .dev-mode #error-btn { display: inline-block; }
+
+    /* ── Layout ── */
+    main { max-width: 760px; margin: 0 auto; padding: 0 1rem; display: flex; flex-direction: column; gap: 0.95rem; }
+
+    /* ── Participant cards ── */
+    .card {
+      background: var(--card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: var(--radius);
+      box-shadow: 5px 5px 0 var(--ink);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 9px 9px 0 var(--ink); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.95rem;
+      padding: 1rem 1.15rem;
+      cursor: pointer;
       user-select: none;
     }
-    .participant-row:hover {
-      border-color: var(--border-hi);
-      border-left-color: var(--accent);
-      background: var(--surface-hi);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.09);
-    }
-    .participant-row.expanded {
-      border-color: var(--border-hi);
-      border-left-color: var(--accent);
-      background: var(--surface-hi);
-      box-shadow: 0 4px 14px rgba(0,0,0,0.09);
-    }
-    .participant-row.rank-1 { border-left-color: var(--accent); }
 
-    .participant-header {
+    .medal {
+      width: 2.7rem; height: 2.7rem;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-display); font-weight: 800; font-size: 1.1rem;
+      border: var(--border-w) solid var(--ink);
+      border-radius: 5px;
+      background: #fff; color: var(--ink);
+    }
+    .card.rank-1 .medal { background: var(--gold); }
+    .card.rank-2 .medal { background: var(--silver); }
+    .card.rank-3 .medal { background: var(--bronze); }
+
+    .mid { flex: 1; min-width: 0; }
+    .name { font-family: var(--f-body); font-weight: 700; font-size: 1.38rem; line-height: 1.05; letter-spacing: -0.01em; }
+    .flag-kit { display: flex; gap: 0.18rem; margin-top: 0.38rem; flex-wrap: wrap; line-height: 1; }
+    .flag-kit .flag { font-size: 0.92rem; transition: opacity 0.2s ease, filter 0.2s ease; }
+    .flag-kit .flag.elim { opacity: 0.3; filter: grayscale(1); }
+    .flag-kit .flag.live { filter: drop-shadow(0 0 4px var(--live)); }
+
+    .right { display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
+    .score { font-family: var(--f-display); font-weight: 800; font-size: 2.2rem; line-height: 0.82; letter-spacing: 0.01em; text-align: right; }
+    .pts   { font-family: var(--f-mono); font-size: 0.56rem; font-weight: 600; letter-spacing: 0.22em; color: var(--muted); margin-top: 0.2rem; text-align: right; }
+    .chev  { font-size: 1.5rem; line-height: 1; color: var(--muted); transition: transform 0.25s ease; }
+    .card.expanded .chev { transform: rotate(90deg); }
+
+    /* ── Energy bar ── */
+    .bar { height: 7px; background: var(--ink); }
+    .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 0 3px 3px 0; transition: width 0.7s cubic-bezier(0.16,1,0.3,1); }
+
+    /* ── Breakdown (expand/collapse) ── */
+    .breakdown { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease; }
+    .card.expanded .breakdown { max-height: 900px; opacity: 1; }
+    .breakdown-inner { padding: 0.35rem 0.9rem 1rem; }
+
+    .team-row {
       display: grid;
-      grid-template-columns: 2.75rem 1fr 150px 5.75rem;
+      grid-template-columns: 1.7rem 1fr auto auto;
+      gap: 0.6rem;
       align-items: center;
-      gap: 0.875rem;
-      padding: 0.9rem 1.25rem 0.9rem 0.9rem;
+      padding: 0.55rem 0.35rem;
+      border-bottom: 1px solid var(--ink);
+    }
+    .team-row:last-child { border-bottom: none; }
+    .team-row.elim { opacity: 0.5; }
+
+    .t-flag  { font-size: 1.15rem; line-height: 1; text-align: center; }
+    .t-name  { font-family: var(--f-body); font-weight: 600; font-size: 1rem; min-width: 0; display: flex; align-items: center; gap: 0.1rem; }
+    .t-mult  { font-family: var(--f-mono); font-size: 0.82rem; color: var(--muted); }
+    .t-score { font-family: var(--f-display); font-weight: 700; font-size: 1.25rem; line-height: 1; text-align: right; letter-spacing: 0.01em; }
+    .t-detail {
+      grid-column: 1 / -1;
+      font-family: var(--f-mono); font-size: 0.7rem; color: var(--muted);
+      display: flex; gap: 0.35rem; flex-wrap: wrap; align-items: center;
+      padding: 0.1rem 0 0 1.6rem; line-height: 1.5;
     }
 
-    .rank {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 0.88rem;
-      color: var(--border-hi);
-      text-align: right;
-      line-height: 1;
-      transition: color 0.15s;
-    }
-    .rank-1 .rank,
-    .participant-row:hover .rank,
-    .participant-row.expanded .rank { color: var(--accent); }
-
-    .participant-name {
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: 0.01em;
-    }
-
-    .score-bar-wrap {
-      height: 4px;
-      background: var(--border);
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .score-bar {
-      height: 100%;
-      background: var(--accent);
-      border-radius: 2px;
-      transition: width 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .total-pts {
-      font-family: var(--font-mono);
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-align: right;
-      letter-spacing: -0.03em;
-    }
-    .rank-1 .total-pts { color: var(--accent); }
-
-    /* ── Team breakdown ── */
-    .team-breakdown {
-      display: none;
-      border-top: 1px solid var(--border);
-      padding: 0.7rem 1.25rem 1.1rem 0.9rem;
-      background: #ffffff;
-    }
-    .participant-row.expanded .team-breakdown { display: block; }
-
-    .team-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .team-table th {
-      font-family: var(--font-mono);
-      font-size: 0.65rem;
-      font-weight: 400;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.35rem 0.6rem 0.55rem;
-      text-align: left;
-      border-bottom: 1px solid var(--border);
-    }
-    .team-table td {
-      padding: 0.55rem 0.6rem;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
-    }
-    .team-table tr:last-child td { border-bottom: none; }
-
-    .td-name {
-      font-family: var(--font-body);
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .td-mult {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .td-score {
-      font-family: var(--font-mono);
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: -0.03em;
-    }
-    .td-detail {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--muted);
-      letter-spacing: 0.01em;
-      line-height: 1.65;
-    }
+    .live-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--live); margin-left: 0.4rem; animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.82); } }
 
     /* ── Badges ── */
     .badge {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 0.63rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 0.1rem 0.32rem;
-      border-radius: 2px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--muted);
-      margin-left: 0.25rem;
-      white-space: nowrap;
-      vertical-align: middle;
+      display: inline-flex; align-items: center;
+      font-family: var(--f-mono); font-size: 0.58rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 0.12rem 0.36rem; border-radius: 5px; white-space: nowrap;
+      background: var(--chip); color: var(--muted); border: 1px solid var(--ink);
     }
-    .badge.qf       { background: #eff6ff; border-color: #bfdbfe; color: #1d4ed8; }
-    .badge.sf       { background: #f0fdf4; border-color: #bbf7d0; color: #15803d; }
-    .badge.final    { background: #fefce8; border-color: #fde68a; color: #92400e; }
-    .badge.champion { background: #fef2f2; border-color: #fecaca; color: var(--accent); }
-
-    /* ── Live / eliminated ── */
-    .live-dot {
-      display: inline-block;
-      width: 6px; height: 6px;
-      background: var(--live);
-      border-radius: 50%;
-      margin-left: 0.35rem;
-      vertical-align: middle;
-      animation: pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
-
-    .eliminated .td-name  { color: var(--muted); }
-    .eliminated .td-mult  { color: var(--border-hi); }
-    .eliminated .td-score { color: var(--muted); }
-    .eliminated .td-detail { opacity: 0.7; }
-
-    /* ── Skeleton ── */
-    .skeleton {
-      background: linear-gradient(90deg, var(--surface) 25%, var(--border) 50%, var(--surface) 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.6s infinite;
-      border-radius: 5px;
-    }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    .skel-row { height: 63px; margin-bottom: 0.35rem; }
-
-    /* ── Test button ── */
-    #test-btn {
-      font-family: var(--font-mono);
-      font-size: 0.67rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.22rem 0.6rem;
-      border-radius: 2px;
-      border: 1px solid var(--border-hi);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    #test-btn:hover { border-color: var(--accent); color: var(--accent); }
-    #test-btn.active { background: #fee2e2; color: var(--accent); border-color: var(--accent); }
-
-    /* ── Toast ── */
-    #toast {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      padding: 0.6rem 1.1rem;
-      border-radius: 2px;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      letter-spacing: 0.02em;
-      z-index: 100;
-      white-space: nowrap;
-    }
-
-    /* ── Mobile ── */
-    @media (max-width: 540px) {
-      header { padding: 1.5rem 1rem 1rem; }
-      h1 { font-size: 2.2rem; }
-      main { padding: 0 0.625rem 2rem; }
-
-      /* Rank + Name + [shrinkable bar] + Points — name and points always fit */
-      .participant-header {
-        grid-template-columns: 2rem 1fr minmax(40px, 80px) 4.25rem;
-        gap: 0.5rem;
-        padding: 0.8rem 0.85rem 0.8rem 0.7rem;
-      }
-      .participant-name { font-size: 1.1rem; }
-      .total-pts        { font-size: 1rem; }
-
-      /* Team table: collapse detail onto its own row */
-      .team-breakdown { padding: 0.4rem 0.6rem 0.75rem; }
-
-      .team-table         { display: block; }
-      .team-table thead   { display: none; }
-      .team-table tbody   { display: block; }
-
-      .team-table tr {
-        display: grid;
-        grid-template-columns: 1fr auto auto;
-        border-bottom: 1px solid var(--border);
-      }
-      .team-table tr:last-child { border-bottom: none; }
-      .team-table td            { border-bottom: none; }
-
-      .td-name {
-        grid-column: 1; grid-row: 1;
-        padding: 0.45rem 0.3rem 0.1rem 0.4rem;
-        font-size: 0.95rem;
-        align-self: center;
-      }
-      .td-mult {
-        grid-column: 2; grid-row: 1;
-        padding: 0.45rem 0.3rem 0.1rem 0.25rem;
-        font-size: 0.78rem;
-        align-self: center;
-      }
-      .td-score {
-        grid-column: 3; grid-row: 1;
-        padding: 0.45rem 0.4rem 0.1rem 0.25rem;
-        font-size: 0.95rem;
-        text-align: right;
-        align-self: center;
-      }
-      .td-detail {
-        grid-column: 1 / -1; grid-row: 2;
-        padding: 0 0.4rem 0.45rem;
-        font-size: 0.72rem;
-        line-height: 1.5;
-      }
-    }
+    .badge.qf       { background: rgba(56,128,255,0.16); color: #4f8cff; border-color: rgba(56,128,255,0.34); }
+    .badge.sf       { background: rgba(34,197,94,0.16);  color: #22c55e; border-color: rgba(34,197,94,0.34); }
+    .badge.final    { background: rgba(234,179,8,0.18);  color: #ca9a04; border-color: rgba(234,179,8,0.42); }
+    .badge.champion { background: rgba(255,68,34,0.18);  color: var(--accent); border-color: rgba(255,68,34,0.5); }
 
     /* ── Error state ── */
-    .error-state {
-      text-align: center;
-      padding: 3.5rem 1rem 2.5rem;
-    }
-    .error-icon {
-      font-size: 4.5rem;
-      display: block;
-      margin-bottom: 1.1rem;
-      animation: tilt 2.2s ease-in-out infinite;
-      transform-origin: center bottom;
-    }
-    @keyframes tilt {
-      0%, 100% { transform: rotate(-10deg); }
-      50%       { transform: rotate(10deg); }
-    }
-    .error-title {
-      font-family: var(--font-body);
-      font-weight: 700;
-      font-size: 1.5rem;
-      color: var(--text);
-      margin-bottom: 0.55rem;
-    }
-    .error-sub {
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--muted);
-      line-height: 1.75;
-    }
-
-    /* ── Dev buttons (hidden until Shift+D) ── */
-    #test-btn, #error-btn { display: none; }
-    .dev-mode #test-btn,
-    .dev-mode #error-btn { display: inline-block; }
-
-    /* ── Error button (same base as test-btn) ── */
-    #error-btn {
-      font-family: var(--font-mono);
-      font-size: 0.67rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 0.22rem 0.6rem;
-      border-radius: 2px;
-      border: 1px solid var(--border-hi);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    #error-btn:hover  { border-color: #b45309; color: #92400e; }
-    #error-btn.active { background: #fef3c7; color: #92400e; border-color: #b45309; }
+    .error-state { text-align: center; padding: 3.5rem 1.25rem 3rem; max-width: 520px; margin: 0 auto; }
+    .error-icon { font-size: 4.6rem; display: inline-block; margin-bottom: 1.1rem; transform-origin: center bottom; animation: tilt 2.2s ease-in-out infinite; }
+    @keyframes tilt { 0%, 100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+    .error-title { font-family: var(--f-display); font-weight: 800; font-size: 1.9rem; text-transform: uppercase; letter-spacing: 0.01em; margin-bottom: 0.5rem; }
+    .error-sub   { font-family: var(--f-mono); font-size: 0.8rem; line-height: 1.8; color: var(--muted); }
 
     .hidden { display: none !important; }
   </style>
@@ -420,12 +215,14 @@
     <div id="status-bar">
       <span id="last-updated"></span>
       <span id="refresh-spinner" class="spinner hidden">&#8635;</span>
-      <button id="test-btn" onclick="toggleTestMode()">Test</button>
-      <button id="error-btn" onclick="toggleErrorMode()">Error</button>
+    </div>
+    <div class="controls">
+      <button id="mode-btn" class="pill" onclick="toggleMode()">Demo data</button>
+      <button id="error-btn" class="pill" onclick="toggleError()">Error</button>
     </div>
   </header>
   <main id="leaderboard"></main>
-  <div id="toast" class="hidden"></div>
+
   <script>
     // ── Config ──────────────────────────────────────────────────────────────────
     const API_KEY  = '3f78d135cc954c46bb6b8f1cf10b7205'; // yes this is visible, yes it's free, go get your own: football-data.org
@@ -439,11 +236,8 @@
       3: ["Czechia","Bosnia and Herzegovina","Canada","Paraguay","Scotland","Algeria","Egypt","Ivory Coast","Ghana","Iran","Tunisia","Australia"],
       4: ["Saudi Arabia","Qatar","South Africa","Uzbekistan","Iraq","Jordan","New Zealand","Panama","DR Congo","Haiti","Cape Verde","Curacao"]
     };
-
     const TEAM_POT = {};
-    for (const [pot, teams] of Object.entries(POTS)) {
-      for (const team of teams) TEAM_POT[team] = Number(pot);
-    }
+    for (const [pot, teams] of Object.entries(POTS)) for (const team of teams) TEAM_POT[team] = Number(pot);
 
     const PARTICIPANTS = [
       { name: "Jimmy",   teams: ["France","Argentina","USA","Ecuador","Canada","Czechia","New Zealand","Saudi Arabia"] },
@@ -455,88 +249,69 @@
       { name: "Eain",    teams: ["Germany","Brazil","Japan","USA","Canada","Scotland","South Africa","Haiti"] },
     ];
 
-    // ── Mock Data (Test Mode) ─────────────────────────────────────────────────────
-    // Post-final snapshot: France Champions, Spain Finalists
-    const MOCK_TEAM_STATS = {
-      "France":       { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group I", totalGoals:17, reachedQF:true,  reachedSF:true,  reachedFinal:true,  isChampion:true  },
-      "Spain":        { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group H", totalGoals:18, reachedQF:true,  reachedSF:true,  reachedFinal:true,  isChampion:false },
-      "Argentina":    { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group J", totalGoals:14, reachedQF:true,  reachedSF:true,  reachedFinal:false, isChampion:false },
-      "Brazil":       { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group C", totalGoals:14, reachedQF:true,  reachedSF:true,  reachedFinal:false, isChampion:false },
-      "Germany":      { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group E", totalGoals:11, reachedQF:true,  reachedSF:false, reachedFinal:false, isChampion:false },
-      "Netherlands":  { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group F", totalGoals:11, reachedQF:true,  reachedSF:false, reachedFinal:false, isChampion:false },
-      "USA":          { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group D", totalGoals:11, reachedQF:true,  reachedSF:false, reachedFinal:false, isChampion:false },
-      "Colombia":     { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group K", totalGoals:12, reachedQF:true,  reachedSF:false, reachedFinal:false, isChampion:false },
-      "Mexico":       { matchPoints:9,  groupPosition:1, playedGames:3, won:3, draw:0, lost:0, group:"Group A", totalGoals:12, reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Canada":       { matchPoints:7,  groupPosition:1, playedGames:3, won:2, draw:1, lost:0, group:"Group B", totalGoals:8,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Norway":       { matchPoints:6,  groupPosition:2, playedGames:3, won:2, draw:0, lost:1, group:"Group I", totalGoals:5,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "South Korea":  { matchPoints:6,  groupPosition:2, playedGames:3, won:2, draw:0, lost:1, group:"Group A", totalGoals:5,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Algeria":      { matchPoints:6,  groupPosition:2, playedGames:3, won:2, draw:0, lost:1, group:"Group J", totalGoals:5,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Ecuador":      { matchPoints:6,  groupPosition:2, playedGames:3, won:2, draw:0, lost:1, group:"Group E", totalGoals:6,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Japan":        { matchPoints:4,  groupPosition:2, playedGames:3, won:1, draw:1, lost:1, group:"Group F", totalGoals:5,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "New Zealand":  { matchPoints:6,  groupPosition:2, playedGames:3, won:2, draw:0, lost:1, group:"Group G", totalGoals:6,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "South Africa": { matchPoints:3,  groupPosition:3, playedGames:3, won:1, draw:0, lost:2, group:"Group A", totalGoals:2,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Haiti":        { matchPoints:3,  groupPosition:3, playedGames:3, won:1, draw:0, lost:2, group:"Group C", totalGoals:2,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Saudi Arabia": { matchPoints:3,  groupPosition:3, playedGames:3, won:1, draw:0, lost:2, group:"Group H", totalGoals:2,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Jordan":       { matchPoints:3,  groupPosition:3, playedGames:3, won:1, draw:0, lost:2, group:"Group J", totalGoals:2,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "DR Congo":     { matchPoints:3,  groupPosition:3, playedGames:3, won:1, draw:0, lost:2, group:"Group K", totalGoals:3,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Czechia":      { matchPoints:0,  groupPosition:4, playedGames:3, won:0, draw:0, lost:3, group:"Group A", totalGoals:1,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Qatar":        { matchPoints:0,  groupPosition:4, playedGames:3, won:0, draw:0, lost:3, group:"Group B", totalGoals:0,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Scotland":     { matchPoints:0,  groupPosition:4, playedGames:3, won:0, draw:0, lost:3, group:"Group C", totalGoals:0,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Paraguay":     { matchPoints:1,  groupPosition:4, playedGames:3, won:0, draw:1, lost:2, group:"Group D", totalGoals:2,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Uzbekistan":   { matchPoints:0,  groupPosition:4, playedGames:3, won:0, draw:0, lost:3, group:"Group K", totalGoals:0,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
-      "Panama":       { matchPoints:0,  groupPosition:4, playedGames:3, won:0, draw:0, lost:3, group:"Group L", totalGoals:0,  reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false },
+    // Country → flag emoji
+    const FLAGS = {
+      "Spain":"🇪🇸","France":"🇫🇷","England":"🏴󠁧󠁢󠁥󠁮󠁧󠁿","Portugal":"🇵🇹","Brazil":"🇧🇷","Argentina":"🇦🇷","Germany":"🇩🇪","Netherlands":"🇳🇱","Belgium":"🇧🇪","Uruguay":"🇺🇾","Norway":"🇳🇴","Morocco":"🇲🇦",
+      "Japan":"🇯🇵","USA":"🇺🇸","Colombia":"🇨🇴","Croatia":"🇭🇷","Mexico":"🇲🇽","Switzerland":"🇨🇭","Turkey":"🇹🇷","Ecuador":"🇪🇨","Sweden":"🇸🇪","Austria":"🇦🇹","Senegal":"🇸🇳","South Korea":"🇰🇷",
+      "Czechia":"🇨🇿","Bosnia and Herzegovina":"🇧🇦","Canada":"🇨🇦","Paraguay":"🇵🇾","Scotland":"🏴󠁧󠁢󠁳󠁣󠁴󠁿","Algeria":"🇩🇿","Egypt":"🇪🇬","Ivory Coast":"🇨🇮","Ghana":"🇬🇭","Iran":"🇮🇷","Tunisia":"🇹🇳","Australia":"🇦🇺",
+      "Saudi Arabia":"🇸🇦","Qatar":"🇶🇦","South Africa":"🇿🇦","Uzbekistan":"🇺🇿","Iraq":"🇮🇶","Jordan":"🇯🇴","New Zealand":"🇳🇿","Panama":"🇵🇦","DR Congo":"🇨🇩","Haiti":"🇭🇹","Cape Verde":"🇨🇻","Curacao":"🇨🇼"
     };
 
-    const MOCK_ELIMINATED = new Set([
-      'Czechia','Qatar','Scotland','Paraguay','Uzbekistan','Panama',
-      'South Africa','Haiti','Saudi Arabia','Jordan','DR Congo',
-      'South Korea','Norway','Algeria','Ecuador','Japan','New Zealand',
-      'Mexico','Canada',
-      'Germany','Netherlands','USA','Colombia',
-      'Argentina','Brazil',
-    ]);
+    // ── Mock Data (Demo Mode) — post-final snapshot: France Champions ──────────────
+    const MOCK_TEAM_STATS = {
+      "France":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group I",totalGoals:17,reachedQF:true,reachedSF:true,reachedFinal:true,isChampion:true},
+      "Spain":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group H",totalGoals:18,reachedQF:true,reachedSF:true,reachedFinal:true,isChampion:false},
+      "Argentina":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group J",totalGoals:14,reachedQF:true,reachedSF:true,reachedFinal:false,isChampion:false},
+      "Brazil":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group C",totalGoals:14,reachedQF:true,reachedSF:true,reachedFinal:false,isChampion:false},
+      "Germany":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group E",totalGoals:11,reachedQF:true,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Netherlands":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group F",totalGoals:11,reachedQF:true,reachedSF:false,reachedFinal:false,isChampion:false},
+      "USA":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group D",totalGoals:11,reachedQF:true,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Colombia":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group K",totalGoals:12,reachedQF:true,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Mexico":{matchPoints:9,groupPosition:1,playedGames:3,won:3,draw:0,lost:0,group:"Group A",totalGoals:12,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Canada":{matchPoints:7,groupPosition:1,playedGames:3,won:2,draw:1,lost:0,group:"Group B",totalGoals:8,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Norway":{matchPoints:6,groupPosition:2,playedGames:3,won:2,draw:0,lost:1,group:"Group I",totalGoals:5,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "South Korea":{matchPoints:6,groupPosition:2,playedGames:3,won:2,draw:0,lost:1,group:"Group A",totalGoals:5,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Algeria":{matchPoints:6,groupPosition:2,playedGames:3,won:2,draw:0,lost:1,group:"Group J",totalGoals:5,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Ecuador":{matchPoints:6,groupPosition:2,playedGames:3,won:2,draw:0,lost:1,group:"Group E",totalGoals:6,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Japan":{matchPoints:4,groupPosition:2,playedGames:3,won:1,draw:1,lost:1,group:"Group F",totalGoals:5,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "New Zealand":{matchPoints:6,groupPosition:2,playedGames:3,won:2,draw:0,lost:1,group:"Group G",totalGoals:6,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "South Africa":{matchPoints:3,groupPosition:3,playedGames:3,won:1,draw:0,lost:2,group:"Group A",totalGoals:2,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Haiti":{matchPoints:3,groupPosition:3,playedGames:3,won:1,draw:0,lost:2,group:"Group C",totalGoals:2,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Saudi Arabia":{matchPoints:3,groupPosition:3,playedGames:3,won:1,draw:0,lost:2,group:"Group H",totalGoals:2,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Jordan":{matchPoints:3,groupPosition:3,playedGames:3,won:1,draw:0,lost:2,group:"Group J",totalGoals:2,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "DR Congo":{matchPoints:3,groupPosition:3,playedGames:3,won:1,draw:0,lost:2,group:"Group K",totalGoals:3,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Czechia":{matchPoints:0,groupPosition:4,playedGames:3,won:0,draw:0,lost:3,group:"Group A",totalGoals:1,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Qatar":{matchPoints:0,groupPosition:4,playedGames:3,won:0,draw:0,lost:3,group:"Group B",totalGoals:0,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Scotland":{matchPoints:0,groupPosition:4,playedGames:3,won:0,draw:0,lost:3,group:"Group C",totalGoals:0,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Paraguay":{matchPoints:1,groupPosition:4,playedGames:3,won:0,draw:1,lost:2,group:"Group D",totalGoals:2,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Uzbekistan":{matchPoints:0,groupPosition:4,playedGames:3,won:0,draw:0,lost:3,group:"Group K",totalGoals:0,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false},
+      "Panama":{matchPoints:0,groupPosition:4,playedGames:3,won:0,draw:0,lost:3,group:"Group L",totalGoals:0,reachedQF:false,reachedSF:false,reachedFinal:false,isChampion:false}
+    };
+    const MOCK_ELIMINATED = new Set(['Czechia','Qatar','Scotland','Paraguay','Uzbekistan','Panama','South Africa','Haiti','Saudi Arabia','Jordan','DR Congo','South Korea','Norway','Algeria','Ecuador','Japan','New Zealand','Mexico','Canada','Germany','Netherlands','USA','Colombia','Argentina','Brazil']);
 
     const NAME_MAP = {
-      "Czech Republic":     "Czechia",
-      "Curaçao":            "Curacao",
-      "Congo DR":           "DR Congo",
-      "Bosnia-Herzegovina": "Bosnia and Herzegovina",
-      "Korea Republic":     "South Korea",
-      "Côte d'Ivoire":      "Ivory Coast",
-      "United States":      "USA",
-      "Cape Verde Islands": "Cape Verde",
+      "Czech Republic":"Czechia","Curaçao":"Curacao","Congo DR":"DR Congo","Bosnia-Herzegovina":"Bosnia and Herzegovina",
+      "Korea Republic":"South Korea","Côte d'Ivoire":"Ivory Coast","United States":"USA","Cape Verde Islands":"Cape Verde"
     };
-
-    function normalizeName(name) {
-      return NAME_MAP[name] ?? name;
-    }
+    const normalizeName = (name) => NAME_MAP[name] ?? name;
 
     // ── Scoring Engine ────────────────────────────────────────────────────────────
+    // Per team:  (matchPoints + goals + groupBonus + knockoutBonus) × pot
+    //   groupBonus     = [GW 8, RU 4, 3rd 2, 4th 1] once all 3 group games played
+    //   knockoutBonus  = QF 12 + SF 24 + Final 36 + Champion 48 (cumulative)
     function calcTeamScore(teamName, teamStats) {
-      const pot   = TEAM_POT[teamName];
+      const pot = TEAM_POT[teamName];
       const stats = teamStats[teamName];
       if (!stats || !pot) return 0;
-
-      const groupBonus = stats.playedGames >= 3 ? ([0, 8, 4, 2, 1][stats.groupPosition] ?? 0) : 0;
-
-      const knockoutBonus =
-        (stats.reachedQF    ? 12 : 0) +
-        (stats.reachedSF    ? 24 : 0) +
-        (stats.reachedFinal ? 36 : 0) +
-        (stats.isChampion   ? 48 : 0);
-
-      const base = stats.matchPoints + stats.totalGoals + groupBonus + knockoutBonus;
-      return base * pot;
+      const groupBonus = stats.playedGames >= 3 ? ([0,8,4,2,1][stats.groupPosition] ?? 0) : 0;
+      const knockoutBonus = (stats.reachedQF?12:0) + (stats.reachedSF?24:0) + (stats.reachedFinal?36:0) + (stats.isChampion?48:0);
+      return (stats.matchPoints + stats.totalGoals + groupBonus + knockoutBonus) * pot;
     }
+    const calcPersonScore = (p, teamStats) => p.teams.reduce((s, t) => s + calcTeamScore(t, teamStats), 0);
 
-    function calcPersonScore(participant, teamStats) {
-      return participant.teams.reduce(
-        (sum, team) => sum + calcTeamScore(team, teamStats),
-        0
-      );
-    }
-
-    // ── API Layer ─────────────────────────────────────────────────────────────────
+    // ── API Layer ───────────────────────────────────────────────────────────────
+    // Locally: hits football-data.org directly. Deployed (GitHub Pages): reads
+    // static ./data/*.json refreshed every 10 min by GitHub Actions.
     async function fetchStandings() {
       const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/standings` : './data/standings.json';
       const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
@@ -544,7 +319,6 @@
       if (!res.ok) throw new Error(`Standings ${res.status}`);
       return res.json();
     }
-
     async function fetchMatches() {
       const url  = IS_LOCAL ? `${API_BASE}/competitions/WC/matches` : './data/matches.json';
       const opts = IS_LOCAL ? { headers: { 'X-Auth-Token': API_KEY } } : {};
@@ -553,150 +327,76 @@
       return res.json();
     }
 
-    const GOAL_ONLY_STAGES = new Set(['LAST_32', 'LAST_16', 'THIRD_PLACE']);
-    const BONUS_STAGES     = new Set(['QUARTER_FINALS', 'SEMI_FINALS', 'FINAL']);
+    const GOAL_ONLY_STAGES = new Set(['LAST_32','LAST_16','THIRD_PLACE']);
+    const BONUS_STAGES     = new Set(['QUARTER_FINALS','SEMI_FINALS','FINAL']);
     const ALL_KNOCKOUT     = new Set([...GOAL_ONLY_STAGES, ...BONUS_STAGES]);
 
     function buildTeamStats(standingsData, matchesData) {
       const stats = {};
-
       for (const group of standingsData.standings) {
         for (const entry of group.table) {
           const name = normalizeName(entry.team.name);
           stats[name] = {
-            matchPoints:   entry.points,
-            groupPosition: entry.position,
-            playedGames:   entry.playedGames,
-            won:           entry.won,
-            draw:          entry.draw,
-            lost:          entry.lost,
-            group:         group.group,
-            totalGoals:    entry.goalsFor,
-            reachedQF:     false,
-            reachedSF:     false,
-            reachedFinal:  false,
-            isChampion:    false,
+            matchPoints: entry.points, groupPosition: entry.position, playedGames: entry.playedGames,
+            won: entry.won, draw: entry.draw, lost: entry.lost, group: group.group, totalGoals: entry.goalsFor,
+            reachedQF: false, reachedSF: false, reachedFinal: false, isChampion: false
           };
         }
       }
-
       for (const match of matchesData.matches) {
-        if (!ALL_KNOCKOUT.has(match.stage)) continue;
-        if (match.status !== 'FINISHED')    continue;
-
-        const home      = normalizeName(match.homeTeam.name);
-        const away      = normalizeName(match.awayTeam.name);
-        const homeGoals = match.score.fullTime.home ?? 0;
-        const awayGoals = match.score.fullTime.away ?? 0;
-
-        if (stats[home]) stats[home].totalGoals += homeGoals;
-        if (stats[away]) stats[away].totalGoals += awayGoals;
-
-        // W/L record for all knockout stages — no draws; penalty wins count as wins
-        if (stats[home]) stats[home].playedGames += 1;
-        if (stats[away]) stats[away].playedGames += 1;
-        let koWinner, koLoser;
-        if (homeGoals !== awayGoals) {
-          koWinner = homeGoals > awayGoals ? home : away;
-          koLoser  = homeGoals > awayGoals ? away : home;
-        } else {
-          const hp = match.score.penalties?.home ?? 0;
-          const ap = match.score.penalties?.away ?? 0;
-          koWinner = hp > ap ? home : away;
-          koLoser  = hp > ap ? away : home;
-        }
-        if (stats[koWinner]) stats[koWinner].won  += 1;
-        if (stats[koLoser])  stats[koLoser].lost  += 1;
-
+        if (!ALL_KNOCKOUT.has(match.stage) || match.status !== 'FINISHED') continue;
+        const home = normalizeName(match.homeTeam.name);
+        const away = normalizeName(match.awayTeam.name);
+        const hg = match.score.fullTime.home ?? 0;
+        const ag = match.score.fullTime.away ?? 0;
+        if (stats[home]) { stats[home].totalGoals += hg; stats[home].playedGames += 1; }
+        if (stats[away]) { stats[away].totalGoals += ag; stats[away].playedGames += 1; }
+        let win, lose;
+        if (hg !== ag) { win = hg>ag?home:away; lose = hg>ag?away:home; }
+        else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; win = hp>ap?home:away; lose = hp>ap?away:home; }
+        if (stats[win])  stats[win].won  += 1;
+        if (stats[lose]) stats[lose].lost += 1;
         if (!BONUS_STAGES.has(match.stage)) continue;
-
         for (const team of [home, away]) {
           if (!stats[team]) continue;
-          if (match.stage === 'QUARTER_FINALS') stats[team].reachedQF    = true;
-          if (match.stage === 'SEMI_FINALS')    stats[team].reachedSF    = true;
+          if (match.stage === 'QUARTER_FINALS') stats[team].reachedQF = true;
+          if (match.stage === 'SEMI_FINALS')    stats[team].reachedSF = true;
           if (match.stage === 'FINAL')          stats[team].reachedFinal = true;
         }
-
         if (match.stage === 'FINAL') {
           let winner;
-          if (homeGoals !== awayGoals) {
-            winner = homeGoals > awayGoals ? home : away;
-          } else {
-            const hp = match.score.penalties?.home ?? 0;
-            const ap = match.score.penalties?.away ?? 0;
-            winner = hp > ap ? home : away;
-          }
+          if (hg !== ag) winner = hg>ag?home:away;
+          else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; winner = hp>ap?home:away; }
           if (stats[winner]) stats[winner].isChampion = true;
         }
       }
-
       return stats;
     }
 
     // ── Live / Eliminated State ───────────────────────────────────────────────────
-    let liveTeams       = new Set();
+    let liveTeams = new Set();
     let eliminatedTeams = new Set();
-
     function buildActivitySets(matchesData) {
-      liveTeams       = new Set();
-      eliminatedTeams = new Set();
-
-      const scheduled = new Set();
-      const played    = new Set();
-
+      liveTeams = new Set(); eliminatedTeams = new Set();
+      const scheduled = new Set(), played = new Set();
       for (const match of matchesData.matches) {
         const home = normalizeName(match.homeTeam.name);
         const away = normalizeName(match.awayTeam.name);
-
-        if (match.status === 'IN_PLAY' || match.status === 'PAUSED') {
-          liveTeams.add(home);
-          liveTeams.add(away);
-        }
-        if (match.status === 'SCHEDULED' || match.status === 'TIMED') {
-          scheduled.add(home);
-          scheduled.add(away);
-        }
-        if (match.status === 'FINISHED') {
-          played.add(home);
-          played.add(away);
-        }
+        if (match.status === 'IN_PLAY' || match.status === 'PAUSED') { liveTeams.add(home); liveTeams.add(away); }
+        if (match.status === 'SCHEDULED' || match.status === 'TIMED') { scheduled.add(home); scheduled.add(away); }
+        if (match.status === 'FINISHED') { played.add(home); played.add(away); }
       }
-
-      for (const team of played) {
-        if (!scheduled.has(team) && !liveTeams.has(team)) {
-          eliminatedTeams.add(team);
-        }
-      }
+      for (const team of played) if (!scheduled.has(team) && !liveTeams.has(team)) eliminatedTeams.add(team);
     }
 
     // ── UI Helpers ────────────────────────────────────────────────────────────────
-    function setRefreshingState(active) {
-      document.getElementById('refresh-spinner').classList.toggle('hidden', !active);
-    }
-
+    const setRefreshing = (active) => document.getElementById('refresh-spinner').classList.toggle('hidden', !active);
     function updateLastUpdated(matchesData) {
-      const timestamps = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
-      const date = timestamps.length
-        ? new Date(timestamps.reduce((a, b) => a > b ? a : b))
-        : new Date();
+      const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
+      const date = ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
       document.getElementById('last-updated').textContent =
-        `Data as of ${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} · ` +
-        `${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })}`;
-    }
-
-    function showToast(msg) {
-      const el = document.getElementById('toast');
-      el.textContent = msg;
-      el.classList.remove('hidden');
-    }
-
-    function hideToast() {
-      document.getElementById('toast').classList.add('hidden');
-    }
-
-    function renderSkeletons() {
-      document.getElementById('leaderboard').innerHTML =
-        Array.from({ length: 7 }, () => '<div class="skeleton skel-row"></div>').join('');
+        `Data as of ${date.toLocaleDateString('en-US',{month:'short',day:'numeric'})} · ` +
+        `${date.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'})}`;
     }
 
     // ── Leaderboard Renderer ──────────────────────────────────────────────────────
@@ -705,87 +405,69 @@
 
     function teamBadges(stats) {
       const parts = [];
-      if (stats.playedGames >= 3 && stats.groupPosition) {
-        parts.push(`<span class="badge">${GROUP_LABELS[stats.groupPosition] ?? ''}</span>`);
-      }
+      if (stats.playedGames >= 3 && stats.groupPosition) parts.push(`<span class="badge">${GROUP_LABELS[stats.groupPosition] ?? ''}</span>`);
       if (stats.reachedQF)    parts.push('<span class="badge qf">QF</span>');
       if (stats.reachedSF)    parts.push('<span class="badge sf">SF</span>');
       if (stats.reachedFinal) parts.push('<span class="badge final">Final</span>');
-      if (stats.isChampion)   parts.push('<span class="badge champion">&#127942; Champ</span>');
+      if (stats.isChampion)   parts.push('<span class="badge champion">🏆 Champ</span>');
       return parts.join('');
     }
 
     function renderTeamBreakdown(participant, teamStats) {
       const rows = participant.teams.map(teamName => {
-        const stats = teamStats[teamName] ?? {
-          matchPoints: 0, groupPosition: 0, playedGames: 0,
-          won: 0, draw: 0, lost: 0, totalGoals: 0,
-          reachedQF: false, reachedSF: false, reachedFinal: false, isChampion: false
-        };
-        const score   = calcTeamScore(teamName, teamStats);
-        const pot     = TEAM_POT[teamName] ?? '?';
-        const isLive  = liveTeams.has(teamName);
-        const isElim  = eliminatedTeams.has(teamName);
-        const liveDot = isLive ? '<span class="live-dot"></span>' : '';
-
-        const wdl = stats.playedGames > 0
-          ? `${stats.won}W ${stats.draw}D ${stats.lost}L · `
-          : '';
-        const standing = stats.playedGames > 0 && stats.playedGames < 3
-          ? ` · ${ORDINALS[stats.groupPosition] ?? stats.groupPosition} ${stats.group}`
-          : '';
-
-        return `<tr class="${isElim ? 'eliminated' : ''}">
-          <td class="td-name">${teamName}${liveDot}</td>
-          <td class="td-mult">×${pot}</td>
-          <td class="td-score">${score}</td>
-          <td class="td-detail">${wdl}${stats.totalGoals}g · ${stats.matchPoints}pts${standing}${teamBadges(stats)}</td>
-        </tr>`;
+        const stats = teamStats[teamName] ?? { matchPoints:0, groupPosition:0, playedGames:0, won:0, draw:0, lost:0, totalGoals:0, group:'', reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false };
+        const score = calcTeamScore(teamName, teamStats);
+        const pot   = TEAM_POT[teamName] ?? '?';
+        const isElim = eliminatedTeams.has(teamName);
+        const liveDot = liveTeams.has(teamName) ? '<span class="live-dot"></span>' : '';
+        const wdl = stats.playedGames > 0 ? `${stats.won}W ${stats.draw}D ${stats.lost}L · ` : '';
+        const standing = stats.playedGames > 0 && stats.playedGames < 3 ? ` · ${ORDINALS[stats.groupPosition] ?? stats.groupPosition} ${stats.group}` : '';
+        return `<div class="team-row${isElim ? ' elim' : ''}">
+          <span class="t-flag">${FLAGS[teamName] ?? '🏳️'}</span>
+          <span class="t-name">${teamName}${liveDot}</span>
+          <span class="t-mult">×${pot}</span>
+          <span class="t-score">${score}</span>
+          <div class="t-detail"><span>${wdl}${stats.totalGoals}g · ${stats.matchPoints}pts${standing}</span>${teamBadges(stats)}</div>
+        </div>`;
       });
-
-      return `<table class="team-table">
-        <thead><tr><th>Team</th><th>Pot</th><th>Score</th><th>Detail</th></tr></thead>
-        <tbody>${rows.join('')}</tbody>
-      </table>`;
+      return `<div class="breakdown"><div class="breakdown-inner">${rows.join('')}</div></div>`;
     }
 
     function renderParticipantRow(participant, rank, maxScore, teamStats, expandedName) {
-      const barPct    = maxScore > 0 ? Math.round((participant.score / maxScore) * 100) : 0;
-      const expanded  = participant.name === expandedName ? ' expanded' : '';
-      const rankClass = rank === 1 ? ' rank-1' : '';
-
-      return `<div class="participant-row${expanded}${rankClass}" data-name="${participant.name}">
-        <div class="participant-header">
-          <span class="rank">${String(rank).padStart(2, '0')}</span>
-          <span class="participant-name">${participant.name}</span>
-          <div class="score-bar-wrap">
-            <div class="score-bar" style="width:${barPct}%"></div>
+      const barPct   = maxScore > 0 ? Math.round((participant.score / maxScore) * 100) : 0;
+      const expanded = participant.name === expandedName ? ' expanded' : '';
+      const flagKit  = participant.teams.map(t => {
+        const cls = eliminatedTeams.has(t) ? ' elim' : liveTeams.has(t) ? ' live' : '';
+        return `<span class="flag${cls}">${FLAGS[t] ?? '🏳️'}</span>`;
+      }).join('');
+      return `<div class="card rank-${rank}${expanded}" data-name="${participant.name}">
+        <div class="card-header">
+          <div class="medal">${String(rank).padStart(2, '0')}</div>
+          <div class="mid">
+            <div class="name">${participant.name}</div>
+            <div class="flag-kit">${flagKit}</div>
           </div>
-          <span class="total-pts">${participant.score}</span>
+          <div class="right">
+            <div>
+              <div class="score">${participant.score}</div>
+              <div class="pts">PTS</div>
+            </div>
+            <span class="chev">&#8250;</span>
+          </div>
         </div>
-        <div class="team-breakdown">
-          ${renderTeamBreakdown(participant, teamStats)}
-        </div>
+        <div class="bar"><i style="width:${barPct}%"></i></div>
+        ${renderTeamBreakdown(participant, teamStats)}
       </div>`;
     }
 
     function renderLeaderboard(teamStats) {
       const board = document.getElementById('leaderboard');
-
-      const expandedName = board.querySelector('.participant-row.expanded')?.dataset.name ?? null;
-
-      const ranked = PARTICIPANTS
-        .map(p => ({ ...p, score: calcPersonScore(p, teamStats) }))
-        .sort((a, b) => b.score - a.score);
-
+      const expandedName = board.querySelector('.card.expanded')?.dataset.name ?? null;
+      const ranked = PARTICIPANTS.map(p => ({ ...p, score: calcPersonScore(p, teamStats) })).sort((a,b) => b.score - a.score);
       const maxScore = ranked[0]?.score || 1;
-
-      board.innerHTML = ranked
-        .map((p, i) => renderParticipantRow(p, i + 1, maxScore, teamStats, expandedName))
-        .join('');
+      board.innerHTML = ranked.map((p, i) => renderParticipantRow(p, i + 1, maxScore, teamStats, expandedName)).join('');
     }
 
-    // ── Error State ───────────────────────────────────────────────────────────────
     function renderErrorState() {
       document.getElementById('leaderboard').innerHTML = `
         <div class="error-state">
@@ -795,123 +477,104 @@
         </div>`;
     }
 
-    // ── Test Mode ─────────────────────────────────────────────────────────────────
-    let testMode  = false;
-    let errorMode = false;
-
-    function toggleTestMode() {
-      testMode = !testMode;
-      if (testMode && errorMode) {
-        errorMode = false;
-        document.getElementById('error-btn').textContent = 'Error';
-        document.getElementById('error-btn').classList.remove('active');
-      }
-      clearTimeout(refreshTimer);
-      const btn = document.getElementById('test-btn');
-      btn.textContent = testMode ? '← Live' : 'Test';
-      btn.classList.toggle('active', testMode);
-      doRefresh();
-    }
-
-    function toggleErrorMode() {
-      errorMode = !errorMode;
-      if (errorMode && testMode) {
-        testMode = false;
-        document.getElementById('test-btn').textContent = 'Test';
-        document.getElementById('test-btn').classList.remove('active');
-      }
-      clearTimeout(refreshTimer);
-      const btn = document.getElementById('error-btn');
-      btn.textContent = errorMode ? '← Back' : 'Error';
-      btn.classList.toggle('active', errorMode);
-      if (errorMode) {
-        document.getElementById('refresh-spinner').classList.add('hidden');
-        document.getElementById('last-updated').textContent = '';
-        renderErrorState();
-      } else {
-        if (lastGoodData) {
-          const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
-          buildActivitySets(lastGoodData.matches);
-          renderLeaderboard(teamStats);
-          updateLastUpdated();
-        } else {
-          renderSkeletons();
-          doRefresh();
-        }
-      }
-    }
-
     // ── App Controller ────────────────────────────────────────────────────────────
     const LIVE_INTERVAL = 60_000;
     const IDLE_INTERVAL = 5 * 60_000;
-
+    let mode = 'demo';
+    let errorActive = false;
     let refreshTimer = null;
     let lastGoodData = null;
 
     function scheduleNext() {
       clearTimeout(refreshTimer);
-      // On GitHub Pages data is served from static files updated every 5 min by CI,
-      // so polling faster than that is pointless.
+      if (mode !== 'live') return;
       const delay = (IS_LOCAL && liveTeams.size > 0) ? LIVE_INTERVAL : IDLE_INTERVAL;
       refreshTimer = setTimeout(doRefresh, delay);
     }
 
-    async function doRefresh() {
-      if (testMode) {
-        liveTeams = new Set();
-        eliminatedTeams = MOCK_ELIMINATED;
-        renderLeaderboard(MOCK_TEAM_STATS);
-        document.getElementById('last-updated').textContent = 'Test · Post-final snapshot (France Champions)';
-        document.getElementById('refresh-spinner').classList.add('hidden');
-        hideToast();
-        return;
-      }
+    function renderDemo() {
+      liveTeams = new Set();
+      eliminatedTeams = MOCK_ELIMINATED;
+      renderLeaderboard(MOCK_TEAM_STATS);
+      document.getElementById('last-updated').textContent = 'Demo · post-final snapshot — France champions';
+      setRefreshing(false);
+    }
 
-      setRefreshingState(true);
+    async function doRefresh() {
+      if (mode !== 'live') return;
+      setRefreshing(true);
       try {
         const [standings, matches] = await Promise.all([fetchStandings(), fetchMatches()]);
         lastGoodData = { standings, matches };
-
         const teamStats = buildTeamStats(standings, matches);
         buildActivitySets(matches);
         renderLeaderboard(teamStats);
         updateLastUpdated(matches);
-        hideToast();
+        errorActive = false;
       } catch (err) {
         console.error('Refresh failed:', err);
         if (lastGoodData) {
           const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
+          buildActivitySets(lastGoodData.matches);
           renderLeaderboard(teamStats);
           updateLastUpdated(lastGoodData.matches);
-          showToast('Could not refresh — showing last known data');
+          document.getElementById('last-updated').textContent += ' · could not refresh';
         } else {
           renderErrorState();
         }
       } finally {
-        setRefreshingState(false);
+        setRefreshing(false);
         scheduleNext();
       }
     }
 
+    function toggleMode() {
+      mode = mode === 'live' ? 'demo' : 'live';
+      errorActive = false;
+      document.getElementById('error-btn').classList.remove('active', 'error');
+      clearTimeout(refreshTimer);
+      const btn = document.getElementById('mode-btn');
+      btn.textContent = mode === 'live' ? '● Live' : 'Demo data';
+      btn.classList.toggle('active', mode === 'live');
+      btn.classList.toggle('live', mode === 'live');
+      if (mode === 'live') { document.getElementById('last-updated').textContent = 'Loading…'; doRefresh(); }
+      else renderDemo();
+    }
+
+    function toggleError() {
+      errorActive = !errorActive;
+      const btn = document.getElementById('error-btn');
+      btn.classList.toggle('active', errorActive);
+      btn.classList.toggle('error', errorActive);
+      clearTimeout(refreshTimer);
+      if (errorActive) {
+        setRefreshing(false);
+        document.getElementById('last-updated').textContent = '';
+        renderErrorState();
+      } else if (mode === 'live') {
+        doRefresh();
+      } else {
+        renderDemo();
+      }
+    }
+
     // ── Init ──────────────────────────────────────────────────────────────────────
+    // Shift+D reveals the Error dev toggle.
     document.addEventListener('keydown', e => {
       if (e.key === 'D' && e.shiftKey && !e.ctrlKey && !e.metaKey) {
-        const entering = document.body.classList.toggle('dev-mode');
-        if (!entering) {
-          if (testMode)  toggleTestMode();
-          if (errorMode) toggleErrorMode();
-        }
+        const leaving = !document.body.classList.toggle('dev-mode');
+        if (leaving && errorActive) toggleError();
       }
     });
 
+    // Expand / collapse a participant card.
     document.getElementById('leaderboard').addEventListener('click', e => {
-      const row = e.target.closest('.participant-row');
-      if (!row) return;
-      row.classList.toggle('expanded');
+      const card = e.target.closest('.card');
+      if (card) card.classList.toggle('expanded');
     });
 
-    renderSkeletons();
-    doRefresh();
+    // Start in live mode immediately.
+    toggleMode();
   </script>
 </body>
 </html>
