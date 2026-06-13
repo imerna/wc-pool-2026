@@ -250,6 +250,88 @@
         0
       );
     }
+
+    // ── API Layer ─────────────────────────────────────────────────────────────────
+    async function fetchStandings() {
+      const res = await fetch(`${API_BASE}/competitions/WC/standings`, {
+        headers: { 'X-Auth-Token': API_KEY }
+      });
+      if (!res.ok) throw new Error(`Standings ${res.status}`);
+      return res.json();
+    }
+
+    async function fetchMatches() {
+      const res = await fetch(`${API_BASE}/competitions/WC/matches`, {
+        headers: { 'X-Auth-Token': API_KEY }
+      });
+      if (!res.ok) throw new Error(`Matches ${res.status}`);
+      return res.json();
+    }
+
+    // Goals count here but no advancement bonus
+    const GOAL_ONLY_STAGES = new Set(['LAST_32', 'LAST_16', 'THIRD_PLACE']);
+    // Goals + advancement bonuses stack here
+    const BONUS_STAGES     = new Set(['QUARTER_FINALS', 'SEMI_FINALS', 'FINAL']);
+    const ALL_KNOCKOUT     = new Set([...GOAL_ONLY_STAGES, ...BONUS_STAGES]);
+
+    function buildTeamStats(standingsData, matchesData) {
+      const stats = {};
+
+      // Seed from group standings
+      for (const group of standingsData.standings) {
+        for (const entry of group.table) {
+          const name = normalizeName(entry.team.name);
+          stats[name] = {
+            matchPoints:   entry.points,
+            groupPosition: entry.position,
+            totalGoals:    entry.goalsFor,
+            reachedQF:     false,
+            reachedSF:     false,
+            reachedFinal:  false,
+            isChampion:    false,
+          };
+        }
+      }
+
+      // Layer in knockout match data
+      for (const match of matchesData.matches) {
+        if (!ALL_KNOCKOUT.has(match.stage)) continue;
+        if (match.status !== 'FINISHED')    continue;
+
+        const home      = normalizeName(match.homeTeam.name);
+        const away      = normalizeName(match.awayTeam.name);
+        const homeGoals = match.score.fullTime.home ?? 0;
+        const awayGoals = match.score.fullTime.away ?? 0;
+
+        // Goals always count in all knockout stages
+        if (stats[home]) stats[home].totalGoals += homeGoals;
+        if (stats[away]) stats[away].totalGoals += awayGoals;
+
+        if (!BONUS_STAGES.has(match.stage)) continue;
+
+        // Both teams reached this stage
+        for (const team of [home, away]) {
+          if (!stats[team]) continue;
+          if (match.stage === 'QUARTER_FINALS') stats[team].reachedQF    = true;
+          if (match.stage === 'SEMI_FINALS')    stats[team].reachedSF    = true;
+          if (match.stage === 'FINAL')          stats[team].reachedFinal = true;
+        }
+
+        if (match.stage === 'FINAL') {
+          let winner;
+          if (homeGoals !== awayGoals) {
+            winner = homeGoals > awayGoals ? home : away;
+          } else {
+            const hp = match.score.penalties?.home ?? 0;
+            const ap = match.score.penalties?.away ?? 0;
+            winner = hp > ap ? home : away;
+          }
+          if (stats[winner]) stats[winner].isChampion = true;
+        }
+      }
+
+      return stats;
+    }
   </script>
 </body>
 </html>
