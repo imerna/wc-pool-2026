@@ -794,20 +794,20 @@
     }
 
     // ── Init ──────────────────────────────────────────────────────────────────────
-    // Long press on status bar shows fetched-at time (mobile-friendly).
+    // Long press on status bar temporarily shows fetched-at time in place of the normal label.
     (function () {
-      let toastTimer = null;
-      const bar   = document.getElementById('status-bar');
-      const toast = document.getElementById('fetched-toast');
+      let restoreTimer = null;
+      const bar     = document.getElementById('status-bar');
+      const label   = document.getElementById('last-updated');
       bar.addEventListener('contextmenu', e => {
         e.preventDefault();
         const raw = lastGoodData?.matches?._fetchedAt;
-        toast.textContent = raw
+        const saved = label.textContent;
+        label.textContent = raw
           ? 'fetched ' + new Date(raw).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' })
           : 'fetched time unavailable';
-        toast.classList.add('visible');
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove('visible'), 2500);
+        clearTimeout(restoreTimer);
+        restoreTimer = setTimeout(() => { label.textContent = saved; }, 3000);
       });
     })();
 
