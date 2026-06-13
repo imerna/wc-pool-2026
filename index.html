@@ -368,6 +368,110 @@
         }
       }
     }
+
+    // ── UI Helpers ────────────────────────────────────────────────────────────────
+    function setRefreshingState(active) {
+      document.getElementById('refresh-spinner').classList.toggle('hidden', !active);
+    }
+
+    function updateLastUpdated() {
+      const now = new Date();
+      document.getElementById('last-updated').textContent =
+        `Last updated: ${now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}, ` +
+        `${now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.remove('hidden');
+    }
+
+    function hideToast() {
+      document.getElementById('toast').classList.add('hidden');
+    }
+
+    function renderSkeletons() {
+      document.getElementById('leaderboard').innerHTML =
+        Array.from({ length: 7 }, () => '<div class="skeleton skel-row"></div>').join('');
+    }
+
+    // ── Leaderboard Renderer ──────────────────────────────────────────────────────
+    const GROUP_LABELS = ['', 'Group Winner', 'Runner-Up', '3rd Place', '4th Place'];
+
+    function teamBadges(stats) {
+      const parts = [];
+      if (stats.groupPosition) {
+        parts.push(`<span class="badge">${GROUP_LABELS[stats.groupPosition] ?? ''}</span>`);
+      }
+      if (stats.reachedQF)    parts.push('<span class="badge qf">QF</span>');
+      if (stats.reachedSF)    parts.push('<span class="badge sf">SF</span>');
+      if (stats.reachedFinal) parts.push('<span class="badge final">Final</span>');
+      if (stats.isChampion)   parts.push('<span class="badge champion">&#127942; Champion</span>');
+      return parts.join('');
+    }
+
+    function renderTeamBreakdown(participant, teamStats) {
+      const rows = participant.teams.map(teamName => {
+        const stats = teamStats[teamName] ?? {
+          matchPoints: 0, groupPosition: 0, totalGoals: 0,
+          reachedQF: false, reachedSF: false, reachedFinal: false, isChampion: false
+        };
+        const score   = calcTeamScore(teamName, teamStats);
+        const pot     = TEAM_POT[teamName] ?? '?';
+        const isLive  = liveTeams.has(teamName);
+        const isElim  = eliminatedTeams.has(teamName);
+        const liveDot = isLive ? '<span class="live-dot"></span>' : '';
+
+        return `<tr class="${isElim ? 'eliminated' : ''}">
+          <td>${teamName}${liveDot}</td>
+          <td style="color:var(--muted)">&#215;${pot}</td>
+          <td style="font-weight:600">${score}</td>
+          <td style="color:var(--muted)">${stats.totalGoals}g &#183; ${stats.matchPoints}pts${teamBadges(stats)}</td>
+        </tr>`;
+      });
+
+      return `<table class="team-table">
+        <thead><tr><th>Team</th><th>Pot</th><th>Score</th><th>Detail</th></tr></thead>
+        <tbody>${rows.join('')}</tbody>
+      </table>`;
+    }
+
+    function renderParticipantRow(participant, rank, maxScore, teamStats, expandedName) {
+      const barPct   = maxScore > 0 ? Math.round((participant.score / maxScore) * 100) : 0;
+      const expanded = participant.name === expandedName ? ' expanded' : '';
+
+      return `<div class="participant-row${expanded}" data-name="${participant.name}">
+        <div class="participant-header">
+          <span class="rank">${rank}</span>
+          <span class="participant-name">${participant.name}</span>
+          <div class="score-bar-wrap">
+            <div class="score-bar" style="width:${barPct}%"></div>
+          </div>
+          <span class="total-pts">${participant.score}</span>
+        </div>
+        <div class="team-breakdown">
+          ${renderTeamBreakdown(participant, teamStats)}
+        </div>
+      </div>`;
+    }
+
+    function renderLeaderboard(teamStats) {
+      const board = document.getElementById('leaderboard');
+
+      // Preserve which participant is expanded across refreshes
+      const expandedName = board.querySelector('.participant-row.expanded')?.dataset.name ?? null;
+
+      const ranked = PARTICIPANTS
+        .map(p => ({ ...p, score: calcPersonScore(p, teamStats) }))
+        .sort((a, b) => b.score - a.score);
+
+      const maxScore = ranked[0]?.score || 1;
+
+      board.innerHTML = ranked
+        .map((p, i) => renderParticipantRow(p, i + 1, maxScore, teamStats, expandedName))
+        .join('');
+    }
   </script>
 </body>
 </html>
