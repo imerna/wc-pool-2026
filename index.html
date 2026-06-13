@@ -232,7 +232,7 @@
       const stats = teamStats[teamName];
       if (!stats || !pot) return 0;
 
-      const groupBonus = [0, 8, 4, 2, 1][stats.groupPosition] ?? 0;
+      const groupBonus = stats.playedGames >= 3 ? ([0, 8, 4, 2, 1][stats.groupPosition] ?? 0) : 0;
 
       const knockoutBonus =
         (stats.reachedQF    ? 12 : 0) +
@@ -284,6 +284,7 @@
           stats[name] = {
             matchPoints:   entry.points,
             groupPosition: entry.position,
+            playedGames:   entry.playedGames,
             totalGoals:    entry.goalsFor,
             reachedQF:     false,
             reachedSF:     false,
@@ -401,7 +402,7 @@
 
     function teamBadges(stats) {
       const parts = [];
-      if (stats.groupPosition) {
+      if (stats.playedGames >= 3 && stats.groupPosition) {
         parts.push(`<span class="badge">${GROUP_LABELS[stats.groupPosition] ?? ''}</span>`);
       }
       if (stats.reachedQF)    parts.push('<span class="badge qf">QF</span>');
