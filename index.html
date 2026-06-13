@@ -160,6 +160,9 @@
     /* ── Energy bar ── */
     .bar { height: 7px; background: var(--ink); }
     .bar > i { display: block; height: 100%; background: var(--accent); border-radius: 0 3px 3px 0; transition: width 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .card.rank-1 .bar > i { background: var(--gold); }
+    .card.rank-2 .bar > i { background: var(--silver); }
+    .card.rank-3 .bar > i { background: var(--bronze); }
 
     /* ── Breakdown (expand/collapse) ── */
     .breakdown { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease; }
