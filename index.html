@@ -217,7 +217,8 @@
     .hidden { display: none !important; }
 
     /* ── View nav ── */
-    .view-nav { margin: 1rem 0 0.4rem; display: flex; justify-content: center; gap: 0.45rem; }
+    .view-nav { margin: 0.5rem 0 0.6rem; display: flex; justify-content: center; gap: 0.6rem; }
+    .view-nav .pill { font-size: 1.1rem; padding: 0.6rem 1.8rem; border-width: 2px; }
     .view-nav .pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 
     /* ── Match filters ── */
@@ -258,7 +259,6 @@
 <body>
   <header>
     <p class="eyebrow">FIFA World Cup 2026 &middot; Pool Tracker</p>
-    <h1 id="view-title">Standings</h1>
     <nav class="view-nav">
       <button id="nav-standings" class="pill active" onclick="switchView('standings')">Standings</button>
       <button id="nav-matches"   class="pill"        onclick="switchView('matches')">Matches</button>
@@ -557,7 +557,6 @@
       document.getElementById('matches-view').classList.toggle('hidden', view !== 'matches');
       document.getElementById('nav-standings').classList.toggle('active', view === 'standings');
       document.getElementById('nav-matches').classList.toggle('active', view === 'matches');
-      document.getElementById('view-title').textContent = view === 'standings' ? 'Standings' : 'Matches';
       if (view === 'matches') {
         if (lastGoodData) renderMatchesView(lastGoodData.matches.matches);
         else document.getElementById('match-list').innerHTML =
