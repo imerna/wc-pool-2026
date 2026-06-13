@@ -101,6 +101,8 @@
     /* Dev pills hidden until Shift+D */
     #mode-btn, #error-btn { display: none; }
     .dev-mode #mode-btn, .dev-mode #error-btn { display: inline-block; }
+    #fetched-at { display: none; font-family: var(--f-mono); font-size: 0.65rem; color: var(--muted); opacity: 0.7; }
+    .dev-mode #fetched-at { display: inline; }
 
     /* Status bar color matches active mode */
     #last-updated { transition: color 0.3s ease; }
@@ -266,6 +268,7 @@
     <div id="status-bar">
       <span id="last-updated"></span>
       <span id="refresh-spinner" class="spinner hidden">&#8635;</span>
+      <span id="fetched-at"></span>
     </div>
     <div class="controls">
       <button id="mode-btn" class="pill" onclick="toggleMode()">Demo data</button>
@@ -456,15 +459,16 @@
       el.className = state ? `state-${state}` : '';
     }
     function updateLastUpdated(matchesData) {
-      const date = matchesData?._fetchedAt
-        ? new Date(matchesData._fetchedAt)
-        : (() => {
-            const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
-            return ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
-          })();
+      const ts = matchesData?.matches?.map(m => m.lastUpdated).filter(Boolean) ?? [];
+      const date = ts.length ? new Date(ts.reduce((a,b) => a>b?a:b)) : new Date();
       document.getElementById('last-updated').textContent =
         `Data as of ${date.toLocaleDateString('en-US',{month:'short',day:'numeric'})} · ` +
         `${date.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'})}`;
+      if (matchesData?._fetchedAt) {
+        const fetched = new Date(matchesData._fetchedAt);
+        document.getElementById('fetched-at').textContent =
+          `fetched ${fetched.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZoneName:'short'})}`;
+      }
     }
 
     // ── Leaderboard Renderer ──────────────────────────────────────────────────────
