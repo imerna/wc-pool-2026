@@ -2,8 +2,8 @@ name: Fetch WC Scores
 
 on:
   schedule:
-    - cron: '*/30 15-23 * * *'  # 11am–11:59pm ET (covers noon and afternoon matches)
-    - cron: '*/30 0-5 * * *'    # 8pm–1:59am ET (covers US evening matches)
+    - cron: '*/5 15-23 * * *'  # 11am–11:59pm ET (covers noon and afternoon matches)
+    - cron: '*/5 0-5 * * *'    # 8pm–1:59am ET (covers US evening matches)
   workflow_dispatch:
 
 permissions:
