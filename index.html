@@ -332,6 +332,42 @@
 
       return stats;
     }
+
+    // ── Live / Eliminated State ───────────────────────────────────────────────────
+    let liveTeams       = new Set();
+    let eliminatedTeams = new Set();
+
+    function buildActivitySets(matchesData) {
+      liveTeams       = new Set();
+      eliminatedTeams = new Set();
+
+      const scheduled = new Set();
+      const played    = new Set();
+
+      for (const match of matchesData.matches) {
+        const home = normalizeName(match.homeTeam.name);
+        const away = normalizeName(match.awayTeam.name);
+
+        if (match.status === 'IN_PLAY' || match.status === 'PAUSED') {
+          liveTeams.add(home);
+          liveTeams.add(away);
+        }
+        if (match.status === 'SCHEDULED' || match.status === 'TIMED') {
+          scheduled.add(home);
+          scheduled.add(away);
+        }
+        if (match.status === 'FINISHED') {
+          played.add(home);
+          played.add(away);
+        }
+      }
+
+      for (const team of played) {
+        if (!scheduled.has(team) && !liveTeams.has(team)) {
+          eliminatedTeams.add(team);
+        }
+      }
+    }
   </script>
 </body>
 </html>
