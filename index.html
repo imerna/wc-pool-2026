@@ -215,12 +215,54 @@
     .error-sub   { font-family: var(--f-mono); font-size: 0.8rem; line-height: 1.8; color: var(--muted); }
 
     .hidden { display: none !important; }
+
+    /* ── View nav ── */
+    .view-nav { margin: 1rem 0 0.4rem; display: flex; justify-content: center; gap: 0.45rem; }
+    .view-nav .pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+    /* ── Match filters ── */
+    .match-filters { max-width: 760px; margin: 0 auto 1rem; padding: 0 1rem; display: flex; gap: 0.45rem; flex-wrap: wrap; }
+    .match-filters .pill.active { background: rgba(20,17,12,0.12); color: var(--ink); }
+
+    /* ── Date group header ── */
+    .date-header { max-width: 760px; margin: 0 auto 0.5rem; padding: 0 1rem;
+      font-family: var(--f-display); font-size: 0.78rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--muted); }
+    .date-header + .date-header, .match-card + .date-header { margin-top: 1.4rem; }
+
+    /* ── Match card ── */
+    .match-card { background: var(--card); border: var(--border-w) solid var(--ink);
+      border-radius: var(--radius); box-shadow: 4px 4px 0 var(--ink);
+      max-width: 760px; margin: 0 auto 0.6rem; padding: 0.75rem 1rem; }
+
+    .match-meta { display: flex; justify-content: space-between; align-items: center;
+      font-family: var(--f-mono); font-size: 0.65rem; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
+    .match-status-live { color: var(--live); display: flex; align-items: center; gap: 0.3rem; }
+
+    .match-teams { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 0.5rem; }
+    .match-home { display: flex; align-items: center; gap: 0.45rem; }
+    .match-away { display: flex; align-items: center; gap: 0.45rem; justify-content: flex-end; }
+    .match-team-name { font-family: var(--f-body); font-weight: 600; font-size: 1rem; }
+    .match-team-flag { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+    .match-score { font-family: var(--f-display); font-size: 1.6rem; line-height: 1;
+      text-align: center; letter-spacing: 0.04em; white-space: nowrap; padding: 0 0.25rem; }
+    .match-score-vs { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); text-align: center; }
+    .match-home.lost, .match-away.lost { opacity: 0.38; }
+
+    /* ── Match empty state ── */
+    .match-empty { text-align: center; padding: 3rem 1rem;
+      font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
   </style>
 </head>
 <body>
   <header>
     <p class="eyebrow">FIFA World Cup 2026 &middot; Pool Tracker</p>
-    <h1>Standings</h1>
+    <h1 id="view-title">Standings</h1>
+    <nav class="view-nav">
+      <button id="nav-standings" class="pill active" onclick="switchView('standings')">Standings</button>
+      <button id="nav-matches"   class="pill"        onclick="switchView('matches')">Matches</button>
+    </nav>
     <div id="status-bar">
       <span id="last-updated"></span>
       <span id="refresh-spinner" class="spinner hidden">&#8635;</span>
@@ -231,6 +273,15 @@
     </div>
   </header>
   <main id="leaderboard"></main>
+
+  <main id="matches-view" class="hidden">
+    <div class="match-filters">
+      <button id="mf-today"    class="pill active" onclick="setMatchFilter('today')">Today</button>
+      <button id="mf-results"  class="pill"        onclick="setMatchFilter('results')">Results</button>
+      <button id="mf-upcoming" class="pill"        onclick="setMatchFilter('upcoming')">Upcoming</button>
+    </div>
+    <div id="match-list"></div>
+  </main>
 
   <script>
     // ── Config ──────────────────────────────────────────────────────────────────
@@ -490,6 +541,153 @@
         </div>`;
     }
 
+    // ── Matches View ─────────────────────────────────────────────────────────────
+    const STAGE_LABELS = {
+      GROUP_STAGE: 'Group Stage', LAST_32: 'Round of 32', LAST_16: 'Round of 16',
+      QUARTER_FINALS: 'Quarter-final', SEMI_FINALS: 'Semi-final',
+      FINAL: 'Final', THIRD_PLACE: 'Third Place'
+    };
+
+    let currentView = 'standings';
+    let matchFilter = 'today';
+
+    function switchView(view) {
+      currentView = view;
+      document.getElementById('leaderboard').classList.toggle('hidden', view !== 'standings');
+      document.getElementById('matches-view').classList.toggle('hidden', view !== 'matches');
+      document.getElementById('nav-standings').classList.toggle('active', view === 'standings');
+      document.getElementById('nav-matches').classList.toggle('active', view === 'matches');
+      document.getElementById('view-title').textContent = view === 'standings' ? 'Standings' : 'Matches';
+      if (view === 'matches') {
+        if (lastGoodData) renderMatchesView(lastGoodData.matches);
+        else document.getElementById('match-list').innerHTML =
+          '<p class="match-empty">Loading match data…</p>';
+      }
+    }
+
+    function setMatchFilter(filter) {
+      matchFilter = filter;
+      ['today','results','upcoming'].forEach(f => {
+        document.getElementById(`mf-${f}`).classList.toggle('active', f === filter);
+      });
+      if (lastGoodData) renderMatchesView(lastGoodData.matches);
+    }
+
+    function filterMatches(matches) {
+      const today = new Date().toLocaleDateString();
+      if (matchFilter === 'today') {
+        return matches
+          .filter(m => new Date(m.utcDate).toLocaleDateString() === today)
+          .sort((a, b) => a.utcDate.localeCompare(b.utcDate));
+      }
+      if (matchFilter === 'results') {
+        return matches
+          .filter(m => m.status === 'FINISHED')
+          .sort((a, b) => b.utcDate.localeCompare(a.utcDate));
+      }
+      // upcoming: scheduled + live
+      return matches
+        .filter(m => m.status !== 'FINISHED')
+        .sort((a, b) => a.utcDate.localeCompare(b.utcDate));
+    }
+
+    function matchDateLabel(utcDate) {
+      const d = new Date(utcDate);
+      const today    = new Date().toLocaleDateString();
+      const yesterday = new Date(Date.now() - 864e5).toLocaleDateString();
+      const local = d.toLocaleDateString();
+      const label = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      if (local === today)     return `Today · ${label}`;
+      if (local === yesterday) return `Yesterday · ${label}`;
+      return label;
+    }
+
+    function renderMatchCard(match) {
+      const home     = normalizeName(match.homeTeam.name);
+      const away     = normalizeName(match.awayTeam.name);
+      const homeFlag = FLAGS[home] ?? '🏳️';
+      const awayFlag = FLAGS[away] ?? '🏳️';
+      const isLive   = match.status === 'IN_PLAY' || match.status === 'PAUSED';
+      const isDone   = match.status === 'FINISHED';
+      const winner   = match.score?.winner; // 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
+
+      // Stage / group label
+      let stageLabel = STAGE_LABELS[match.stage] ?? match.stage;
+      if (match.stage === 'GROUP_STAGE' && match.group) {
+        const grp = match.group.replace('GROUP_', 'Group ');
+        stageLabel = `${grp} · MD ${match.matchday}`;
+      }
+
+      // Right-side status
+      let statusHtml;
+      if (isLive) {
+        statusHtml = `<span class="match-status-live"><span class="live-dot"></span>Live</span>`;
+      } else if (isDone) {
+        statusHtml = `<span>FT</span>`;
+      } else {
+        const t = new Date(match.utcDate).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+        statusHtml = `<span>${t}</span>`;
+      }
+
+      // Score or vs
+      let scoreHtml;
+      if (isDone || isLive) {
+        const h = match.score.fullTime.home ?? 0;
+        const a = match.score.fullTime.away ?? 0;
+        scoreHtml = `<div class="match-score">${h} — ${a}</div>`;
+      } else {
+        scoreHtml = `<div class="match-score-vs">vs</div>`;
+      }
+
+      const homeLost = isDone && winner === 'AWAY_TEAM';
+      const awayLost = isDone && winner === 'HOME_TEAM';
+
+      return `<div class="match-card">
+        <div class="match-meta"><span>${stageLabel}</span>${statusHtml}</div>
+        <div class="match-teams">
+          <div class="match-home${homeLost ? ' lost' : ''}">
+            <span class="match-team-flag">${homeFlag}</span>
+            <span class="match-team-name">${home}</span>
+          </div>
+          ${scoreHtml}
+          <div class="match-away${awayLost ? ' lost' : ''}">
+            <span class="match-team-name">${away}</span>
+            <span class="match-team-flag">${awayFlag}</span>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function renderMatchesView(matchesData) {
+      const matches = filterMatches(matchesData);
+      const list = document.getElementById('match-list');
+
+      if (matches.length === 0) {
+        const msg = matchFilter === 'today'
+          ? 'No matches today<br>Check Results or Upcoming'
+          : matchFilter === 'results' ? 'No results yet'
+          : 'No upcoming matches';
+        list.innerHTML = `<p class="match-empty">${msg}</p>`;
+        return;
+      }
+
+      // Group by local date
+      const groups = new Map();
+      for (const m of matches) {
+        const key = new Date(m.utcDate).toLocaleDateString();
+        if (!groups.has(key)) groups.set(key, { label: matchDateLabel(m.utcDate), matches: [] });
+        groups.get(key).matches.push(m);
+      }
+
+      const showHeaders = matchFilter !== 'today';
+      let html = '';
+      for (const { label, matches: group } of groups.values()) {
+        if (showHeaders) html += `<div class="date-header">${label}</div>`;
+        html += group.map(renderMatchCard).join('');
+      }
+      list.innerHTML = html;
+    }
+
     // ── App Controller ────────────────────────────────────────────────────────────
     const LIVE_INTERVAL = 60_000;
     const IDLE_INTERVAL = 5 * 60_000;
@@ -523,6 +721,7 @@
         const teamStats = buildTeamStats(standings, matches);
         buildActivitySets(matches);
         renderLeaderboard(teamStats);
+        if (currentView === 'matches') renderMatchesView(matches.matches);
         updateLastUpdated(matches);
         setStatusColor('live');
         errorActive = false;
