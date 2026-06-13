@@ -184,10 +184,6 @@
   <main id="leaderboard"></main>
   <div id="toast" class="hidden"></div>
   <script>
-    // ── Config ──────────────────────────────────────────────────────────────────
-    const API_KEY  = '3f78d135cc954c46bb6b8f1cf10b7205';
-    const API_BASE = 'https://api.football-data.org/v4';
-
     // ── Static Data ──────────────────────────────────────────────────────────────
     const POTS = {
       1: ["Spain","France","England","Portugal","Brazil","Argentina","Germany","Netherlands","Belgium","Uruguay","Norway","Morocco"],
@@ -252,18 +248,16 @@
     }
 
     // ── API Layer ─────────────────────────────────────────────────────────────────
+    // Requests go through /.netlify/functions/football to avoid CORS restrictions.
+    // Run locally with: netlify dev (https://docs.netlify.com/cli/get-started/)
     async function fetchStandings() {
-      const res = await fetch(`${API_BASE}/competitions/WC/standings`, {
-        headers: { 'X-Auth-Token': API_KEY }
-      });
+      const res = await fetch('/.netlify/functions/football?endpoint=standings');
       if (!res.ok) throw new Error(`Standings ${res.status}`);
       return res.json();
     }
 
     async function fetchMatches() {
-      const res = await fetch(`${API_BASE}/competitions/WC/matches`, {
-        headers: { 'X-Auth-Token': API_KEY }
-      });
+      const res = await fetch('/.netlify/functions/football?endpoint=matches');
       if (!res.ok) throw new Error(`Matches ${res.status}`);
       return res.json();
     }
