@@ -171,7 +171,7 @@
 
     .team-row {
       display: grid;
-      grid-template-columns: 1.7rem 1fr auto auto;
+      grid-template-columns: 1.7rem 1fr auto;
       gap: 0.6rem;
       align-items: center;
       padding: 0.55rem 0.35rem;
@@ -485,13 +485,11 @@
         const isElim = eliminatedTeams.has(teamName);
         const liveDot = liveTeams.has(teamName) ? '<span class="live-dot"></span>' : '';
         const wdl = stats.playedGames > 0 ? `${stats.won}W ${stats.draw}D ${stats.lost}L · ` : '';
-        const standing = stats.playedGames > 0 && stats.playedGames < 3 ? ` · ${ORDINALS[stats.groupPosition] ?? stats.groupPosition} ${stats.group}` : '';
         return `<div class="team-row${isElim ? ' elim' : ''}">
           <span class="t-flag">${FLAGS[teamName] ?? '🏳️'}</span>
-          <span class="t-name">${teamName}${liveDot}</span>
-          <span class="t-mult">×${pot}</span>
+          <span class="t-name">${teamName}${liveDot} <span class="t-mult">(×${pot})</span></span>
           <span class="t-score">${score}</span>
-          <div class="t-detail"><span>${wdl}${stats.totalGoals}g · ${stats.matchPoints}pts${standing}</span>${teamBadges(stats)}</div>
+          <div class="t-detail"><span>${wdl}${stats.totalGoals}g · ${stats.matchPoints}pts</span>${teamBadges(stats)}</div>
         </div>`;
       });
       return `<div class="breakdown"><div class="breakdown-inner">${rows.join('')}</div></div>`;
