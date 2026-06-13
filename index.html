@@ -472,6 +472,57 @@
         .map((p, i) => renderParticipantRow(p, i + 1, maxScore, teamStats, expandedName))
         .join('');
     }
+
+    // ── App Controller ────────────────────────────────────────────────────────────
+    const LIVE_INTERVAL = 60_000;
+    const IDLE_INTERVAL = 5 * 60_000;
+
+    let refreshTimer = null;
+    let lastGoodData = null;
+
+    function scheduleNext() {
+      clearTimeout(refreshTimer);
+      const delay = liveTeams.size > 0 ? LIVE_INTERVAL : IDLE_INTERVAL;
+      refreshTimer = setTimeout(doRefresh, delay);
+    }
+
+    async function doRefresh() {
+      setRefreshingState(true);
+      try {
+        const [standings, matches] = await Promise.all([fetchStandings(), fetchMatches()]);
+        lastGoodData = { standings, matches };
+
+        const teamStats = buildTeamStats(standings, matches);
+        buildActivitySets(matches);
+        renderLeaderboard(teamStats);
+        updateLastUpdated();
+        hideToast();
+      } catch (err) {
+        console.error('Refresh failed:', err);
+        if (lastGoodData) {
+          const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
+          renderLeaderboard(teamStats);
+          showToast('Could not refresh scores — showing last known data');
+        } else {
+          document.getElementById('leaderboard').innerHTML =
+            '<p style="text-align:center;color:var(--muted);padding:2rem">Failed to load data. Check your API token and try again.</p>';
+        }
+      } finally {
+        setRefreshingState(false);
+        scheduleNext();
+      }
+    }
+
+    // ── Init ──────────────────────────────────────────────────────────────────────
+    // Single persistent click handler — survives innerHTML re-renders on the board element
+    document.getElementById('leaderboard').addEventListener('click', e => {
+      const row = e.target.closest('.participant-row');
+      if (!row) return;
+      row.classList.toggle('expanded');
+    });
+
+    renderSkeletons();
+    doRefresh();
   </script>
 </body>
 </html>
