@@ -2,7 +2,7 @@ name: Fetch WC Scores
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/10 17-23 * * *'
   workflow_dispatch:
 
 permissions:
