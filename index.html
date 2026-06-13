@@ -603,10 +603,12 @@
     }
 
     function renderMatchCard(match) {
-      const home     = normalizeName(match.homeTeam.name);
-      const away     = normalizeName(match.awayTeam.name);
-      const homeFlag = FLAGS[home] ?? '🏳️';
-      const awayFlag = FLAGS[away] ?? '🏳️';
+      const home     = match.homeTeam.name ? normalizeName(match.homeTeam.name) : null;
+      const away     = match.awayTeam.name ? normalizeName(match.awayTeam.name) : null;
+      const homeFlag = (home && FLAGS[home]) ? FLAGS[home] : '🏳️';
+      const awayFlag = (away && FLAGS[away]) ? FLAGS[away] : '🏳️';
+      const homeName = home ?? 'TBD';
+      const awayName = away ?? 'TBD';
       const isLive   = match.status === 'IN_PLAY' || match.status === 'PAUSED';
       const isDone   = match.status === 'FINISHED';
       const winner   = match.score?.winner; // 'HOME_TEAM' | 'AWAY_TEAM' | 'DRAW' | null
@@ -647,11 +649,11 @@
         <div class="match-teams">
           <div class="match-home${homeLost ? ' lost' : ''}">
             <span class="match-team-flag">${homeFlag}</span>
-            <span class="match-team-name">${home}</span>
+            <span class="match-team-name">${homeName}</span>
           </div>
           ${scoreHtml}
           <div class="match-away${awayLost ? ' lost' : ''}">
-            <span class="match-team-name">${away}</span>
+            <span class="match-team-name">${awayName}</span>
             <span class="match-team-flag">${awayFlag}</span>
           </div>
         </div>
