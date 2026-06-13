@@ -120,7 +120,7 @@
       overflow: hidden;
       transition: transform 0.18s ease, box-shadow 0.18s ease;
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 9px 9px 0 var(--ink); }
+    @media (hover: hover) { .card:hover { transform: translateY(-2px); box-shadow: 9px 9px 0 var(--ink); } }
 
     .card-header {
       display: flex;
@@ -258,7 +258,7 @@
 </head>
 <body>
   <header>
-    <p class="eyebrow">FIFA World Cup 2026 &middot; Pool Tracker</p>
+    <p class="eyebrow">WC 2026 &middot; Pool Tracker</p>
     <nav class="view-nav">
       <button id="nav-standings" class="pill active" onclick="switchView('standings')">Standings</button>
       <button id="nav-matches"   class="pill"        onclick="switchView('matches')">Matches</button>
