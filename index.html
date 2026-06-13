@@ -184,7 +184,47 @@
   <main id="leaderboard"></main>
   <div id="toast" class="hidden"></div>
   <script>
-    // JS added in subsequent tasks
+    // ── Config ──────────────────────────────────────────────────────────────────
+    const API_KEY  = '3f78d135cc954c46bb6b8f1cf10b7205';
+    const API_BASE = 'https://api.football-data.org/v4';
+
+    // ── Static Data ──────────────────────────────────────────────────────────────
+    const POTS = {
+      1: ["Spain","France","England","Portugal","Brazil","Argentina","Germany","Netherlands","Belgium","Uruguay","Norway","Morocco"],
+      2: ["Japan","USA","Colombia","Croatia","Mexico","Switzerland","Turkey","Ecuador","Sweden","Austria","Senegal","South Korea"],
+      3: ["Czechia","Bosnia and Herzegovina","Canada","Paraguay","Scotland","Algeria","Egypt","Ivory Coast","Ghana","Iran","Tunisia","Australia"],
+      4: ["Saudi Arabia","Qatar","South Africa","Uzbekistan","Iraq","Jordan","New Zealand","Panama","DR Congo","Haiti","Cape Verde","Curacao"]
+    };
+
+    const TEAM_POT = {};
+    for (const [pot, teams] of Object.entries(POTS)) {
+      for (const team of teams) TEAM_POT[team] = Number(pot);
+    }
+
+    const PARTICIPANTS = [
+      { name: "Jimmy",   teams: ["France","Argentina","USA","Ecuador","Canada","Czechia","New Zealand","Saudi Arabia"] },
+      { name: "Jackson", teams: ["France","Spain","Colombia","USA","Paraguay","Canada","Jordan","Uzbekistan"] },
+      { name: "Ryan",    teams: ["Spain","Netherlands","Mexico","South Korea","Czechia","Canada","Qatar","Panama"] },
+      { name: "Ian",     teams: ["France","Netherlands","Mexico","Colombia","Canada","Czechia","South Africa","Jordan"] },
+      { name: "Jay",     teams: ["Norway","Spain","Mexico","South Korea","Paraguay","Czechia","Haiti","DR Congo"] },
+      { name: "Alfonso", teams: ["Brazil","Argentina","Colombia","Mexico","Canada","Algeria","New Zealand","Panama"] },
+      { name: "Eain",    teams: ["Germany","Brazil","Japan","USA","Canada","Scotland","South Africa","Haiti"] },
+    ];
+
+    const NAME_MAP = {
+      "Czech Republic":        "Czechia",
+      "Curaçao":               "Curacao",
+      "Congo DR":              "DR Congo",
+      "Bosnia-Herzegovina":    "Bosnia and Herzegovina",
+      "Korea Republic":        "South Korea",
+      "Côte d'Ivoire":         "Ivory Coast",
+      "United States":         "USA",
+      "Cape Verde Islands":    "Cape Verde",
+    };
+
+    function normalizeName(name) {
+      return NAME_MAP[name] ?? name;
+    }
   </script>
 </body>
 </html>
