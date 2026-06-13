@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Cup Pool 2026</title>
+  <style>
+    :root {
+      --bg: #0a0f1e;
+      --surface: #141929;
+      --border: #2a3350;
+      --accent: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --live: #22c55e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 1.5rem 1rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    h1 { font-size: 1.75rem; color: var(--accent); margin-bottom: 0.4rem; }
+
+    #status-bar {
+      font-size: 0.8rem;
+      color: var(--muted);
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      align-items: center;
+      min-height: 1.2rem;
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    main { max-width: 680px; margin: 0 auto; padding: 0 1rem 2rem; }
+
+    .participant-row {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.15s;
+      user-select: none;
+    }
+    .participant-row:hover { border-color: var(--accent); }
+
+    .participant-header {
+      display: grid;
+      grid-template-columns: 1.75rem 1fr 130px 4.5rem;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .rank { color: var(--muted); font-size: 0.85rem; text-align: right; }
+    .participant-name { font-weight: 600; font-size: 1rem; }
+
+    .score-bar-wrap {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .score-bar {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .total-pts {
+      font-weight: 700;
+      font-size: 1rem;
+      text-align: right;
+    }
+
+    .team-breakdown {
+      display: none;
+      border-top: 1px solid var(--border);
+      padding: 0.5rem 1rem 1rem;
+    }
+    .participant-row.expanded .team-breakdown { display: block; }
+
+    .team-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+    }
+    .team-table th {
+      color: var(--muted);
+      font-weight: 500;
+      padding: 0.4rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .team-table td {
+      padding: 0.45rem 0.5rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .team-table tr:last-child td { border-bottom: none; }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      background: var(--border);
+      margin-left: 0.25rem;
+      white-space: nowrap;
+    }
+    .badge.qf       { background: #1e3a5f; color: #93c5fd; }
+    .badge.sf       { background: #14532d; color: #86efac; }
+    .badge.final    { background: #78350f; color: #fcd34d; }
+    .badge.champion { background: #92400e; color: var(--accent); font-weight: 700; }
+
+    .live-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      background: var(--live);
+      border-radius: 50%;
+      margin-left: 0.4rem;
+      animation: pulse 1.4s ease-in-out infinite;
+      vertical-align: middle;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+    .eliminated td { opacity: 0.4; }
+
+    .skeleton {
+      background: linear-gradient(90deg, var(--surface) 25%, var(--border) 50%, var(--surface) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 4px;
+    }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skel-row { height: 52px; margin-bottom: 0.5rem; border-radius: 8px; }
+
+    #toast {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #7f1d1d;
+      color: #fca5a5;
+      padding: 0.7rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      z-index: 100;
+      white-space: nowrap;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>&#127942; World Cup Pool 2026</h1>
+    <div id="status-bar">
+      <span id="last-updated"></span>
+      <span id="refresh-spinner" class="spinner hidden">&#8635;</span>
+    </div>
+  </header>
+  <main id="leaderboard"></main>
+  <div id="toast" class="hidden"></div>
+  <script>
+    // JS added in subsequent tasks
+  </script>
+</body>
+</html>
