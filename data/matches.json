@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 6
+    "played": 7
   },
   "competition": {
     "id": 2000,
@@ -435,11 +435,11 @@
       },
       "id": 537340,
       "utcDate": "2026-06-14T01:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_C",
-      "lastUpdated": "2026-06-14T02:58:26Z",
+      "lastUpdated": "2026-06-14T03:09:14Z",
       "homeTeam": {
         "id": 836,
         "name": "Haiti",
@@ -6209,5 +6209,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-14T03:00:23Z"
+  "_fetchedAt": "2026-06-14T03:10:16Z"
 }
