@@ -633,11 +633,11 @@
       },
       "id": 537357,
       "utcDate": "2026-06-14T20:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_F",
-      "lastUpdated": "2026-06-14T20:50:17Z",
+      "lastUpdated": "2026-06-14T20:55:02Z",
       "homeTeam": {
         "id": 8601,
         "name": "Netherlands",
@@ -660,8 +660,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -733,7 +733,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 43918,
+          "name": "François Letexier",
+          "type": "REFEREE",
+          "nationality": "France"
+        }
+      ]
     },
     {
       "area": {
@@ -6223,5 +6230,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-14T20:50:21Z"
+  "_fetchedAt": "2026-06-14T21:00:19Z"
 }
