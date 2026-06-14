@@ -571,7 +571,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-14T17:19:32Z",
+      "lastUpdated": "2026-06-14T17:28:47Z",
       "homeTeam": {
         "id": 759,
         "name": "Germany",
@@ -587,11 +587,11 @@
         "crest": "https://crests.football-data.org/curacao.svg"
       },
       "score": {
-        "winner": "HOME_TEAM",
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
           "home": 1,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -6216,5 +6216,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-14T17:20:17Z"
+  "_fetchedAt": "2026-06-14T17:30:20Z"
 }
