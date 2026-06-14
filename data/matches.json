@@ -439,7 +439,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_C",
-      "lastUpdated": "2026-06-14T02:39:50Z",
+      "lastUpdated": "2026-06-14T02:49:26Z",
       "homeTeam": {
         "id": 836,
         "name": "Haiti",
@@ -6209,5 +6209,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-14T02:40:15Z"
+  "_fetchedAt": "2026-06-14T02:50:21Z"
 }
