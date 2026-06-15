@@ -831,11 +831,11 @@
       },
       "id": 537369,
       "utcDate": "2026-06-15T16:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-15T16:49:34Z",
+      "lastUpdated": "2026-06-15T16:57:22Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -858,8 +858,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -931,7 +931,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 18754,
+          "name": "Ramon Abatti Abel",
+          "type": "REFEREE",
+          "nationality": "Brazil"
+        }
+      ]
     },
     {
       "area": {
@@ -6244,5 +6251,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-15T16:50:18Z"
+  "_fetchedAt": "2026-06-15T17:00:27Z"
 }
