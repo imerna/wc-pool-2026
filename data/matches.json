@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 12
+    "played": 11
   },
   "competition": {
     "id": 2000,
@@ -699,11 +699,11 @@
       },
       "id": 537352,
       "utcDate": "2026-06-14T23:00:00Z",
-      "status": "FINISHED",
+      "status": "IN_PLAY",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-15T01:09:23Z",
+      "lastUpdated": "2026-06-15T02:59:31Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -6237,5 +6237,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-15T04:20:15Z"
+  "_fetchedAt": "2026-06-15T04:30:18Z"
 }
