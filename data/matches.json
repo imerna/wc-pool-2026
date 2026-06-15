@@ -703,7 +703,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-15T08:25:00Z",
+      "lastUpdated": "2026-06-15T08:25:01Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -901,7 +901,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-15T19:40:07Z",
+      "lastUpdated": "2026-06-15T19:50:19Z",
       "homeTeam": {
         "id": 805,
         "name": "Belgium",
@@ -6251,5 +6251,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-15T19:40:18Z"
+  "_fetchedAt": "2026-06-15T19:50:23Z"
 }
