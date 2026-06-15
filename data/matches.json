@@ -769,7 +769,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_F",
-      "lastUpdated": "2026-06-15T03:30:16Z",
+      "lastUpdated": "2026-06-15T03:39:16Z",
       "homeTeam": {
         "id": 792,
         "name": "Sweden",
@@ -6237,5 +6237,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-15T03:30:18Z"
+  "_fetchedAt": "2026-06-15T03:40:16Z"
 }
