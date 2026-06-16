@@ -1033,7 +1033,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-16T01:05:43Z",
+      "lastUpdated": "2026-06-16T01:19:31Z",
       "homeTeam": {
         "id": 840,
         "name": "Iran",
@@ -1049,11 +1049,11 @@
         "crest": "https://crests.football-data.org/783.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -6265,5 +6265,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-16T01:10:15Z"
+  "_fetchedAt": "2026-06-16T01:20:17Z"
 }
