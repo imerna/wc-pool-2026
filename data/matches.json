@@ -1165,7 +1165,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-16T23:19:58Z",
+      "lastUpdated": "2026-06-16T23:29:34Z",
       "homeTeam": {
         "id": 8062,
         "name": "Iraq",
@@ -6286,5 +6286,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-16T23:20:17Z"
+  "_fetchedAt": "2026-06-16T23:30:20Z"
 }
