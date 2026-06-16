@@ -835,7 +835,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-15T19:56:23Z",
+      "lastUpdated": "2026-06-16T03:25:00Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -901,7 +901,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-16T00:59:15Z",
+      "lastUpdated": "2026-06-16T03:25:00Z",
       "homeTeam": {
         "id": 805,
         "name": "Belgium",
@@ -967,7 +967,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-16T02:59:13Z",
+      "lastUpdated": "2026-06-16T03:25:00Z",
       "homeTeam": {
         "id": 801,
         "name": "Saudi Arabia",
@@ -1033,7 +1033,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-16T03:09:19Z",
+      "lastUpdated": "2026-06-16T03:25:00Z",
       "homeTeam": {
         "id": 840,
         "name": "Iran",
@@ -6265,5 +6265,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-16T03:20:21Z"
+  "_fetchedAt": "2026-06-16T03:30:25Z"
 }
