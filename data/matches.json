@@ -1161,11 +1161,11 @@
       },
       "id": 537392,
       "utcDate": "2026-06-16T22:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-16T22:59:34Z",
+      "lastUpdated": "2026-06-16T23:19:58Z",
       "homeTeam": {
         "id": 8062,
         "name": "Iraq",
@@ -6286,5 +6286,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-16T23:10:22Z"
+  "_fetchedAt": "2026-06-16T23:20:17Z"
 }
