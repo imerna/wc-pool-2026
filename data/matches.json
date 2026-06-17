@@ -1293,11 +1293,11 @@
       },
       "id": 537398,
       "utcDate": "2026-06-17T04:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-17T04:58:04Z",
+      "lastUpdated": "2026-06-17T05:19:40Z",
       "homeTeam": {
         "id": 816,
         "name": "Austria",
@@ -6293,5 +6293,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-17T05:10:23Z"
+  "_fetchedAt": "2026-06-17T05:20:17Z"
 }
