@@ -1359,11 +1359,11 @@
       },
       "id": 537403,
       "utcDate": "2026-06-17T17:00:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_K",
-      "lastUpdated": "2026-06-13T15:20:17Z",
+      "lastUpdated": "2026-06-17T17:10:10Z",
       "homeTeam": {
         "id": 765,
         "name": "Portugal",
@@ -1379,11 +1379,11 @@
         "crest": "https://crests.football-data.org/congo_dr.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "halfTime": {
           "home": null,
@@ -6300,5 +6300,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-17T17:00:26Z"
+  "_fetchedAt": "2026-06-17T17:10:17Z"
 }
