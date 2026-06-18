@@ -1789,7 +1789,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 58065,
+          "name": "Cristián Garay",
+          "type": "REFEREE",
+          "nationality": "Chile"
+        }
+      ]
     },
     {
       "area": {
@@ -6335,5 +6342,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-18T20:50:15Z"
+  "_fetchedAt": "2026-06-18T21:00:21Z"
 }
