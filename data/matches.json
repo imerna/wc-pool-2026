@@ -1759,7 +1759,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_B",
-      "lastUpdated": "2026-06-18T23:39:52Z",
+      "lastUpdated": "2026-06-18T23:49:41Z",
       "homeTeam": {
         "id": 828,
         "name": "Canada",
@@ -1778,7 +1778,7 @@
         "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 4,
+          "home": 5,
           "away": 0
         },
         "halfTime": {
@@ -6349,5 +6349,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-18T23:40:16Z"
+  "_fetchedAt": "2026-06-18T23:50:16Z"
 }
