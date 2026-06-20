@@ -1891,7 +1891,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_D",
-      "lastUpdated": "2026-06-20T08:25:01Z",
+      "lastUpdated": "2026-06-20T08:25:00Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -2221,7 +2221,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-20T20:39:25Z",
+      "lastUpdated": "2026-06-20T20:49:40Z",
       "homeTeam": {
         "id": 759,
         "name": "Germany",
@@ -6391,5 +6391,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-20T20:40:17Z"
+  "_fetchedAt": "2026-06-20T20:50:15Z"
 }
