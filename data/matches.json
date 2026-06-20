@@ -307,7 +307,7 @@
       "matchday": 1,
       "stage": "GROUP_STAGE",
       "group": "GROUP_B",
-      "lastUpdated": "2026-06-13T21:09:44Z",
+      "lastUpdated": "2026-06-13T23:07:33Z",
       "homeTeam": {
         "id": 8030,
         "name": "Qatar",
@@ -6391,5 +6391,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-20T19:30:19Z"
+  "_fetchedAt": "2026-06-20T19:40:15Z"
 }
