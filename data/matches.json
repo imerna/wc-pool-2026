@@ -2151,11 +2151,11 @@
       },
       "id": 537359,
       "utcDate": "2026-06-20T17:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_F",
-      "lastUpdated": "2026-06-20T17:49:22Z",
+      "lastUpdated": "2026-06-20T17:57:46Z",
       "homeTeam": {
         "id": 8601,
         "name": "Netherlands",
@@ -2178,8 +2178,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 0
         }
       },
       "odds": {
@@ -2251,7 +2251,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 116383,
+          "name": "Juan Benítez",
+          "type": "REFEREE",
+          "nationality": "Paraguay"
+        }
+      ]
     },
     {
       "area": {
@@ -6384,5 +6391,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-20T17:50:18Z"
+  "_fetchedAt": "2026-06-20T18:00:24Z"
 }
