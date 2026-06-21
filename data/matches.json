@@ -2419,7 +2419,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-21T16:10:10Z",
+      "lastUpdated": "2026-06-21T16:19:10Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -2435,10 +2435,10 @@
         "crest": "https://crests.football-data.org/saudi_arabia.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "halfTime": {
@@ -6412,5 +6412,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-21T16:10:15Z"
+  "_fetchedAt": "2026-06-21T16:20:15Z"
 }
