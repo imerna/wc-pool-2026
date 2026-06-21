@@ -2415,11 +2415,11 @@
       },
       "id": 537371,
       "utcDate": "2026-06-21T16:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-21T16:49:10Z",
+      "lastUpdated": "2026-06-21T16:58:10Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -2442,8 +2442,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 3,
+          "away": 0
         }
       },
       "odds": {
@@ -2515,7 +2515,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 57288,
+          "name": "Darío Herrera",
+          "type": "REFEREE",
+          "nationality": "Argentina"
+        }
+      ]
     },
     {
       "area": {
@@ -6412,5 +6419,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-21T16:50:17Z"
+  "_fetchedAt": "2026-06-21T17:00:19Z"
 }
