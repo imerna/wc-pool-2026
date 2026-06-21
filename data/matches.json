@@ -2551,7 +2551,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-21T22:29:52Z",
+      "lastUpdated": "2026-06-21T22:39:28Z",
       "homeTeam": {
         "id": 758,
         "name": "Uruguay",
@@ -6426,5 +6426,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-21T22:30:17Z"
+  "_fetchedAt": "2026-06-21T22:40:18Z"
 }
