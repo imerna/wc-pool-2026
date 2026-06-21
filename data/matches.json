@@ -1891,7 +1891,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_D",
-      "lastUpdated": "2026-06-20T08:25:01Z",
+      "lastUpdated": "2026-06-20T08:25:00Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -2287,7 +2287,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-21T00:30:13Z",
+      "lastUpdated": "2026-06-21T00:39:13Z",
       "homeTeam": {
         "id": 791,
         "name": "Ecuador",
@@ -6398,5 +6398,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-21T00:30:17Z"
+  "_fetchedAt": "2026-06-21T00:40:15Z"
 }
