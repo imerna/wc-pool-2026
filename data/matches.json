@@ -2617,7 +2617,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-22T02:49:22Z",
+      "lastUpdated": "2026-06-22T03:00:10Z",
       "homeTeam": {
         "id": 783,
         "name": "New Zealand",
@@ -6433,5 +6433,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-22T02:50:15Z"
+  "_fetchedAt": "2026-06-22T03:00:21Z"
 }
