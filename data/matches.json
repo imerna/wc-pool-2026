@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 38
+    "played": 39
   },
   "competition": {
     "id": 2000,
@@ -2547,11 +2547,11 @@
       },
       "id": 537372,
       "utcDate": "2026-06-21T22:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-22T00:10:04Z",
+      "lastUpdated": "2026-06-22T00:10:40Z",
       "homeTeam": {
         "id": 758,
         "name": "Uruguay",
@@ -6433,5 +6433,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-22T00:10:15Z"
+  "_fetchedAt": "2026-06-22T00:20:16Z"
 }
