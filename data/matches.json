@@ -2877,11 +2877,11 @@
       },
       "id": 537400,
       "utcDate": "2026-06-23T03:00:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-20T15:20:13Z",
+      "lastUpdated": "2026-06-23T03:09:46Z",
       "homeTeam": {
         "id": 8049,
         "name": "Jordan",
@@ -2897,11 +2897,11 @@
         "crest": "https://crests.football-data.org/algeria.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "halfTime": {
           "home": null,
@@ -6461,5 +6461,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-23T03:00:19Z"
+  "_fetchedAt": "2026-06-23T03:10:16Z"
 }
