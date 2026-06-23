@@ -1891,7 +1891,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_D",
-      "lastUpdated": "2026-06-20T08:25:01Z",
+      "lastUpdated": "2026-06-20T08:25:00Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -2881,7 +2881,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-23T03:30:00Z",
+      "lastUpdated": "2026-06-23T03:40:13Z",
       "homeTeam": {
         "id": 8049,
         "name": "Jordan",
@@ -6461,5 +6461,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-23T03:30:19Z"
+  "_fetchedAt": "2026-06-23T03:40:17Z"
 }
