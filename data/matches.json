@@ -2815,7 +2815,7 @@
       "matchday": 2,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-23T01:40:07Z",
+      "lastUpdated": "2026-06-23T01:49:07Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -6461,5 +6461,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-23T01:40:15Z"
+  "_fetchedAt": "2026-06-23T01:50:15Z"
 }
