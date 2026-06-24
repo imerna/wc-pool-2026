@@ -3193,11 +3193,11 @@
       },
       "id": 537337,
       "utcDate": "2026-06-24T19:00:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_B",
-      "lastUpdated": "2026-06-23T15:20:15Z",
+      "lastUpdated": "2026-06-24T19:10:07Z",
       "homeTeam": {
         "id": 788,
         "name": "Switzerland",
@@ -3213,11 +3213,11 @@
         "crest": "https://crests.football-data.org/canada.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "halfTime": {
           "home": null,
@@ -3259,11 +3259,11 @@
       },
       "id": 537338,
       "utcDate": "2026-06-24T19:00:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_B",
-      "lastUpdated": "2026-06-23T15:20:15Z",
+      "lastUpdated": "2026-06-24T19:09:40Z",
       "homeTeam": {
         "id": 1060,
         "name": "Bosnia-Herzegovina",
@@ -3279,11 +3279,11 @@
         "crest": "https://crests.football-data.org/8030.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "halfTime": {
           "home": null,
@@ -6489,5 +6489,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-24T19:00:20Z"
+  "_fetchedAt": "2026-06-24T19:10:16Z"
 }
