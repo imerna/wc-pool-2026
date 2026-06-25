@@ -3623,7 +3623,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 212450,
+          "name": "Tori Penso",
+          "type": "REFEREE",
+          "nationality": "USA"
+        }
+      ]
     },
     {
       "area": {
@@ -3682,7 +3689,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 30960,
+          "name": "Glenn Nyberg",
+          "type": "REFEREE",
+          "nationality": "Sweden"
+        }
+      ]
     },
     {
       "area": {
@@ -6517,5 +6531,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-25T17:50:20Z"
+  "_fetchedAt": "2026-06-25T18:00:22Z"
 }
