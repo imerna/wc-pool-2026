@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 56
+    "played": 54
   },
   "competition": {
     "id": 2000,
@@ -3589,11 +3589,11 @@
       },
       "id": 537355,
       "utcDate": "2026-06-25T20:00:00Z",
-      "status": "FINISHED",
+      "status": "TIMED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-25T22:08:03Z",
+      "lastUpdated": "2026-06-11T15:20:18Z",
       "homeTeam": {
         "id": 791,
         "name": "Ecuador",
@@ -3609,15 +3609,15 @@
         "crest": "https://crests.football-data.org/759.svg"
       },
       "score": {
-        "winner": "HOME_TEAM",
+        "winner": null,
         "duration": "REGULAR",
         "fullTime": {
-          "home": 2,
-          "away": 1
+          "home": null,
+          "away": null
         },
         "halfTime": {
-          "home": 1,
-          "away": 1
+          "home": null,
+          "away": null
         }
       },
       "odds": {
@@ -3655,11 +3655,11 @@
       },
       "id": 537356,
       "utcDate": "2026-06-25T20:00:00Z",
-      "status": "FINISHED",
+      "status": "TIMED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_E",
-      "lastUpdated": "2026-06-25T22:04:07Z",
+      "lastUpdated": "2026-06-11T15:20:18Z",
       "homeTeam": {
         "id": 9460,
         "name": "Curaçao",
@@ -3675,15 +3675,15 @@
         "crest": "https://crests.football-data.org/787.svg"
       },
       "score": {
-        "winner": "AWAY_TEAM",
+        "winner": null,
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
-          "away": 2
+          "home": null,
+          "away": null
         },
         "halfTime": {
-          "home": 0,
-          "away": 1
+          "home": null,
+          "away": null
         }
       },
       "odds": {
@@ -6545,5 +6545,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-25T23:00:18Z"
+  "_fetchedAt": "2026-06-25T23:10:13Z"
 }
