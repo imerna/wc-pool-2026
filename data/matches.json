@@ -3857,7 +3857,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_D",
-      "lastUpdated": "2026-06-26T03:29:56Z",
+      "lastUpdated": "2026-06-26T03:39:55Z",
       "homeTeam": {
         "id": 803,
         "name": "Turkey",
@@ -3923,7 +3923,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_D",
-      "lastUpdated": "2026-06-26T03:30:11Z",
+      "lastUpdated": "2026-06-26T03:40:10Z",
       "homeTeam": {
         "id": 761,
         "name": "Paraguay",
@@ -6559,5 +6559,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-26T03:30:15Z"
+  "_fetchedAt": "2026-06-26T03:40:16Z"
 }
