@@ -3989,7 +3989,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-26T20:20:07Z",
+      "lastUpdated": "2026-06-26T20:30:07Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -4051,11 +4051,11 @@
       },
       "id": 537396,
       "utcDate": "2026-06-26T19:00:00Z",
-      "status": "LIVE",
+      "status": "IN_PLAY",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-26T20:19:58Z",
+      "lastUpdated": "2026-06-26T20:30:11Z",
       "homeTeam": {
         "id": 804,
         "name": "Senegal",
@@ -4074,7 +4074,7 @@
         "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         },
         "halfTime": {
@@ -6573,5 +6573,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-26T20:20:16Z"
+  "_fetchedAt": "2026-06-26T20:30:18Z"
 }
