@@ -4253,7 +4253,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T03:30:20Z",
+      "lastUpdated": "2026-06-27T03:39:40Z",
       "homeTeam": {
         "id": 783,
         "name": "New Zealand",
@@ -4269,11 +4269,11 @@
         "crest": "https://crests.football-data.org/805.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -4319,7 +4319,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T03:29:51Z",
+      "lastUpdated": "2026-06-27T03:39:51Z",
       "homeTeam": {
         "id": 825,
         "name": "Egypt",
@@ -6601,5 +6601,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T03:30:24Z"
+  "_fetchedAt": "2026-06-27T03:40:17Z"
 }
