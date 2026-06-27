@@ -4385,7 +4385,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-27T21:09:51Z",
+      "lastUpdated": "2026-06-27T21:19:51Z",
       "homeTeam": {
         "id": 1836,
         "name": "Panama",
@@ -4451,7 +4451,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-27T21:09:51Z",
+      "lastUpdated": "2026-06-27T21:20:03Z",
       "homeTeam": {
         "id": 799,
         "name": "Croatia",
@@ -6615,5 +6615,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T21:10:13Z"
+  "_fetchedAt": "2026-06-27T21:20:16Z"
 }
