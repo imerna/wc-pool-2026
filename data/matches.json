@@ -4117,11 +4117,11 @@
       },
       "id": 537373,
       "utcDate": "2026-06-27T00:00:00Z",
-      "status": "LIVE",
+      "status": "PAUSED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-27T00:50:10Z",
+      "lastUpdated": "2026-06-27T01:00:19Z",
       "homeTeam": {
         "id": 758,
         "name": "Uruguay",
@@ -4144,8 +4144,8 @@
           "away": 1
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "odds": {
@@ -4183,11 +4183,11 @@
       },
       "id": 537374,
       "utcDate": "2026-06-27T00:00:00Z",
-      "status": "LIVE",
+      "status": "PAUSED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-27T00:49:58Z",
+      "lastUpdated": "2026-06-27T00:59:23Z",
       "homeTeam": {
         "id": 1930,
         "name": "Cape Verde Islands",
@@ -4210,8 +4210,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -4283,7 +4283,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 129250,
+          "name": "Adham Makhadmeh",
+          "type": "REFEREE",
+          "nationality": "Jordan"
+        }
+      ]
     },
     {
       "area": {
@@ -4342,7 +4349,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 43888,
+          "name": "Szymon Marciniak",
+          "type": "REFEREE",
+          "nationality": "Poland"
+        }
+      ]
     },
     {
       "area": {
@@ -6587,5 +6601,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T00:50:14Z"
+  "_fetchedAt": "2026-06-27T01:00:20Z"
 }
