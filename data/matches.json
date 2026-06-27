@@ -4253,7 +4253,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T03:09:40Z",
+      "lastUpdated": "2026-06-27T03:19:55Z",
       "homeTeam": {
         "id": 783,
         "name": "New Zealand",
@@ -4319,7 +4319,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T03:09:51Z",
+      "lastUpdated": "2026-06-27T03:19:52Z",
       "homeTeam": {
         "id": 825,
         "name": "Egypt",
@@ -4338,8 +4338,8 @@
         "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
-          "away": 0
+          "home": 1,
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -6601,5 +6601,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T03:10:16Z"
+  "_fetchedAt": "2026-06-27T03:20:18Z"
 }
