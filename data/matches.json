@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 66
+    "played": 68
   },
   "competition": {
     "id": 2000,
@@ -4381,11 +4381,11 @@
       },
       "id": 537413,
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-27T23:00:02Z",
+      "lastUpdated": "2026-06-27T23:05:20Z",
       "homeTeam": {
         "id": 1836,
         "name": "Panama",
@@ -4447,11 +4447,11 @@
       },
       "id": 537414,
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-27T22:59:33Z",
+      "lastUpdated": "2026-06-27T23:04:51Z",
       "homeTeam": {
         "id": 799,
         "name": "Croatia",
@@ -6629,5 +6629,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T23:00:18Z"
+  "_fetchedAt": "2026-06-27T23:10:14Z"
 }
