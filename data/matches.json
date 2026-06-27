@@ -4253,7 +4253,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T04:19:53Z",
+      "lastUpdated": "2026-06-27T04:30:05Z",
       "homeTeam": {
         "id": 783,
         "name": "New Zealand",
@@ -4319,7 +4319,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T04:20:15Z",
+      "lastUpdated": "2026-06-27T04:30:16Z",
       "homeTeam": {
         "id": 825,
         "name": "Egypt",
@@ -6601,5 +6601,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-27T04:20:17Z"
+  "_fetchedAt": "2026-06-27T04:30:17Z"
 }
