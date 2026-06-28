@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 70
+    "played": 72
   },
   "competition": {
     "id": 2000,
@@ -3989,7 +3989,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-26T23:00:47Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -4055,7 +4055,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-26T23:05:58Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 804,
         "name": "Senegal",
@@ -4121,7 +4121,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-27T04:02:59Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 758,
         "name": "Uruguay",
@@ -4187,7 +4187,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_H",
-      "lastUpdated": "2026-06-27T04:00:59Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 1930,
         "name": "Cape Verde Islands",
@@ -4253,7 +4253,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T06:58:41Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 783,
         "name": "New Zealand",
@@ -4319,7 +4319,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_G",
-      "lastUpdated": "2026-06-27T07:04:41Z",
+      "lastUpdated": "2026-06-27T07:23:05Z",
       "homeTeam": {
         "id": 825,
         "name": "Egypt",
@@ -4381,7 +4381,7 @@
       },
       "id": 537413,
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
@@ -4401,15 +4401,15 @@
         "crest": "https://crests.football-data.org/770.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 2
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -4447,7 +4447,7 @@
       },
       "id": 537414,
       "utcDate": "2026-06-27T21:00:00Z",
-      "status": "TIMED",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
@@ -4467,15 +4467,15 @@
         "crest": "https://crests.football-data.org/ghana.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 2,
+          "away": 1
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "odds": {
@@ -6643,5 +6643,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-28T05:50:16Z"
+  "_fetchedAt": "2026-06-28T06:00:17Z"
 }
