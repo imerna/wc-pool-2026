@@ -4811,7 +4811,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 38806,
+          "name": "João Pinheiro",
+          "type": "REFEREE",
+          "nationality": "Portugal"
+        }
+      ]
     },
     {
       "area": {
@@ -6643,5 +6650,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-28T16:50:13Z"
+  "_fetchedAt": "2026-06-28T17:00:17Z"
 }
