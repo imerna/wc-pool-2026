@@ -4649,7 +4649,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-28T04:07:40Z",
+      "lastUpdated": "2026-06-28T04:36:33Z",
       "homeTeam": {
         "id": 8049,
         "name": "Jordan",
@@ -6643,5 +6643,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-28T04:30:17Z"
+  "_fetchedAt": "2026-06-28T04:40:14Z"
 }
