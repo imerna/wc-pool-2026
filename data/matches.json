@@ -4777,11 +4777,11 @@
       },
       "id": 537417,
       "utcDate": "2026-06-28T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-28T20:30:06Z",
+      "lastUpdated": "2026-06-28T20:40:12Z",
       "homeTeam": {
         "id": 774,
         "name": "South Africa",
@@ -6650,5 +6650,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-28T20:30:17Z"
+  "_fetchedAt": "2026-06-28T20:40:15Z"
 }
