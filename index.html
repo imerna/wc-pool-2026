@@ -450,17 +450,36 @@
     // ── Live / Eliminated State ───────────────────────────────────────────────────
     let liveTeams = new Set();
     let eliminatedTeams = new Set();
-    function buildActivitySets(matchesData) {
+    function buildActivitySets(matchesData, teamStats) {
       liveTeams = new Set(); eliminatedTeams = new Set();
-      const scheduled = new Set(), played = new Set();
+      const scheduled = new Set(), played = new Set(), knockoutWinners = new Set();
       for (const match of matchesData.matches) {
         const home = normalizeName(match.homeTeam.name);
         const away = normalizeName(match.awayTeam.name);
-        if (match.status === 'IN_PLAY' || match.status === 'PAUSED') { liveTeams.add(home); liveTeams.add(away); }
-        if (match.status === 'SCHEDULED' || match.status === 'TIMED') { scheduled.add(home); scheduled.add(away); }
-        if (match.status === 'FINISHED') { played.add(home); played.add(away); }
+        const s = match.status;
+        // 'LIVE' is a second in-progress status the API returns alongside 'IN_PLAY'
+        if (s === 'IN_PLAY' || s === 'PAUSED' || s === 'LIVE') {
+          if (home) liveTeams.add(home); if (away) liveTeams.add(away);
+        }
+        if (s === 'SCHEDULED' || s === 'TIMED') { if (home) scheduled.add(home); if (away) scheduled.add(away); }
+        if (s === 'FINISHED') { if (home) played.add(home); if (away) played.add(away); }
+        // Track knockout winners so they aren't marked eliminated during bracket-assignment gaps
+        // (next-round slots have null team names until the bracket is officially set)
+        if (ALL_KNOCKOUT.has(match.stage) && s === 'FINISHED' && home && away) {
+          const hg = match.score.fullTime.home ?? 0, ag = match.score.fullTime.away ?? 0;
+          let winner;
+          if (hg !== ag) { winner = hg > ag ? home : away; }
+          else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; winner = hp > ap ? home : away; }
+          if (winner) knockoutWinners.add(winner);
+        }
       }
-      for (const team of played) if (!scheduled.has(team) && !liveTeams.has(team)) eliminatedTeams.add(team);
+      for (const team of played) {
+        if (scheduled.has(team) || liveTeams.has(team) || knockoutWinners.has(team)) continue;
+        // Protect 1st/2nd place group finishers until their R32 slot is assigned
+        const stats = teamStats?.[team];
+        if (stats?.playedGames >= 3 && stats.groupPosition <= 2) continue;
+        eliminatedTeams.add(team);
+      }
     }
 
     // ── UI Helpers ────────────────────────────────────────────────────────────────
@@ -737,7 +756,7 @@
         const [standings, matches] = await Promise.all([fetchStandings(), fetchMatches()]);
         lastGoodData = { standings, matches };
         const teamStats = buildTeamStats(standings, matches);
-        buildActivitySets(matches);
+        buildActivitySets(matches, teamStats);
         renderLeaderboard(teamStats);
         if (currentView === 'matches') renderMatchesView(matches.matches);
         updateLastUpdated(matches);
@@ -747,7 +766,7 @@
         console.error('Refresh failed:', err);
         if (lastGoodData) {
           const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
-          buildActivitySets(lastGoodData.matches);
+          buildActivitySets(lastGoodData.matches, teamStats);
           renderLeaderboard(teamStats);
           updateLastUpdated(lastGoodData.matches);
           document.getElementById('last-updated').textContent += ' · could not refresh';
