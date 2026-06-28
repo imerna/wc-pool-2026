@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 70
+    "played": 72
   },
   "competition": {
     "id": 2000,
@@ -4385,7 +4385,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-28T03:27:15Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 1836,
         "name": "Panama",
@@ -4451,7 +4451,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_L",
-      "lastUpdated": "2026-06-28T03:27:15Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 799,
         "name": "Croatia",
@@ -4517,7 +4517,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_K",
-      "lastUpdated": "2026-06-28T03:27:15Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 818,
         "name": "Colombia",
@@ -4583,7 +4583,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_K",
-      "lastUpdated": "2026-06-28T03:27:15Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 1934,
         "name": "Congo DR",
@@ -4645,11 +4645,11 @@
       },
       "id": 537401,
       "utcDate": "2026-06-28T02:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-28T04:00:07Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 8049,
         "name": "Jordan",
@@ -4711,11 +4711,11 @@
       },
       "id": 537402,
       "utcDate": "2026-06-28T02:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_J",
-      "lastUpdated": "2026-06-28T04:00:07Z",
+      "lastUpdated": "2026-06-28T04:07:40Z",
       "homeTeam": {
         "id": 778,
         "name": "Algeria",
@@ -4734,8 +4734,8 @@
         "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 2,
-          "away": 2
+          "home": 3,
+          "away": 3
         },
         "halfTime": {
           "home": 1,
@@ -6643,5 +6643,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-28T04:00:18Z"
+  "_fetchedAt": "2026-06-28T04:10:13Z"
 }
