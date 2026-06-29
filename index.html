@@ -452,7 +452,7 @@
     let eliminatedTeams = new Set();
     function buildActivitySets(matchesData, teamStats) {
       liveTeams = new Set(); eliminatedTeams = new Set();
-      const scheduled = new Set(), played = new Set(), knockoutWinners = new Set();
+      const scheduled = new Set(), played = new Set(), knockoutWinners = new Set(), knockoutPlayed = new Set();
       for (const match of matchesData.matches) {
         const home = normalizeName(match.homeTeam.name);
         const away = normalizeName(match.awayTeam.name);
@@ -463,9 +463,11 @@
         }
         if (s === 'SCHEDULED' || s === 'TIMED') { if (home) scheduled.add(home); if (away) scheduled.add(away); }
         if (s === 'FINISHED') { if (home) played.add(home); if (away) played.add(away); }
-        // Track knockout winners so they aren't marked eliminated during bracket-assignment gaps
-        // (next-round slots have null team names until the bracket is officially set)
+        // Track knockout participants and winners to handle bracket-assignment gaps:
+        // next-round slots have null team names until the bracket is officially set,
+        // so winners can't be found in `scheduled` until then.
         if (ALL_KNOCKOUT.has(match.stage) && s === 'FINISHED' && home && away) {
+          knockoutPlayed.add(home); knockoutPlayed.add(away);
           const hg = match.score.fullTime.home ?? 0, ag = match.score.fullTime.away ?? 0;
           let winner;
           if (hg !== ag) { winner = hg > ag ? home : away; }
@@ -475,9 +477,10 @@
       }
       for (const team of played) {
         if (scheduled.has(team) || liveTeams.has(team) || knockoutWinners.has(team)) continue;
-        // Protect 1st/2nd place group finishers until their R32 slot is assigned
+        // Protect 1st/2nd place group finishers until their R32 slot is assigned —
+        // but only before they've played a knockout match; after that, win/loss decides.
         const stats = teamStats?.[team];
-        if (stats?.playedGames >= 3 && stats.groupPosition <= 2) continue;
+        if (!knockoutPlayed.has(team) && stats?.playedGames >= 3 && stats.groupPosition <= 2) continue;
         eliminatedTeams.add(team);
       }
     }
