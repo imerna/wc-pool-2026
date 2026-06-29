@@ -4909,11 +4909,11 @@
       },
       "id": 537415,
       "utcDate": "2026-06-29T20:30:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-29T22:49:35Z",
+      "lastUpdated": "2026-06-29T23:00:00Z",
       "homeTeam": {
         "id": 759,
         "name": "Germany",
@@ -4929,10 +4929,10 @@
         "crest": "https://crests.football-data.org/761.svg"
       },
       "score": {
-        "winner": "DRAW",
-        "duration": "EXTRA_TIME",
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 1
         },
         "halfTime": {
@@ -4944,7 +4944,7 @@
           "away": null
         },
         "extraTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         }
       },
@@ -5017,7 +5017,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 11412,
+          "name": "Wilton Sampaio",
+          "type": "REFEREE",
+          "nationality": "Brazil"
+        }
+      ]
     },
     {
       "area": {
@@ -6672,5 +6679,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-29T22:50:14Z"
+  "_fetchedAt": "2026-06-29T23:00:19Z"
 }
