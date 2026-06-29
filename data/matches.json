@@ -4055,7 +4055,7 @@
       "matchday": 3,
       "stage": "GROUP_STAGE",
       "group": "GROUP_I",
-      "lastUpdated": "2026-06-29T05:20:12Z",
+      "lastUpdated": "2026-06-29T08:25:01Z",
       "homeTeam": {
         "id": 804,
         "name": "Senegal",
@@ -4877,7 +4877,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 11043,
+          "name": "Maurizio Mariani",
+          "type": "REFEREE",
+          "nationality": "Italy"
+        }
+      ]
     },
     {
       "area": {
@@ -6650,5 +6657,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-29T06:50:18Z"
+  "_fetchedAt": "2026-06-29T16:00:21Z"
 }
