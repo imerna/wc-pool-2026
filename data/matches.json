@@ -4913,7 +4913,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-29T23:09:30Z",
+      "lastUpdated": "2026-06-29T23:19:55Z",
       "homeTeam": {
         "id": 759,
         "name": "Germany",
@@ -6679,5 +6679,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-29T23:10:13Z"
+  "_fetchedAt": "2026-06-29T23:20:14Z"
 }
