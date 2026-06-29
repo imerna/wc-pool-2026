@@ -4847,7 +4847,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-29T18:19:54Z",
+      "lastUpdated": "2026-06-29T18:29:49Z",
       "homeTeam": {
         "id": 764,
         "name": "Brazil",
@@ -4863,10 +4863,10 @@
         "crest": "https://crests.football-data.org/766.svg"
       },
       "score": {
-        "winner": "AWAY_TEAM",
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 1
         },
         "halfTime": {
@@ -4943,7 +4943,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 289426,
+          "name": "Jalal Jayed",
+          "type": "REFEREE",
+          "nationality": "Morocco"
+        }
+      ]
     },
     {
       "area": {
@@ -6657,5 +6664,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-29T18:20:13Z"
+  "_fetchedAt": "2026-06-29T18:30:18Z"
 }
