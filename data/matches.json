@@ -4843,11 +4843,11 @@
       },
       "id": 537423,
       "utcDate": "2026-06-29T17:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-29T17:49:54Z",
+      "lastUpdated": "2026-06-29T17:55:18Z",
       "homeTeam": {
         "id": 764,
         "name": "Brazil",
@@ -4870,8 +4870,8 @@
           "away": 1
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "odds": {
@@ -6657,5 +6657,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-29T17:50:13Z"
+  "_fetchedAt": "2026-06-29T18:00:19Z"
 }
