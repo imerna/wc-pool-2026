@@ -5131,11 +5131,11 @@
       },
       "id": 537416,
       "utcDate": "2026-06-30T21:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T21:50:09Z",
+      "lastUpdated": "2026-06-30T21:59:06Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -5151,15 +5151,15 @@
         "crest": "https://crests.football-data.org/792.svg"
       },
       "score": {
-        "winner": "HOME_TEAM",
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 1,
+          "home": 0,
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -6709,5 +6709,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T21:50:15Z"
+  "_fetchedAt": "2026-06-30T22:00:21Z"
 }
