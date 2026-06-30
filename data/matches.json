@@ -4847,7 +4847,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-29T21:04:03Z",
+      "lastUpdated": "2026-06-30T08:25:01Z",
       "homeTeam": {
         "id": 764,
         "name": "Brazil",
@@ -5099,7 +5099,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 28805,
+          "name": "Jesús Valenzuela",
+          "type": "REFEREE",
+          "nationality": "Venezuela"
+        }
+      ]
     },
     {
       "area": {
@@ -6695,5 +6702,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T06:50:14Z"
+  "_fetchedAt": "2026-06-30T16:00:19Z"
 }
