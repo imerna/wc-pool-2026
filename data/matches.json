@@ -4991,7 +4991,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T03:59:57Z",
+      "lastUpdated": "2026-06-30T04:08:17Z",
       "homeTeam": {
         "id": 8601,
         "name": "Netherlands",
@@ -5010,7 +5010,7 @@
         "winner": null,
         "duration": "PENALTY_SHOOTOUT",
         "fullTime": {
-          "home": 4,
+          "home": 3,
           "away": 4
         },
         "halfTime": {
@@ -6695,5 +6695,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T04:00:17Z"
+  "_fetchedAt": "2026-06-30T04:10:14Z"
 }
