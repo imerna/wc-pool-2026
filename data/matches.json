@@ -5131,11 +5131,11 @@
       },
       "id": 537416,
       "utcDate": "2026-06-30T21:00:00Z",
-      "status": "LIVE",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T22:09:21Z",
+      "lastUpdated": "2026-06-30T22:19:30Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -5154,7 +5154,7 @@
         "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 0
         },
         "halfTime": {
@@ -6709,5 +6709,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T22:10:13Z"
+  "_fetchedAt": "2026-06-30T22:20:13Z"
 }
