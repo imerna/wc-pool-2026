@@ -5135,7 +5135,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T22:19:30Z",
+      "lastUpdated": "2026-06-30T22:30:14Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6709,5 +6709,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T22:20:13Z"
+  "_fetchedAt": "2026-06-30T22:30:16Z"
 }
