@@ -5069,7 +5069,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T18:50:07Z",
+      "lastUpdated": "2026-06-30T19:00:06Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -5085,11 +5085,11 @@
         "crest": "https://crests.football-data.org/813.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 1,
-          "away": 1
+          "away": 2
         },
         "halfTime": {
           "home": 0,
@@ -5165,7 +5165,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 43899,
+          "name": "Danny Makkelie",
+          "type": "REFEREE",
+          "nationality": "Netherlands"
+        }
+      ]
     },
     {
       "area": {
@@ -6702,5 +6709,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T18:50:14Z"
+  "_fetchedAt": "2026-06-30T19:00:19Z"
 }
