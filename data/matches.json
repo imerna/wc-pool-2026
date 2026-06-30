@@ -4991,7 +4991,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T03:00:12Z",
+      "lastUpdated": "2026-06-30T03:10:09Z",
       "homeTeam": {
         "id": 8601,
         "name": "Netherlands",
@@ -5008,12 +5008,20 @@
       },
       "score": {
         "winner": "DRAW",
-        "duration": "REGULAR",
+        "duration": "EXTRA_TIME",
         "fullTime": {
           "home": 1,
           "away": 1
         },
         "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "regularTime": {
+          "home": null,
+          "away": null
+        },
+        "extraTime": {
           "home": 0,
           "away": 0
         }
@@ -6683,5 +6691,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-06-30T03:00:18Z"
+  "_fetchedAt": "2026-06-30T03:10:13Z"
 }
