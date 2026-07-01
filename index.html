@@ -267,6 +267,39 @@
     /* ── Match empty state ── */
     .match-empty { text-align: center; padding: 3rem 1rem;
       font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+
+    /* ── Score breakdown modal ── */
+    .score-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; }
+    .score-modal.hidden { display: none !important; }
+    .score-modal-backdrop { position: absolute; inset: 0; background: rgba(20,17,12,0.55); }
+    .score-modal-card {
+      position: relative; z-index: 1;
+      background: var(--card); border: var(--border-w) solid var(--ink);
+      border-radius: var(--radius); box-shadow: 7px 7px 0 var(--ink);
+      width: min(92vw, 380px); padding: 1.25rem 1.25rem 1rem;
+    }
+    .score-modal-header {
+      display: flex; align-items: center; gap: 0.55rem; margin-bottom: 1rem;
+    }
+    .score-modal-flag { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
+    .score-modal-name { font-family: var(--f-body); font-weight: 700; font-size: 1.05rem; flex: 1; min-width: 0; }
+    .score-modal-close {
+      background: none; border: var(--border-w) solid var(--ink); border-radius: 4px;
+      font-size: 0.85rem; line-height: 1; padding: 0.25rem 0.45rem; cursor: pointer;
+      color: var(--ink); font-family: var(--f-mono); flex-shrink: 0;
+    }
+    .score-modal-table { width: 100%; border-collapse: collapse; font-family: var(--f-mono); font-size: 0.78rem; margin-bottom: 0.5rem; }
+    .score-modal-table td { padding: 0.32rem 0.2rem; color: var(--ink); }
+    .score-modal-table td:last-child { text-align: right; font-weight: 700; }
+    .score-modal-table tr { border-bottom: 1px solid var(--chip); }
+    .score-modal-table tr:last-child { border-bottom: none; }
+    .score-modal-table .row-subtotal td { border-top: 2px solid var(--ink); padding-top: 0.55rem; font-weight: 700; }
+    .score-modal-table .row-mult td { color: var(--muted); font-size: 0.72rem; }
+    .score-modal-total {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin-top: 0.75rem; padding-top: 0.75rem; border-top: var(--border-w) solid var(--ink);
+      font-family: var(--f-display); font-size: 1.15rem; letter-spacing: 0.01em;
+    }
   </style>
 </head>
 <body>
@@ -296,6 +329,22 @@
     </div>
     <div id="match-list"></div>
   </main>
+
+  <div id="score-modal" class="score-modal hidden" role="dialog" aria-modal="true">
+    <div class="score-modal-backdrop"></div>
+    <div class="score-modal-card">
+      <div class="score-modal-header">
+        <span id="score-modal-flag" class="score-modal-flag"></span>
+        <span id="score-modal-name" class="score-modal-name"></span>
+        <button class="score-modal-close" id="score-modal-close" aria-label="Close">✕</button>
+      </div>
+      <table id="score-modal-table" class="score-modal-table"></table>
+      <div class="score-modal-total">
+        <span>TOTAL</span>
+        <span id="score-modal-total-val"></span>
+      </div>
+    </div>
+  </div>
 
   <script>
     // ── Config ──────────────────────────────────────────────────────────────────
@@ -372,13 +421,13 @@
     // ── Scoring Engine ────────────────────────────────────────────────────────────
     // Per team:  (matchPoints + goals + groupBonus + knockoutBonus) × pot
     //   groupBonus     = [GW 8, RU 4, 3rd 2, 4th 1] once all 3 group games played
-    //   knockoutBonus  = QF 12 + SF 24 + Final 36 + Champion 48 (cumulative)
+    //   knockoutBonus  = R32 win 8 + QF 12 + SF 24 + Final 36 + Champion 48 (cumulative)
     function calcTeamScore(teamName, teamStats) {
       const pot = TEAM_POT[teamName];
       const stats = teamStats[teamName];
       if (!stats || !pot) return 0;
       const groupBonus = stats.playedGames >= 3 ? ([0,8,4,2,1][stats.groupPosition] ?? 0) : 0;
-      const knockoutBonus = (stats.reachedQF?12:0) + (stats.reachedSF?24:0) + (stats.reachedFinal?36:0) + (stats.isChampion?48:0);
+      const knockoutBonus = (stats.wonLast32?8:0) + (stats.reachedQF?12:0) + (stats.reachedSF?24:0) + (stats.reachedFinal?36:0) + (stats.isChampion?48:0);
       return (stats.matchPoints + stats.totalGoals + groupBonus + knockoutBonus) * pot;
     }
     const calcPersonScore = (p, teamStats) => p.teams.reduce((s, t) => s + calcTeamScore(t, teamStats), 0);
@@ -413,7 +462,7 @@
           stats[name] = {
             matchPoints: entry.points, groupPosition: entry.position, playedGames: entry.playedGames,
             won: entry.won, draw: entry.draw, lost: entry.lost, group: group.group, totalGoals: entry.goalsFor,
-            reachedQF: false, reachedSF: false, reachedFinal: false, isChampion: false
+            reachedQF: false, reachedSF: false, reachedFinal: false, isChampion: false, wonLast32: false
           };
         }
       }
@@ -430,6 +479,7 @@
         else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; win = hp>ap?home:away; lose = hp>ap?away:home; }
         if (stats[win])  stats[win].won  += 1;
         if (stats[lose]) stats[lose].lost += 1;
+        if (match.stage === 'LAST_32' && stats[win]) stats[win].wonLast32 = true;
         if (!BONUS_STAGES.has(match.stage)) continue;
         for (const team of [home, away]) {
           if (!stats[team]) continue;
@@ -527,7 +577,7 @@
         const liveDot = liveTeams.has(teamName) ? '<span class="live-dot"></span>' : '';
         const wdl = stats.playedGames > 0 ? `${stats.won}W ${stats.draw}D ${stats.lost}L · ` : '';
         return `<div class="team-row${isElim ? ' elim' : ''}">
-          <span class="t-flag">${FLAGS[teamName] ?? '🏳️'}</span>
+          <span class="t-flag" data-team="${teamName}">${FLAGS[teamName] ?? '🏳️'}</span>
           <span class="t-name">${teamName}${liveDot} <span class="t-mult">(×${pot})</span></span>
           <span class="t-score">${score}</span>
           <div class="t-detail"><span>${wdl}${stats.totalGoals}g · ${stats.matchPoints}pts</span>${teamBadges(stats)}</div>
@@ -735,6 +785,7 @@
     let errorActive = false;
     let refreshTimer = null;
     let lastGoodData = null;
+    let lastTeamStats = null;
 
     function scheduleNext() {
       clearTimeout(refreshTimer);
@@ -746,6 +797,7 @@
     function renderDemo() {
       liveTeams = new Set();
       eliminatedTeams = MOCK_ELIMINATED;
+      lastTeamStats = MOCK_TEAM_STATS;
       renderLeaderboard(MOCK_TEAM_STATS);
       document.getElementById('last-updated').textContent = 'Demo · post-final snapshot — France champions';
       setStatusColor('demo');
@@ -759,6 +811,7 @@
         const [standings, matches] = await Promise.all([fetchStandings(), fetchMatches()]);
         lastGoodData = { standings, matches };
         const teamStats = buildTeamStats(standings, matches);
+        lastTeamStats = teamStats;
         buildActivitySets(matches, teamStats);
         renderLeaderboard(teamStats);
         if (currentView === 'matches') renderMatchesView(matches.matches);
@@ -769,6 +822,7 @@
         console.error('Refresh failed:', err);
         if (lastGoodData) {
           const teamStats = buildTeamStats(lastGoodData.standings, lastGoodData.matches);
+          lastTeamStats = teamStats;
           buildActivitySets(lastGoodData.matches, teamStats);
           renderLeaderboard(teamStats);
           updateLastUpdated(lastGoodData.matches);
@@ -815,6 +869,50 @@
       }
     }
 
+    // ── Score Breakdown Modal ─────────────────────────────────────────────────────
+    const GROUP_BONUS_LABELS = ['', 'Group Winner', 'Runner-up', '3rd Place', '4th Place'];
+    const GROUP_BONUS_VALUES = [0, 8, 4, 2, 1];
+
+    function showScoreModal(teamName) {
+      const stats = lastTeamStats?.[teamName];
+      const pot   = TEAM_POT[teamName];
+      if (!pot) return;
+      const s = stats ?? { matchPoints:0, groupPosition:0, playedGames:0, totalGoals:0, wonLast32:false, reachedQF:false, reachedSF:false, reachedFinal:false, isChampion:false };
+
+      const groupBonus    = s.playedGames >= 3 ? (GROUP_BONUS_VALUES[s.groupPosition] ?? 0) : 0;
+      const r32Bonus      = s.wonLast32  ? 8  : 0;
+      const qfBonus       = s.reachedQF  ? 12 : 0;
+      const sfBonus       = s.reachedSF  ? 24 : 0;
+      const finalBonus    = s.reachedFinal ? 36 : 0;
+      const champBonus    = s.isChampion  ? 48 : 0;
+      const subtotal      = s.matchPoints + s.totalGoals + groupBonus + r32Bonus + qfBonus + sfBonus + finalBonus + champBonus;
+      const total         = subtotal * pot;
+
+      const rows = [];
+      const row = (label, val, cls = '') => `<tr class="${cls}"><td>${label}</td><td>${val > 0 ? '+' : ''}${val}</td></tr>`;
+
+      rows.push(row('Match Points', s.matchPoints));
+      rows.push(row('Goals Scored', s.totalGoals));
+      if (groupBonus)   rows.push(row(`Group Bonus (${GROUP_BONUS_LABELS[s.groupPosition]})`, groupBonus));
+      if (r32Bonus)     rows.push(row('Round of 32 Win', r32Bonus));
+      if (qfBonus)      rows.push(row('Quarter-final', qfBonus));
+      if (sfBonus)      rows.push(row('Semi-final', sfBonus));
+      if (finalBonus)   rows.push(row('Final', finalBonus));
+      if (champBonus)   rows.push(row('Champion', champBonus));
+      rows.push(`<tr class="row-subtotal"><td>Subtotal</td><td>${subtotal}</td></tr>`);
+      rows.push(`<tr class="row-mult"><td>Pot ${pot} multiplier</td><td>×${pot}</td></tr>`);
+
+      document.getElementById('score-modal-flag').textContent = FLAGS[teamName] ?? '🏳️';
+      document.getElementById('score-modal-name').textContent = teamName;
+      document.getElementById('score-modal-table').innerHTML = rows.join('');
+      document.getElementById('score-modal-total-val').textContent = total;
+      document.getElementById('score-modal').classList.remove('hidden');
+    }
+
+    function closeScoreModal() {
+      document.getElementById('score-modal').classList.add('hidden');
+    }
+
     // ── Init ──────────────────────────────────────────────────────────────────────
     // Long press on status bar temporarily shows fetched-at time in place of the normal label.
     (function () {
@@ -841,10 +939,28 @@
       }
     });
 
-    // Expand / collapse a participant card.
+    // Expand / collapse a participant card (but not when opening the score modal).
     document.getElementById('leaderboard').addEventListener('click', e => {
+      if (e.target.closest('.t-flag[data-team]')) return;
       const card = e.target.closest('.card');
       if (card) card.classList.toggle('expanded');
+    });
+
+    // Right-click / long-press a team flag in an expanded card → score breakdown.
+    document.getElementById('leaderboard').addEventListener('contextmenu', e => {
+      const flag = e.target.closest('.t-flag[data-team]');
+      if (!flag) return;
+      e.preventDefault();
+      showScoreModal(flag.dataset.team);
+    });
+
+    // Close modal: backdrop click, close button, or Escape.
+    document.getElementById('score-modal').addEventListener('click', e => {
+      if (e.target.closest('.score-modal-card') && !e.target.closest('#score-modal-close')) return;
+      closeScoreModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeScoreModal();
     });
 
     // Start in live mode immediately.
