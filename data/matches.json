@@ -5069,7 +5069,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-06-30T20:59:39Z",
+      "lastUpdated": "2026-07-01T08:25:01Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -5099,14 +5099,7 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": [
-        {
-          "id": 28805,
-          "name": "Jesús Valenzuela",
-          "type": "REFEREE",
-          "nationality": "Venezuela"
-        }
-      ]
+      "referees": []
     },
     {
       "area": {
@@ -5135,7 +5128,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T00:55:18Z",
+      "lastUpdated": "2026-07-01T08:25:01Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -5165,14 +5158,7 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": [
-        {
-          "id": 43899,
-          "name": "Danny Makkelie",
-          "type": "REFEREE",
-          "nationality": "Netherlands"
-        }
-      ]
+      "referees": []
     },
     {
       "area": {
@@ -5201,7 +5187,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T06:02:36Z",
+      "lastUpdated": "2026-07-01T08:25:01Z",
       "homeTeam": {
         "id": 769,
         "name": "Mexico",
@@ -5231,14 +5217,7 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": [
-        {
-          "id": 9351,
-          "name": "Slavko Vinčič",
-          "type": "REFEREE",
-          "nationality": "Slovenia"
-        }
-      ]
+      "referees": []
     },
     {
       "area": {
@@ -6716,5 +6695,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T06:50:15Z"
+  "_fetchedAt": "2026-07-01T16:00:21Z"
 }
