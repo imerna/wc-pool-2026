@@ -5069,7 +5069,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T08:25:00Z",
+      "lastUpdated": "2026-07-01T08:25:01Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -5267,7 +5267,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T16:09:48Z",
+      "lastUpdated": "2026-07-01T16:19:51Z",
       "homeTeam": {
         "id": 770,
         "name": "England",
@@ -5283,11 +5283,11 @@
         "crest": "https://crests.football-data.org/congo_dr.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -6723,5 +6723,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T16:10:15Z"
+  "_fetchedAt": "2026-07-01T16:20:16Z"
 }
