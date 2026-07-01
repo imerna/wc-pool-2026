@@ -5267,7 +5267,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T16:40:15Z",
+      "lastUpdated": "2026-07-01T16:49:51Z",
       "homeTeam": {
         "id": 770,
         "name": "England",
@@ -6723,5 +6723,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T16:40:15Z"
+  "_fetchedAt": "2026-07-01T16:50:17Z"
 }
