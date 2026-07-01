@@ -180,7 +180,7 @@
     /* ── Breakdown (expand/collapse) ── */
     .breakdown { overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s ease, opacity 0.3s ease; }
     .card.expanded .breakdown { max-height: 900px; opacity: 1; }
-    .breakdown-inner { padding: 0.35rem 0.9rem 1rem; }
+    .breakdown-inner { padding: 0.35rem 0.9rem 1rem; user-select: none; -webkit-user-select: none; }
 
     .team-row {
       display: grid;
@@ -193,7 +193,7 @@
     .team-row:last-child { border-bottom: none; }
     .team-row.elim { opacity: 0.5; }
 
-    .t-flag  { font-size: 1.15rem; line-height: 1; text-align: center; }
+    .t-flag  { font-size: 1.15rem; line-height: 1; text-align: center; user-select: none; -webkit-user-select: none; }
     .t-name  { font-family: var(--f-body); font-weight: 600; font-size: 1rem; min-width: 0; display: flex; align-items: center; gap: 0.1rem; }
     .t-mult  { font-family: var(--f-mono); font-size: 0.75rem; color: var(--muted); opacity: 0.7; }
     .t-score { font-family: var(--f-display); font-weight: 700; font-size: 1.25rem; line-height: 1; text-align: right; letter-spacing: 0.01em; }
