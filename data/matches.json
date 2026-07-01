@@ -5069,7 +5069,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T08:25:00Z",
+      "lastUpdated": "2026-07-01T08:25:01Z",
       "homeTeam": {
         "id": 1935,
         "name": "Ivory Coast",
@@ -6745,5 +6745,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T23:20:15Z"
+  "_fetchedAt": "2026-07-01T23:30:19Z"
 }
