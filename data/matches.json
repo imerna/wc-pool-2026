@@ -5333,7 +5333,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T20:39:45Z",
+      "lastUpdated": "2026-07-01T20:49:57Z",
       "homeTeam": {
         "id": 805,
         "name": "Belgium",
@@ -6730,5 +6730,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T20:40:17Z"
+  "_fetchedAt": "2026-07-01T20:50:19Z"
 }
