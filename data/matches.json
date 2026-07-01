@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 79
+    "played": 78
   },
   "competition": {
     "id": 2000,
@@ -5197,11 +5197,11 @@
       },
       "id": 537425,
       "utcDate": "2026-07-01T01:00:00Z",
-      "status": "FINISHED",
+      "status": "TIMED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T04:07:36Z",
+      "lastUpdated": "2026-07-01T04:15:56Z",
       "homeTeam": {
         "id": 769,
         "name": "Mexico",
@@ -5217,15 +5217,15 @@
         "crest": "https://crests.football-data.org/791.svg"
       },
       "score": {
-        "winner": "HOME_TEAM",
+        "winner": null,
         "duration": "REGULAR",
         "fullTime": {
-          "home": 2,
-          "away": 0
+          "home": null,
+          "away": null
         },
         "halfTime": {
-          "home": 2,
-          "away": 0
+          "home": null,
+          "away": null
         }
       },
       "odds": {
@@ -6716,5 +6716,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-01T04:20:12Z"
+  "_fetchedAt": "2026-07-01T04:30:15Z"
 }
