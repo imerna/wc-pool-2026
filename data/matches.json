@@ -5350,7 +5350,7 @@
       },
       "score": {
         "winner": "HOME_TEAM",
-        "duration": "REGULAR",
+        "duration": "EXTRA_TIME",
         "fullTime": {
           "home": 3,
           "away": 2
@@ -6745,5 +6745,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-02T04:10:15Z"
+  "_fetchedAt": "2026-07-02T04:20:17Z"
 }
