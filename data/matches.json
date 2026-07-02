@@ -5407,7 +5407,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-02T01:20:08Z",
+      "lastUpdated": "2026-07-02T01:30:09Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -6745,5 +6745,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-02T01:20:16Z"
+  "_fetchedAt": "2026-07-02T01:30:20Z"
 }
