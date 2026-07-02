@@ -5333,7 +5333,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-01T23:03:12Z",
+      "lastUpdated": "2026-07-01T22:54:56Z",
       "homeTeam": {
         "id": 805,
         "name": "Belgium",
@@ -5350,7 +5350,7 @@
       },
       "score": {
         "winner": "HOME_TEAM",
-        "duration": "EXTRA_TIME",
+        "duration": "REGULAR",
         "fullTime": {
           "home": 3,
           "away": 2
@@ -5403,11 +5403,11 @@
       },
       "id": 537421,
       "utcDate": "2026-07-02T00:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-02T01:01:21Z",
+      "lastUpdated": "2026-07-02T01:20:08Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -6745,5 +6745,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-02T01:10:16Z"
+  "_fetchedAt": "2026-07-02T01:20:16Z"
 }
