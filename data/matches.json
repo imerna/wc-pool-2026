@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 84
+    "played": 85
   },
   "competition": {
     "id": 2000,
@@ -5539,7 +5539,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T01:22:34Z",
+      "lastUpdated": "2026-07-03T01:26:11Z",
       "homeTeam": {
         "id": 765,
         "name": "Portugal",
@@ -5601,11 +5601,11 @@
       },
       "id": 537429,
       "utcDate": "2026-07-03T03:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T05:00:01Z",
+      "lastUpdated": "2026-07-03T05:03:24Z",
       "homeTeam": {
         "id": 788,
         "name": "Switzerland",
@@ -6766,5 +6766,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T05:00:21Z"
+  "_fetchedAt": "2026-07-03T05:10:17Z"
 }
