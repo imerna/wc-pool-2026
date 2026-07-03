@@ -5745,11 +5745,11 @@
       },
       "id": 537427,
       "utcDate": "2026-07-03T22:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T22:50:06Z",
+      "lastUpdated": "2026-07-03T22:55:30Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -5772,8 +5772,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 1,
+          "away": 0
         }
       },
       "odds": {
@@ -6792,5 +6792,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T22:50:18Z"
+  "_fetchedAt": "2026-07-03T23:00:23Z"
 }
