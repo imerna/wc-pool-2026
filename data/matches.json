@@ -5535,11 +5535,11 @@
       },
       "id": 537419,
       "utcDate": "2026-07-02T23:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-02T23:55:39Z",
+      "lastUpdated": "2026-07-03T00:19:39Z",
       "homeTeam": {
         "id": 765,
         "name": "Portugal",
@@ -5555,11 +5555,11 @@
         "crest": "https://crests.football-data.org/799.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": 0,
@@ -6759,5 +6759,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T00:10:15Z"
+  "_fetchedAt": "2026-07-03T00:20:15Z"
 }
