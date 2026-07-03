@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 85
+    "played": 86
   },
   "competition": {
     "id": 2000,
@@ -5667,11 +5667,11 @@
       },
       "id": 537428,
       "utcDate": "2026-07-03T18:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T20:49:57Z",
+      "lastUpdated": "2026-07-03T20:58:23Z",
       "homeTeam": {
         "id": 779,
         "name": "Australia",
@@ -5690,8 +5690,8 @@
         "winner": null,
         "duration": "PENALTY_SHOOTOUT",
         "fullTime": {
-          "home": 2,
-          "away": 2
+          "home": 3,
+          "away": 5
         },
         "halfTime": {
           "home": 0,
@@ -5706,8 +5706,8 @@
           "away": 0
         },
         "penalties": {
-          "home": 1,
-          "away": 1
+          "home": 4,
+          "away": 4
         }
       },
       "odds": {
@@ -6792,5 +6792,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T20:50:14Z"
+  "_fetchedAt": "2026-07-03T21:00:20Z"
 }
