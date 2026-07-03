@@ -5539,7 +5539,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T01:26:11Z",
+      "lastUpdated": "2026-07-03T01:22:34Z",
       "homeTeam": {
         "id": 765,
         "name": "Portugal",
@@ -5605,7 +5605,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T03:09:24Z",
+      "lastUpdated": "2026-07-03T03:20:14Z",
       "homeTeam": {
         "id": 788,
         "name": "Switzerland",
@@ -5621,10 +5621,10 @@
         "crest": "https://crests.football-data.org/algeria.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "halfTime": {
@@ -6766,5 +6766,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T03:10:14Z"
+  "_fetchedAt": "2026-07-03T03:20:15Z"
 }
