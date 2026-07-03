@@ -5667,11 +5667,11 @@
       },
       "id": 537428,
       "utcDate": "2026-07-03T18:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-03T18:50:08Z",
+      "lastUpdated": "2026-07-03T18:56:45Z",
       "homeTeam": {
         "id": 779,
         "name": "Australia",
@@ -5694,8 +5694,8 @@
           "away": 1
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 1
         }
       },
       "odds": {
@@ -6773,5 +6773,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-03T18:50:17Z"
+  "_fetchedAt": "2026-07-03T19:00:22Z"
 }
