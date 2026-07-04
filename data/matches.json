@@ -5951,11 +5951,11 @@
       },
       "id": 537375,
       "utcDate": "2026-07-04T21:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T21:58:09Z",
+      "lastUpdated": "2026-07-04T22:20:06Z",
       "homeTeam": {
         "id": 761,
         "name": "Paraguay",
@@ -6821,5 +6821,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T22:10:17Z"
+  "_fetchedAt": "2026-07-04T22:20:15Z"
 }
