@@ -5885,11 +5885,11 @@
       },
       "id": 537376,
       "utcDate": "2026-07-04T17:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T17:58:30Z",
+      "lastUpdated": "2026-07-04T18:20:12Z",
       "homeTeam": {
         "id": 828,
         "name": "Canada",
@@ -5905,11 +5905,11 @@
         "crest": "https://crests.football-data.org/morocco.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": 0,
@@ -6814,5 +6814,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T18:10:17Z"
+  "_fetchedAt": "2026-07-04T18:20:14Z"
 }
