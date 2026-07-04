@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 87
+    "played": 88
   },
   "competition": {
     "id": 2000,
@@ -5819,11 +5819,11 @@
       },
       "id": 537430,
       "utcDate": "2026-07-04T01:30:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T03:29:50Z",
+      "lastUpdated": "2026-07-04T03:37:36Z",
       "homeTeam": {
         "id": 818,
         "name": "Colombia",
@@ -6807,5 +6807,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T03:30:19Z"
+  "_fetchedAt": "2026-07-04T03:40:17Z"
 }
