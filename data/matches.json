@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 86
+    "played": 87
   },
   "competition": {
     "id": 2000,
@@ -5745,11 +5745,11 @@
       },
       "id": 537427,
       "utcDate": "2026-07-03T22:00:00Z",
-      "status": "PAUSED",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T00:39:55Z",
+      "lastUpdated": "2026-07-04T00:50:06Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6807,5 +6807,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T00:40:15Z"
+  "_fetchedAt": "2026-07-04T00:50:14Z"
 }
