@@ -5823,7 +5823,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T03:19:49Z",
+      "lastUpdated": "2026-07-04T03:29:50Z",
       "homeTeam": {
         "id": 818,
         "name": "Colombia",
@@ -6807,5 +6807,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T03:20:14Z"
+  "_fetchedAt": "2026-07-04T03:30:19Z"
 }
