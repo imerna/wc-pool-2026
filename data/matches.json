@@ -5749,7 +5749,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T02:45:06Z",
+      "lastUpdated": "2026-07-04T13:25:01Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -5823,7 +5823,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T05:32:36Z",
+      "lastUpdated": "2026-07-04T08:25:02Z",
       "homeTeam": {
         "id": 818,
         "name": "Colombia",
@@ -5919,7 +5919,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 11605,
+          "name": "Michael Oliver",
+          "type": "REFEREE",
+          "nationality": "England"
+        }
+      ]
     },
     {
       "area": {
@@ -6807,5 +6814,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T06:50:17Z"
+  "_fetchedAt": "2026-07-04T16:00:20Z"
 }
