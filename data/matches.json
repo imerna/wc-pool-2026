@@ -5955,7 +5955,7 @@
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T22:40:05Z",
+      "lastUpdated": "2026-07-04T22:50:06Z",
       "homeTeam": {
         "id": 761,
         "name": "Paraguay",
@@ -6821,5 +6821,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T22:40:17Z"
+  "_fetchedAt": "2026-07-04T22:50:15Z"
 }
