@@ -5885,11 +5885,11 @@
       },
       "id": 537376,
       "utcDate": "2026-07-04T17:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T17:50:06Z",
+      "lastUpdated": "2026-07-04T17:58:30Z",
       "homeTeam": {
         "id": 828,
         "name": "Canada",
@@ -5912,8 +5912,8 @@
           "away": 0
         },
         "halfTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         }
       },
       "odds": {
@@ -6814,5 +6814,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T17:50:17Z"
+  "_fetchedAt": "2026-07-04T18:00:22Z"
 }
