@@ -5823,7 +5823,7 @@
       "matchday": null,
       "stage": "LAST_32",
       "group": null,
-      "lastUpdated": "2026-07-04T01:39:48Z",
+      "lastUpdated": "2026-07-04T01:50:00Z",
       "homeTeam": {
         "id": 818,
         "name": "Colombia",
@@ -5839,10 +5839,10 @@
         "crest": "https://crests.football-data.org/ghana.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "halfTime": {
@@ -6807,5 +6807,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T01:40:14Z"
+  "_fetchedAt": "2026-07-04T01:50:14Z"
 }
