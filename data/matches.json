@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 88
+    "played": 89
   },
   "competition": {
     "id": 2000,
@@ -5885,11 +5885,11 @@
       },
       "id": 537376,
       "utcDate": "2026-07-04T17:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T18:58:57Z",
+      "lastUpdated": "2026-07-04T19:09:21Z",
       "homeTeam": {
         "id": 828,
         "name": "Canada",
@@ -5909,7 +5909,7 @@
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 2
+          "away": 3
         },
         "halfTime": {
           "home": 0,
@@ -6821,5 +6821,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T19:00:21Z"
+  "_fetchedAt": "2026-07-04T19:10:16Z"
 }
