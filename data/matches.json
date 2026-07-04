@@ -5889,7 +5889,7 @@
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-04T18:20:12Z",
+      "lastUpdated": "2026-07-04T18:29:48Z",
       "homeTeam": {
         "id": 828,
         "name": "Canada",
@@ -6814,5 +6814,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-04T18:20:14Z"
+  "_fetchedAt": "2026-07-04T18:30:19Z"
 }
