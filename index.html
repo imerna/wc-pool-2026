@@ -485,20 +485,16 @@
         else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; win = hp>ap?home:away; lose = hp>ap?away:home; }
         if (stats[win])  stats[win].won  += 1;
         if (stats[lose]) stats[lose].lost += 1;
-        if (match.stage === 'LAST_32' && stats[win]) stats[win].wonLast32 = true;
-        if (!BONUS_STAGES.has(match.stage)) continue;
-        for (const team of [home, away]) {
-          if (!stats[team]) continue;
-          if (match.stage === 'QUARTER_FINALS') stats[team].reachedQF = true;
-          if (match.stage === 'SEMI_FINALS')    stats[team].reachedSF = true;
-          if (match.stage === 'FINAL')          stats[team].reachedFinal = true;
-        }
-        if (match.stage === 'FINAL') {
-          let winner;
-          if (hg !== ag) winner = hg>ag?home:away;
-          else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; winner = hp>ap?home:away; }
-          if (stats[winner]) stats[winner].isChampion = true;
-        }
+        // Advancement flags are driven by winning the *prior* round rather than by
+        // waiting for the next round's stage entry to appear with real team names —
+        // that bracket-assignment gap otherwise delays badges/bonuses by days.
+        // QF/SF/Final "reached" bonuses still credit both eventual participants,
+        // since both got there by winning the round before.
+        if (match.stage === 'LAST_32'        && stats[win]) stats[win].wonLast32   = true;
+        if (match.stage === 'LAST_16'        && stats[win]) stats[win].reachedQF   = true;
+        if (match.stage === 'QUARTER_FINALS' && stats[win]) stats[win].reachedSF   = true;
+        if (match.stage === 'SEMI_FINALS'    && stats[win]) stats[win].reachedFinal = true;
+        if (match.stage === 'FINAL'          && stats[win]) stats[win].isChampion  = true;
       }
       return stats;
     }
@@ -508,7 +504,7 @@
     let eliminatedTeams = new Set();
     function buildActivitySets(matchesData, teamStats) {
       liveTeams = new Set(); eliminatedTeams = new Set();
-      const scheduled = new Set(), played = new Set(), knockoutWinners = new Set(), knockoutPlayed = new Set();
+      const scheduled = new Set(), played = new Set(), knockoutLatest = new Map(), knockoutPlayed = new Set();
       for (const match of matchesData.matches) {
         const home = normalizeName(match.homeTeam.name);
         const away = normalizeName(match.awayTeam.name);
@@ -519,20 +515,26 @@
         }
         if (s === 'SCHEDULED' || s === 'TIMED') { if (home) scheduled.add(home); if (away) scheduled.add(away); }
         if (s === 'FINISHED') { if (home) played.add(home); if (away) played.add(away); }
-        // Track knockout participants and winners to handle bracket-assignment gaps:
-        // next-round slots have null team names until the bracket is officially set,
-        // so winners can't be found in `scheduled` until then.
+        // Track knockout participants to handle bracket-assignment gaps: next-round
+        // slots have null team names until the bracket is officially set, so a team
+        // that just won can't be found in `scheduled` until then. We protect a team
+        // from elimination based on their MOST RECENT knockout result (by date), not
+        // just "ever won a knockout match" — otherwise an early-round win (e.g. R32)
+        // would keep protecting a team forever, even after they lose a later round.
         if (ALL_KNOCKOUT.has(match.stage) && s === 'FINISHED' && home && away) {
           knockoutPlayed.add(home); knockoutPlayed.add(away);
           const hg = match.score.fullTime.home ?? 0, ag = match.score.fullTime.away ?? 0;
-          let winner;
-          if (hg !== ag) { winner = hg > ag ? home : away; }
-          else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; winner = hp > ap ? home : away; }
-          if (winner) knockoutWinners.add(winner);
+          let winner, loser;
+          if (hg !== ag) { winner = hg > ag ? home : away; loser = hg > ag ? away : home; }
+          else { const hp = match.score.penalties?.home ?? 0, ap = match.score.penalties?.away ?? 0; winner = hp > ap ? home : away; loser = hp > ap ? away : home; }
+          for (const [team, won] of [[winner, true], [loser, false]]) {
+            const prev = knockoutLatest.get(team);
+            if (!prev || match.utcDate > prev.date) knockoutLatest.set(team, { date: match.utcDate, won });
+          }
         }
       }
       for (const team of played) {
-        if (scheduled.has(team) || liveTeams.has(team) || knockoutWinners.has(team)) continue;
+        if (scheduled.has(team) || liveTeams.has(team) || knockoutLatest.get(team)?.won) continue;
         // Protect 1st/2nd place group finishers until their R32 slot is assigned —
         // but only before they've played a knockout match; after that, win/loss decides.
         const stats = teamStats?.[team];
@@ -567,7 +569,7 @@
     function teamBadges(stats) {
       const parts = [];
       if (stats.playedGames >= 3 && stats.groupPosition) parts.push(`<span class="badge">${GROUP_LABELS[stats.groupPosition] ?? ''}</span>`);
-      if (stats.wonLast32)    parts.push('<span class="badge r32">R32</span>');
+      if (stats.wonLast32)    parts.push('<span class="badge r32">R16</span>');
       if (stats.reachedQF)    parts.push('<span class="badge qf">QF</span>');
       if (stats.reachedSF)    parts.push('<span class="badge sf">SF</span>');
       if (stats.reachedFinal) parts.push('<span class="badge final">Final</span>');
