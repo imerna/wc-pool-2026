@@ -6082,12 +6082,12 @@
         "winner": null
       },
       "id": 537378,
-      "utcDate": "2026-07-06T00:00:00Z",
-      "status": "TIMED",
+      "utcDate": "2026-07-06T01:00:00Z",
+      "status": "SCHEDULED",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-05T05:20:12Z",
+      "lastUpdated": "2026-07-05T23:29:56Z",
       "homeTeam": {
         "id": 769,
         "name": "Mexico",
@@ -6835,5 +6835,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-05T23:20:15Z"
+  "_fetchedAt": "2026-07-05T23:30:18Z"
 }
