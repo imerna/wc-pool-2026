@@ -6249,7 +6249,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 129250,
+          "name": "Adham Makhadmeh",
+          "type": "REFEREE",
+          "nationality": "Jordan"
+        }
+      ]
     },
     {
       "area": {
@@ -6842,5 +6849,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-06T21:50:18Z"
+  "_fetchedAt": "2026-07-06T22:00:24Z"
 }
