@@ -6215,11 +6215,11 @@
       },
       "id": 537380,
       "utcDate": "2026-07-07T00:00:00Z",
-      "status": "TIMED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-06T05:20:12Z",
+      "lastUpdated": "2026-07-07T00:09:33Z",
       "homeTeam": {
         "id": 771,
         "name": "United States",
@@ -6235,11 +6235,11 @@
         "crest": "https://crests.football-data.org/805.svg"
       },
       "score": {
-        "winner": null,
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
-          "home": null,
-          "away": null
+          "home": 0,
+          "away": 0
         },
         "halfTime": {
           "home": null,
@@ -6849,5 +6849,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T00:00:23Z"
+  "_fetchedAt": "2026-07-07T00:10:15Z"
 }
