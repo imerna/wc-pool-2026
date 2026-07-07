@@ -6285,7 +6285,7 @@
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-07T17:20:00Z",
+      "lastUpdated": "2026-07-07T17:30:00Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6305,7 +6305,7 @@
         "duration": "REGULAR",
         "fullTime": {
           "home": 0,
-          "away": 1
+          "away": 2
         },
         "halfTime": {
           "home": 0,
@@ -6856,5 +6856,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T17:20:21Z"
+  "_fetchedAt": "2026-07-07T17:30:19Z"
 }
