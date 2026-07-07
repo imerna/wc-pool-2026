@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 94
+    "played": 95
   },
   "competition": {
     "id": 2000,
@@ -6281,11 +6281,11 @@
       },
       "id": 537381,
       "utcDate": "2026-07-07T16:00:00Z",
-      "status": "IN_PLAY",
+      "status": "FINISHED",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-07T17:59:13Z",
+      "lastUpdated": "2026-07-07T18:10:15Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6301,10 +6301,10 @@
         "crest": "https://crests.football-data.org/825.svg"
       },
       "score": {
-        "winner": "DRAW",
+        "winner": "HOME_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 2,
+          "home": 3,
           "away": 2
         },
         "halfTime": {
@@ -6863,5 +6863,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T18:00:23Z"
+  "_fetchedAt": "2026-07-07T18:10:20Z"
 }
