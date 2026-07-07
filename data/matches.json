@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 96
+    "played": 95
   },
   "competition": {
     "id": 2000,
@@ -6347,11 +6347,11 @@
       },
       "id": 537382,
       "utcDate": "2026-07-07T20:00:00Z",
-      "status": "FINISHED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-07T22:19:59Z",
+      "lastUpdated": "2026-07-07T22:30:18Z",
       "homeTeam": {
         "id": 788,
         "name": "Switzerland",
@@ -6368,12 +6368,20 @@
       },
       "score": {
         "winner": "DRAW",
-        "duration": "REGULAR",
+        "duration": "EXTRA_TIME",
         "fullTime": {
           "home": 0,
           "away": 0
         },
         "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "regularTime": {
+          "home": null,
+          "away": null
+        },
+        "extraTime": {
           "home": 0,
           "away": 0
         }
@@ -6863,5 +6871,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T22:20:18Z"
+  "_fetchedAt": "2026-07-07T22:30:23Z"
 }
