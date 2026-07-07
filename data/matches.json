@@ -6347,11 +6347,11 @@
       },
       "id": 537382,
       "utcDate": "2026-07-07T20:00:00Z",
-      "status": "LIVE",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-07T21:09:48Z",
+      "lastUpdated": "2026-07-07T21:20:12Z",
       "homeTeam": {
         "id": 788,
         "name": "Switzerland",
@@ -6863,5 +6863,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T21:10:22Z"
+  "_fetchedAt": "2026-07-07T21:20:20Z"
 }
