@@ -6285,7 +6285,7 @@
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-07T17:30:00Z",
+      "lastUpdated": "2026-07-07T17:40:00Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6856,5 +6856,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-07T17:30:19Z"
+  "_fetchedAt": "2026-07-07T17:40:17Z"
 }
