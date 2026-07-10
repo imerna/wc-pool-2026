@@ -13,8 +13,8 @@ test('renderResultsView renders all four sections when the tournament is complet
   renderResultsView(MOCK_TEAM_STATS, true);
   const html = elements['results-content'].innerHTML;
   assert.match(html, /Final Results/);
-  assert.match(html, /The Perfect Bracket/);
-  assert.match(html, /How Close Did You Get\?/);
+  assert.match(html, /Best Possible Bracket/);
+  assert.match(html, /Called It/);
   assert.match(html, /Best Pick/);
   assert.match(html, /Bust of the Pool/);
   // Jimmy is the mock-data pool leader; France/Spain are Pot 1's top scorers.
