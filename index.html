@@ -358,6 +358,7 @@
     const API_BASE = 'https://api.football-data.org/v4';
     const IS_LOCAL = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
+    /* TESTABLE:START */
     // ── Static Data ──────────────────────────────────────────────────────────────
     const POTS = {
       1: ["Spain","France","England","Portugal","Brazil","Argentina","Germany","Netherlands","Belgium","Uruguay","Norway","Morocco"],
@@ -437,6 +438,50 @@
       return (stats.matchPoints + stats.totalGoals + groupBonus + knockoutBonus) * pot;
     }
     const calcPersonScore = (p, teamStats) => p.teams.reduce((s, t) => s + calcTeamScore(t, teamStats), 0);
+
+    // ── Results: pure computations ────────────────────────────────────────────────
+    function isTournamentComplete(matchesData) {
+      const final = matchesData?.matches?.find(m => m.stage === 'FINAL');
+      return final?.status === 'FINISHED';
+    }
+
+    function rankTeamsByScore(teamNames, teamStats) {
+      return [...teamNames].sort((a, b) => {
+        const scoreDiff = calcTeamScore(b, teamStats) - calcTeamScore(a, teamStats);
+        if (scoreDiff !== 0) return scoreDiff;
+        const goalsDiff = (teamStats[b]?.totalGoals ?? 0) - (teamStats[a]?.totalGoals ?? 0);
+        if (goalsDiff !== 0) return goalsDiff;
+        return a.localeCompare(b);
+      });
+    }
+
+    function computePerfectBracket(teamStats) {
+      const bracket = {};
+      for (const [pot, teams] of Object.entries(POTS)) {
+        bracket[pot] = rankTeamsByScore(teams, teamStats).slice(0, 2);
+      }
+      return bracket;
+    }
+
+    function computeOverlap(participant, perfectTeamsSet) {
+      const matched = participant.teams.filter(t => perfectTeamsSet.has(t));
+      return { matched, count: matched.length };
+    }
+
+    function findBestWorstPick(teamStats) {
+      const draftedBy = {};
+      for (const p of PARTICIPANTS) {
+        for (const t of p.teams) (draftedBy[t] ??= []).push(p.name);
+      }
+      const ranked = rankTeamsByScore(Object.keys(draftedBy), teamStats);
+      const best = ranked[0];
+      const worst = ranked[ranked.length - 1];
+      return {
+        best:  { team: best,  score: calcTeamScore(best, teamStats),  pickedBy: draftedBy[best] },
+        worst: { team: worst, score: calcTeamScore(worst, teamStats), pickedBy: draftedBy[worst] },
+      };
+    }
+    /* TESTABLE:END */
 
     // ── API Layer ───────────────────────────────────────────────────────────────
     // Locally: hits football-data.org directly. Deployed (GitHub Pages): reads
