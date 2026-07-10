@@ -6525,7 +6525,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 11605,
+          "name": "Michael Oliver",
+          "type": "REFEREE",
+          "nationality": "England"
+        }
+      ]
     },
     {
       "area": {
@@ -6882,5 +6889,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-10T16:50:17Z"
+  "_fetchedAt": "2026-07-10T17:00:25Z"
 }
