@@ -1162,6 +1162,20 @@
       showScoreModal(flag.dataset.team);
     });
 
+    // Same two interactions, scoped to the Results view's overlap cards / team flags.
+    document.getElementById('results-content').addEventListener('click', e => {
+      if (e.target.closest('.t-flag[data-team]')) return;
+      const card = e.target.closest('.ov-card');
+      if (card) card.classList.toggle('expanded');
+    });
+
+    document.getElementById('results-content').addEventListener('contextmenu', e => {
+      const flag = e.target.closest('.t-flag[data-team]');
+      if (!flag) return;
+      e.preventDefault();
+      showScoreModal(flag.dataset.team);
+    });
+
     // Close modal: backdrop click, close button, or Escape.
     document.getElementById('score-modal').addEventListener('click', e => {
       if (e.target.closest('.score-modal-card') && !e.target.closest('#score-modal-close')) return;
