@@ -6495,7 +6495,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-10T19:39:19Z",
+      "lastUpdated": "2026-07-10T19:50:07Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -6511,11 +6511,11 @@
         "crest": "https://crests.football-data.org/805.svg"
       },
       "score": {
-        "winner": "HOME_TEAM",
+        "winner": "DRAW",
         "duration": "REGULAR",
         "fullTime": {
           "home": 1,
-          "away": 0
+          "away": 1
         },
         "halfTime": {
           "home": null,
@@ -6889,5 +6889,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-10T19:40:17Z"
+  "_fetchedAt": "2026-07-10T19:50:25Z"
 }
