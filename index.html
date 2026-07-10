@@ -305,6 +305,45 @@
       margin-top: 0.7rem; font-family: var(--f-mono); font-size: 0.62rem;
       color: var(--muted); line-height: 1.5; opacity: 0.75;
     }
+
+    /* ── Results view ── */
+    .results-pending { text-align: center; padding: 3.5rem 1.25rem 3rem; max-width: 520px; margin: 0 auto; }
+    .results-pending-icon { font-size: 3.4rem; display: inline-block; margin-bottom: 1rem; }
+    .results-pending-text { font-family: var(--f-mono); font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+    .results-section { max-width: 760px; margin: 0 auto 1.6rem; padding: 0 1rem; }
+    .results-heading {
+      font-family: var(--f-display); font-size: 1rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 0.7rem;
+    }
+
+    .podium-card { margin-bottom: 0.7rem; }
+    .podium-card .medal { font-size: 1.5rem; }
+
+    .pb-card { padding: 0.4rem 1rem; }
+    .pb-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0; border-bottom: 1px solid var(--ink); flex-wrap: wrap; }
+    .pb-row:last-child { border-bottom: none; }
+    .pb-pot { font-family: var(--f-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; min-width: 3.5rem; }
+    .pb-teams { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .pb-team { display: flex; align-items: center; gap: 0.4rem; font-family: var(--f-body); font-weight: 600; }
+    .pb-team .t-score { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+
+    .ov-card { margin-bottom: 0.6rem; }
+    .ov-dots { display: flex; gap: 0.22rem; margin-top: 0.4rem; }
+    .ov-dot { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); background: transparent; }
+    .ov-dot.filled { background: var(--live); border-color: var(--live); }
+    .ov-count { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem; }
+    .ov-matched { display: flex; flex-direction: column; gap: 0.5rem; }
+    .ov-match { display: flex; align-items: center; gap: 0.5rem; font-family: var(--f-body); font-weight: 600; }
+    .ov-none { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); }
+
+    .pick-row { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+    .pick-card { flex: 1 1 220px; padding: 1.1rem; text-align: center; }
+    .pick-icon { font-size: 2.2rem; }
+    .pick-label { font-family: var(--f-display); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0.4rem 0 0.6rem; }
+    .pick-team { display: flex; align-items: center; justify-content: center; gap: 0.4rem; font-family: var(--f-body); font-weight: 700; font-size: 1.15rem; }
+    .pick-score { font-family: var(--f-mono); font-size: 0.85rem; color: var(--muted); margin-top: 0.3rem; }
+    .pick-by { font-family: var(--f-mono); font-size: 0.68rem; color: var(--muted); margin-top: 0.5rem; }
   </style>
 </head>
 <body>
@@ -313,6 +352,7 @@
     <nav class="view-nav">
       <button id="nav-standings" class="pill active" onclick="switchView('standings')">Standings</button>
       <button id="nav-matches"   class="pill"        onclick="switchView('matches')">Matches</button>
+      <button id="nav-results"   class="pill"        onclick="switchView('results')">Results</button>
     </nav>
     <div id="status-bar">
       <span id="last-updated"></span>
@@ -333,6 +373,10 @@
       <button id="mf-upcoming" class="pill"        onclick="setMatchFilter('upcoming')">Upcoming</button>
     </div>
     <div id="match-list"></div>
+  </main>
+
+  <main id="results-view" class="hidden">
+    <div id="results-content"></div>
   </main>
 
   <div id="score-modal" class="score-modal hidden" role="dialog" aria-modal="true">
@@ -698,8 +742,10 @@
       currentView = view;
       document.getElementById('leaderboard').classList.toggle('hidden', view !== 'standings');
       document.getElementById('matches-view').classList.toggle('hidden', view !== 'matches');
+      document.getElementById('results-view').classList.toggle('hidden', view !== 'results');
       document.getElementById('nav-standings').classList.toggle('active', view === 'standings');
       document.getElementById('nav-matches').classList.toggle('active', view === 'matches');
+      document.getElementById('nav-results').classList.toggle('active', view === 'results');
       if (view === 'matches') {
         if (lastGoodData) renderMatchesView(lastGoodData.matches.matches);
         else document.getElementById('match-list').innerHTML =
