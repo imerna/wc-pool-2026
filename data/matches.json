@@ -6495,7 +6495,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-10T20:39:55Z",
+      "lastUpdated": "2026-07-10T20:50:07Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -6889,5 +6889,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-10T20:40:21Z"
+  "_fetchedAt": "2026-07-10T20:50:17Z"
 }
