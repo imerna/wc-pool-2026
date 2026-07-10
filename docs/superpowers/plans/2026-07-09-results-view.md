@@ -400,15 +400,29 @@ Replace with:
     }
 ```
 
-- [ ] **Step 5: Manually verify the scaffold in a browser**
+- [ ] **Step 5: Verify markup and syntax statically**
 
-Open `index.html` directly in a browser (double-click it, or `open index.html` / `xdg-open index.html`).
+There is no browser or DOM-testing tool available in this environment, so verify structurally instead of visually.
 
-Expected:
-- A third "Results" pill appears in the nav, next to Standings and Matches.
-- Clicking it hides the Standings leaderboard and shows an empty `#results-view` (blank — content comes in Task 3), and the pill highlights as active.
-- Clicking back to Standings or Matches still works as before.
-- No console errors.
+Run: `grep -n 'id="nav-results"\|id="results-view"\|id="results-content"' index.html`
+Expected: three matching lines, one per ID.
+
+Run: `grep -n "results-view" index.html`
+Expected: among the matches, a line inside `switchView()` reading `document.getElementById('results-view').classList.toggle('hidden', view !== 'results');`.
+
+Then confirm the whole inline script still parses as valid JavaScript (a typo in a large HTML edit like this is easy to miss without a browser):
+
+```bash
+node -e "
+const fs = require('node:fs');
+const html = fs.readFileSync('index.html', 'utf8');
+const match = html.match(/<script>([\s\S]*?)<\/script>/);
+fs.writeFileSync('/tmp/wc-bracket-script-check.js', match[1]);
+"
+node --check /tmp/wc-bracket-script-check.js
+```
+
+Expected: no output from `node --check` (exit code 0 means syntax is valid).
 
 - [ ] **Step 6: Commit**
 
@@ -422,13 +436,56 @@ git commit -m "feat: add Results view scaffold, nav tab, and styles"
 ### Task 3: Render Functions + Wiring into Refresh/Demo
 
 **Files:**
-- Modify: `index.html` (new `renderResultsView` + 4 helper render functions; calls added to `doRefresh()` and `renderDemo()`)
+- Modify: `index.html` (new `renderResultsView` + 4 helper render functions; calls added to `doRefresh()` and `renderDemo()`; the `/* TESTABLE:END */` marker moves from after `findBestWorstPick` to after the new `renderResultsView`)
+- Modify: `scripts/extract-testable.mjs` (add a minimal `document.getElementById` stub so string-returning render functions can be exercised headlessly, and export the new function/constant names)
+- Create: `scripts/results-render.test.mjs`
 
 **Interfaces:**
 - Consumes: `isTournamentComplete`, `computePerfectBracket`, `computeOverlap`, `findBestWorstPick` (Task 1); `#results-content` (Task 2); existing `PARTICIPANTS`, `calcPersonScore`, `calcTeamScore`, `FLAGS`, `MOCK_TEAM_STATS`.
 - Produces: `renderResultsView(teamStats, isComplete): void` — called on every live refresh and every demo render, mirroring how `renderLeaderboard` is called unconditionally regardless of which tab is active.
 
-- [ ] **Step 1: Add the render functions**
+**Note on verification:** There is no browser, jsdom, or Playwright/Puppeteer available in this environment. `renderPodium`, `renderPerfectBracket`, `renderOverlapSection`, and `renderBestWorstSection` are pure functions that only ever return an HTML string, and `renderResultsView` only ever touches the DOM through one line (`document.getElementById('results-content').innerHTML = ...`) — so a tiny fake `document` object (just enough to record what was written) is enough to unit-test all five functions for real, the same way Task 1 tested the pure computations. This task adds that stub and real assertions instead of a manual browser check.
+
+- [ ] **Step 1: Relocate the `TESTABLE:END` marker**
+
+Task 1 placed `/* TESTABLE:END */` right after `findBestWorstPick`, so the harness only extracts the pure computations. This task's new render functions need to be inside that block too (so Step 4 can test them), so the marker moves down. Find:
+
+```html
+    function findBestWorstPick(teamStats) {
+      const draftedBy = {};
+      for (const p of PARTICIPANTS) {
+        for (const t of p.teams) (draftedBy[t] ??= []).push(p.name);
+      }
+      const ranked = rankTeamsByScore(Object.keys(draftedBy), teamStats);
+      const best = ranked[0];
+      const worst = ranked[ranked.length - 1];
+      return {
+        best:  { team: best,  score: calcTeamScore(best, teamStats),  pickedBy: draftedBy[best] },
+        worst: { team: worst, score: calcTeamScore(worst, teamStats), pickedBy: draftedBy[worst] },
+      };
+    }
+    /* TESTABLE:END */
+```
+
+Replace with (just the marker line removed — the function is unchanged):
+
+```html
+    function findBestWorstPick(teamStats) {
+      const draftedBy = {};
+      for (const p of PARTICIPANTS) {
+        for (const t of p.teams) (draftedBy[t] ??= []).push(p.name);
+      }
+      const ranked = rankTeamsByScore(Object.keys(draftedBy), teamStats);
+      const best = ranked[0];
+      const worst = ranked[ranked.length - 1];
+      return {
+        best:  { team: best,  score: calcTeamScore(best, teamStats),  pickedBy: draftedBy[best] },
+        worst: { team: worst, score: calcTeamScore(worst, teamStats), pickedBy: draftedBy[worst] },
+      };
+    }
+```
+
+- [ ] **Step 2: Add the render functions, ending with the relocated marker**
 
 Find the end of the Matches View section:
 
@@ -571,9 +628,10 @@ Insert immediately after it (before the `// ── App Controller` section):
         renderBestWorstSection(best, worst),
       ].join('');
     }
+    /* TESTABLE:END */
 ```
 
-- [ ] **Step 2: Wire it into demo mode**
+- [ ] **Step 3: Wire it into demo mode**
 
 Find:
 
@@ -604,7 +662,7 @@ Replace with:
     }
 ```
 
-- [ ] **Step 3: Wire it into live refresh (success and stale-fallback paths)**
+- [ ] **Step 4: Wire it into live refresh (success and stale-fallback paths)**
 
 Find:
 
@@ -684,22 +742,205 @@ Replace with:
     }
 ```
 
-- [ ] **Step 4: Manually verify in a browser (Demo mode)**
+- [ ] **Step 5: Extend the test harness with a `document` stub**
 
-Open `index.html` in a browser. It starts in Live mode by default; press **Shift+D** to reveal the dev pills, then click **Demo data** to switch to Demo mode (which uses the post-final mock data).
+Task 1's implementer found that the original `vm.createContext()` design (from Task 1's brief) makes arrays/objects returned across the sandbox boundary fail `assert.deepEqual`/`deepStrictEqual` on this Node version (they're structurally equal but not the same realm's `Array`, and Node's assert now checks that). Their fix, verified by the Task 1 reviewer, was to run the extracted code with `vm.runInThisContext()` wrapped in an IIFE instead — this keeps every call's `const`/`let` declarations scoped to that call's function body (so `loadTestable()` can be called many times per process without an "already declared" error) while keeping return values in the host realm (so `assert.deepEqual` works normally). **Read `scripts/extract-testable.mjs` on disk before editing — the text below is what it actually contains after Task 1, not what Task 1's original brief specified.**
 
-Click the **Results** tab and check:
-- A "Final Results" section shows 3 podium cards (🥇 Jimmy, 🥈 Alfonso, 🥉 Ryan per the mock data ranking) — not a "tournament in progress" placeholder.
-- A "The Perfect Bracket" section lists 4 rows (Pot 1–4), each with 2 team flags/names/scores. Pot 1 should show France and Spain.
-- A "How Close Did You Get?" section lists all 7 players with a dot meter and an N/8 count, sorted by count descending.
-- A "Best Pick & Bust of the Pool" section shows two cards with a team, score, and "Picked by ..." line each.
-- No console errors.
+Find (all of `scripts/extract-testable.mjs` as Task 1 actually left it):
 
-- [ ] **Step 5: Commit**
+```js
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import vm from 'node:vm';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const INDEX_HTML = path.join(__dirname, '..', 'index.html');
+
+const EXPORTED_NAMES = [
+  'POTS', 'PARTICIPANTS', 'TEAM_POT', 'MOCK_TEAM_STATS', 'MOCK_ELIMINATED',
+  'calcTeamScore', 'calcPersonScore',
+  'isTournamentComplete', 'computePerfectBracket', 'computeOverlap', 'findBestWorstPick',
+];
+
+export function loadTestable() {
+  const html = readFileSync(INDEX_HTML, 'utf8');
+  const start = html.indexOf('/* TESTABLE:START */');
+  const end = html.indexOf('/* TESTABLE:END */');
+  if (start === -1 || end === -1) {
+    throw new Error('TESTABLE markers not found in index.html');
+  }
+  const code = html.slice(start, end);
+  const result = vm.runInThisContext(
+    `(function() {
+      ${code}
+      return { ${EXPORTED_NAMES.join(', ')} };
+    })()`
+  );
+  return result;
+}
+```
+
+Replace the whole file with:
+
+```js
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import vm from 'node:vm';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const INDEX_HTML = path.join(__dirname, '..', 'index.html');
+
+const EXPORTED_NAMES = [
+  'POTS', 'PARTICIPANTS', 'TEAM_POT', 'MOCK_TEAM_STATS', 'MOCK_ELIMINATED', 'FLAGS',
+  'calcTeamScore', 'calcPersonScore',
+  'isTournamentComplete', 'computePerfectBracket', 'computeOverlap', 'findBestWorstPick',
+  'renderPodium', 'renderPerfectBracket', 'renderOverlapSection', 'renderBestWorstSection', 'renderResultsView',
+];
+
+export function loadTestable() {
+  const html = readFileSync(INDEX_HTML, 'utf8');
+  const start = html.indexOf('/* TESTABLE:START */');
+  const end = html.indexOf('/* TESTABLE:END */');
+  if (start === -1 || end === -1) {
+    throw new Error('TESTABLE markers not found in index.html');
+  }
+  const code = html.slice(start, end);
+
+  // The only DOM API the testable block ever calls is document.getElementById(id).innerHTML = string.
+  // vm.runInThisContext() runs in the real Node global object (see Task 1's report for why), so the
+  // stub is installed on globalThis for the duration of this call and removed immediately after —
+  // safe because each loadTestable() call runs the extracted code synchronously, start to finish,
+  // before returning.
+  const elements = {};
+  globalThis.document = {
+    getElementById(id) {
+      if (!elements[id]) elements[id] = { innerHTML: '' };
+      return elements[id];
+    },
+  };
+  try {
+    const result = vm.runInThisContext(
+      `(function() {
+        ${code}
+        return { ${EXPORTED_NAMES.join(', ')} };
+      })()`
+    );
+    return { ...result, elements };
+  } finally {
+    delete globalThis.document;
+  }
+}
+```
+
+- [ ] **Step 6: Write automated tests for the render functions**
+
+Create `scripts/results-render.test.mjs`:
+
+```js
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { loadTestable } from './extract-testable.mjs';
+
+test('renderResultsView shows the pending placeholder when the tournament is not complete', () => {
+  const { MOCK_TEAM_STATS, renderResultsView, elements } = loadTestable();
+  renderResultsView(MOCK_TEAM_STATS, false);
+  assert.match(elements['results-content'].innerHTML, /Tournament in progress/);
+});
+
+test('renderResultsView renders all four sections when the tournament is complete', () => {
+  const { MOCK_TEAM_STATS, renderResultsView, elements } = loadTestable();
+  renderResultsView(MOCK_TEAM_STATS, true);
+  const html = elements['results-content'].innerHTML;
+  assert.match(html, /Final Results/);
+  assert.match(html, /The Perfect Bracket/);
+  assert.match(html, /How Close Did You Get\?/);
+  assert.match(html, /Best Pick/);
+  assert.match(html, /Bust of the Pool/);
+  // Jimmy is the mock-data pool leader; France/Spain are Pot 1's top scorers.
+  assert.match(html, /Jimmy/);
+  assert.match(html, /France/);
+  assert.match(html, /Spain/);
+});
+
+test('renderPodium renders the given entries with rank classes', () => {
+  const { renderPodium } = loadTestable();
+  const html = renderPodium([{ name: 'Alice', score: 100 }, { name: 'Bob', score: 80 }]);
+  assert.match(html, /rank-1/);
+  assert.match(html, /rank-2/);
+  assert.match(html, /Alice/);
+  assert.match(html, /100/);
+  assert.match(html, /Bob/);
+});
+
+test('renderPerfectBracket lists each pot with its two teams and scores', () => {
+  const { renderPerfectBracket, MOCK_TEAM_STATS } = loadTestable();
+  const html = renderPerfectBracket({ 1: ['France', 'Spain'] }, MOCK_TEAM_STATS);
+  assert.match(html, /Pot 1/);
+  assert.match(html, /France/);
+  assert.match(html, /Spain/);
+});
+
+test('renderOverlapSection shows dot meters, matched teams, and "No matches" when empty', () => {
+  const { renderOverlapSection } = loadTestable();
+  const html = renderOverlapSection([
+    { name: 'Ian', count: 1, matched: ['France'] },
+    { name: 'Jay', count: 0, matched: [] },
+  ]);
+  assert.match(html, /Ian/);
+  assert.match(html, /1\/8/);
+  assert.match(html, /Jay/);
+  assert.match(html, /0\/8/);
+  assert.match(html, /No matches/);
+});
+
+test('renderBestWorstSection shows both pick cards with scores and pickedBy', () => {
+  const { renderBestWorstSection } = loadTestable();
+  const html = renderBestWorstSection(
+    { team: 'France', score: 154, pickedBy: ['Jimmy', 'Ian'] },
+    { team: 'Qatar', score: 2, pickedBy: ['Ryan'] }
+  );
+  assert.match(html, /Best Pick/);
+  assert.match(html, /Bust of the Pool/);
+  assert.match(html, /France/);
+  assert.match(html, /Jimmy, Ian/);
+  assert.match(html, /Qatar/);
+  assert.match(html, /Ryan/);
+});
+```
+
+- [ ] **Step 7: Run all tests and a syntax check**
+
+Run: `node --test scripts/`
+Expected: PASS — the 6 tests from Task 1 (`results-logic.test.mjs`) plus the 6 new tests in `results-render.test.mjs`, 0 failures.
+
+Then, since this task made large edits to the inline `<script>` block, confirm it still parses cleanly (no browser available to catch a stray typo visually):
 
 ```bash
-git add index.html
-git commit -m "feat: render Results view content and wire into refresh/demo"
+node -e "
+const fs = require('node:fs');
+const html = fs.readFileSync('index.html', 'utf8');
+const match = html.match(/<script>([\s\S]*?)<\/script>/);
+fs.writeFileSync('/tmp/wc-bracket-script-check.js', match[1]);
+"
+node --check /tmp/wc-bracket-script-check.js
+```
+
+Expected: no output (syntax OK).
+
+- [ ] **Step 8: Commit**
+
+```bash
+git add index.html scripts/extract-testable.mjs scripts/results-render.test.mjs
+git commit -m "$(cat <<'EOF'
+feat: render Results view content and wire into refresh/demo
+
+Extends the Node vm test harness with a minimal document stub so the
+string-returning render functions (and renderResultsView's two states)
+get real automated coverage, since no browser/jsdom is available here.
+EOF
+)"
 ```
 
 ---
@@ -767,30 +1008,35 @@ Replace with:
     });
 ```
 
-- [ ] **Step 2: Manually verify interactivity in a browser (Demo mode)**
+- [ ] **Step 2: Verify the new listeners statically**
 
-With `index.html` open in Demo mode on the Results tab:
-- Click a player row in "How Close Did You Get?" — it expands to show which specific teams matched the perfect bracket (or "No matches" if `count` is 0). Clicking again collapses it.
-- Right-click (or long-press on touch) a team flag anywhere in Results (perfect bracket row, overlap breakdown, or best/worst pick card) — the existing score breakdown modal opens showing that team's point breakdown. Close it via the ✕ button, backdrop click, or Escape.
+There is no browser or DOM-testing tool available in this environment, so confirm by inspection that the two new listeners exactly mirror the already-shipped leaderboard listeners added in `index.html` (same file, look just above your new code) — that pattern is known-working in production, so matching it is the check.
 
-- [ ] **Step 3: Manually verify the "pending" placeholder path**
+Run: `grep -n "results-content" index.html`
+Expected: two `addEventListener` calls on `document.getElementById('results-content')` — one `'click'` handler that skips `.t-flag[data-team]` and otherwise toggles `.expanded` on the closest `.ov-card`, and one `'contextmenu'` handler that calls `showScoreModal(flag.dataset.team)` after `e.preventDefault()`.
 
-Since Demo mode's mock data always represents a post-final snapshot, temporarily preview the pending state via the browser console:
+Run: `node --test scripts/`
+Expected: PASS — all 12 tests from Tasks 1 and 3 still passing (confirms this task's edits didn't touch any tested logic; this task adds no new automated tests since event dispatch itself can't be exercised without a DOM).
 
-```js
-renderResultsView(MOCK_TEAM_STATS, false)
+Then confirm the script still parses cleanly:
+
+```bash
+node -e "
+const fs = require('node:fs');
+const html = fs.readFileSync('index.html', 'utf8');
+const match = html.match(/<script>([\s\S]*?)<\/script>/);
+fs.writeFileSync('/tmp/wc-bracket-script-check.js', match[1]);
+"
+node --check /tmp/wc-bracket-script-check.js
 ```
 
-Expected: the Results tab content is replaced by the "🏆 Tournament in progress — check back after the final." placeholder, styled consistently with the rest of the app.
+Expected: no output (syntax OK).
 
-Reload the page afterward to restore normal content (this was a manual, temporary check — no code change).
+- [ ] **Step 3: Note the remaining manual check for the project owner**
 
-- [ ] **Step 4: Run the full logic test suite one more time**
+Click/right-click behavior and the pending placeholder's visual appearance can't be exercised without a real browser, which isn't available in this environment. In your final report, say so explicitly and note that a human should do one last check by opening `index.html` directly: expand/collapse a row in "How Close Did You Get?", right-click a team flag anywhere in Results to confirm the score modal opens, and run `renderResultsView(MOCK_TEAM_STATS, false)` in the browser console to preview the "tournament in progress" placeholder (then reload to restore normal content — that call has no lasting effect).
 
-Run: `node --test scripts/results-logic.test.mjs`
-Expected: PASS — all 6 tests still passing (confirms Tasks 2–4 didn't touch the tested logic).
-
-- [ ] **Step 5: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
 git add index.html
