@@ -525,7 +525,6 @@
         worst: { team: worst, score: calcTeamScore(worst, teamStats), pickedBy: draftedBy[worst] },
       };
     }
-    /* TESTABLE:END */
 
     // ── API Layer ───────────────────────────────────────────────────────────────
     // Locally: hits football-data.org directly. Deployed (GitHub Pages): reads
@@ -878,6 +877,112 @@
       list.innerHTML = html;
     }
 
+    // ── Results View ─────────────────────────────────────────────────────────────
+    const MEDAL_ICON = ['🥇', '🥈', '🥉'];
+
+    function renderPodium(podium) {
+      const rows = podium.map((p, i) => `
+        <div class="card rank-${i + 1} podium-card">
+          <div class="card-header">
+            <div class="medal">${MEDAL_ICON[i]}</div>
+            <div class="mid"><div class="name">${p.name}</div></div>
+            <div class="right"><div><div class="score">${p.score}</div><div class="pts">PTS</div></div></div>
+          </div>
+        </div>`).join('');
+      return `<section class="results-section">
+        <h2 class="results-heading">Final Results</h2>
+        ${rows}
+      </section>`;
+    }
+
+    function renderPerfectBracket(perfectBracket, teamStats) {
+      const rows = Object.entries(perfectBracket).map(([pot, teams]) => {
+        const teamHtml = teams.map(t => `
+          <span class="pb-team">
+            <span class="t-flag" data-team="${t}">${FLAGS[t] ?? '🏳️'}</span>
+            <span class="t-name">${t}</span>
+            <span class="t-score">${calcTeamScore(t, teamStats)}</span>
+          </span>`).join('');
+        return `<div class="pb-row"><span class="pb-pot">Pot ${pot}</span><div class="pb-teams">${teamHtml}</div></div>`;
+      }).join('');
+      return `<section class="results-section">
+        <h2 class="results-heading">The Perfect Bracket</h2>
+        <div class="card pb-card">${rows}</div>
+      </section>`;
+    }
+
+    function renderOverlapSection(overlaps) {
+      const rows = overlaps.map(p => {
+        const dots = Array.from({ length: 8 }, (_, i) =>
+          `<span class="ov-dot${i < p.count ? ' filled' : ''}"></span>`).join('');
+        const matchedHtml = p.matched.map(t => `
+          <span class="ov-match"><span class="t-flag" data-team="${t}">${FLAGS[t] ?? '🏳️'}</span> ${t}</span>`).join('');
+        return `<div class="card ov-card" data-name="${p.name}">
+          <div class="card-header">
+            <div class="mid"><div class="name">${p.name}</div><div class="ov-dots">${dots}</div></div>
+            <div class="right"><div class="ov-count">${p.count}/8</div><span class="chev">&#8250;</span></div>
+          </div>
+          <div class="breakdown"><div class="breakdown-inner ov-matched">${matchedHtml || '<span class="ov-none">No matches</span>'}</div></div>
+        </div>`;
+      }).join('');
+      return `<section class="results-section">
+        <h2 class="results-heading">How Close Did You Get?</h2>
+        ${rows}
+      </section>`;
+    }
+
+    function renderBestWorstSection(best, worst) {
+      const pickCard = (icon, label, pick, cls) => `
+        <div class="card pick-card ${cls}">
+          <div class="pick-icon">${icon}</div>
+          <div class="pick-label">${label}</div>
+          <div class="pick-team">
+            <span class="t-flag" data-team="${pick.team}">${FLAGS[pick.team] ?? '🏳️'}</span>
+            <span class="t-name">${pick.team}</span>
+          </div>
+          <div class="pick-score">${pick.score} pts</div>
+          <div class="pick-by">Picked by ${pick.pickedBy.join(', ')}</div>
+        </div>`;
+      return `<section class="results-section">
+        <h2 class="results-heading">Best Pick &amp; Bust of the Pool</h2>
+        <div class="pick-row">
+          ${pickCard('🔥', 'Best Pick', best, 'pick-best')}
+          ${pickCard('💀', 'Bust of the Pool', worst, 'pick-worst')}
+        </div>
+      </section>`;
+    }
+
+    function renderResultsView(teamStats, isComplete) {
+      const container = document.getElementById('results-content');
+      if (!isComplete) {
+        container.innerHTML = `
+          <div class="results-pending">
+            <span class="results-pending-icon">🏆</span>
+            <p class="results-pending-text">Tournament in progress — check back after the final.</p>
+          </div>`;
+        return;
+      }
+
+      const ranked = PARTICIPANTS
+        .map(p => ({ ...p, score: calcPersonScore(p, teamStats) }))
+        .sort((a, b) => b.score - a.score);
+      const podium = ranked.slice(0, 3);
+      const perfectBracket = computePerfectBracket(teamStats);
+      const perfectTeamsSet = new Set(Object.values(perfectBracket).flat());
+      const overlaps = ranked
+        .map(p => ({ ...p, ...computeOverlap(p, perfectTeamsSet) }))
+        .sort((a, b) => b.count - a.count);
+      const { best, worst } = findBestWorstPick(teamStats);
+
+      container.innerHTML = [
+        renderPodium(podium),
+        renderPerfectBracket(perfectBracket, teamStats),
+        renderOverlapSection(overlaps),
+        renderBestWorstSection(best, worst),
+      ].join('');
+    }
+    /* TESTABLE:END */
+
     // ── App Controller ────────────────────────────────────────────────────────────
     const LIVE_INTERVAL = 60_000;
     const IDLE_INTERVAL = 5 * 60_000;
@@ -899,6 +1004,7 @@
       eliminatedTeams = MOCK_ELIMINATED;
       lastTeamStats = MOCK_TEAM_STATS;
       renderLeaderboard(MOCK_TEAM_STATS);
+      renderResultsView(MOCK_TEAM_STATS, true);
       document.getElementById('last-updated').textContent = 'Demo · post-final snapshot — France champions';
       setStatusColor('demo');
       setRefreshing(false);
@@ -914,6 +1020,7 @@
         lastTeamStats = teamStats;
         buildActivitySets(matches, teamStats);
         renderLeaderboard(teamStats);
+        renderResultsView(teamStats, isTournamentComplete(matches));
         if (currentView === 'matches') renderMatchesView(matches.matches);
         updateLastUpdated(matches);
         setStatusColor('live');
@@ -925,6 +1032,7 @@
           lastTeamStats = teamStats;
           buildActivitySets(lastGoodData.matches, teamStats);
           renderLeaderboard(teamStats);
+          renderResultsView(teamStats, isTournamentComplete(lastGoodData.matches));
           updateLastUpdated(lastGoodData.matches);
           document.getElementById('last-updated').textContent += ' · could not refresh';
           setStatusColor('error');
