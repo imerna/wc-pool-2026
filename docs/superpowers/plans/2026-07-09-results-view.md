@@ -1015,7 +1015,7 @@ There is no browser or DOM-testing tool available in this environment, so confir
 Run: `grep -n "results-content" index.html`
 Expected: two `addEventListener` calls on `document.getElementById('results-content')` — one `'click'` handler that skips `.t-flag[data-team]` and otherwise toggles `.expanded` on the closest `.ov-card`, and one `'contextmenu'` handler that calls `showScoreModal(flag.dataset.team)` after `e.preventDefault()`.
 
-Run: `node --test scripts/`
+Run: `node --test scripts/*.test.mjs` (the directory form `node --test scripts/` fails on this Node version with `MODULE_NOT_FOUND` — Task 3 hit this and confirmed the glob form is the working equivalent)
 Expected: PASS — all 12 tests from Tasks 1 and 3 still passing (confirms this task's edits didn't touch any tested logic; this task adds no new automated tests since event dispatch itself can't be exercised without a DOM).
 
 Then confirm the script still parses cleanly:
