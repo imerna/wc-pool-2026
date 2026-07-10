@@ -33,7 +33,7 @@ export function loadTestable() {
   const elements = {};
   globalThis.document = {
     getElementById(id) {
-      if (!elements[id]) elements[id] = { innerHTML: '' };
+      if (!elements[id]) elements[id] = { innerHTML: '', querySelector: () => null };
       return elements[id];
     },
   };

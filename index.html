@@ -725,6 +725,11 @@
           <p class="error-title">Whoa there, partner.</p>
           <p class="error-sub">Slow down, cowboy — the API's winded.<br>Give it a minute and mosey on back.</p>
         </div>`;
+      document.getElementById('results-content').innerHTML = `
+        <div class="results-pending">
+          <span class="results-pending-icon">🤠</span>
+          <p class="results-pending-text">Could not load data yet — check back soon.</p>
+        </div>`;
     }
 
     // ── Matches View ─────────────────────────────────────────────────────────────
@@ -911,13 +916,14 @@
       </section>`;
     }
 
-    function renderOverlapSection(overlaps) {
+    function renderOverlapSection(overlaps, expandedName = null) {
       const rows = overlaps.map(p => {
         const dots = Array.from({ length: 8 }, (_, i) =>
           `<span class="ov-dot${i < p.count ? ' filled' : ''}"></span>`).join('');
         const matchedHtml = p.matched.map(t => `
           <span class="ov-match"><span class="t-flag" data-team="${t}">${FLAGS[t] ?? '🏳️'}</span> ${t}</span>`).join('');
-        return `<div class="card ov-card" data-name="${p.name}">
+        const expanded = p.name === expandedName ? ' expanded' : '';
+        return `<div class="card ov-card${expanded}" data-name="${p.name}">
           <div class="card-header">
             <div class="mid"><div class="name">${p.name}</div><div class="ov-dots">${dots}</div></div>
             <div class="right"><div class="ov-count">${p.count}/8</div><span class="chev">&#8250;</span></div>
@@ -963,6 +969,8 @@
         return;
       }
 
+      const expandedName = container.querySelector('.ov-card.expanded')?.dataset.name ?? null;
+
       const ranked = PARTICIPANTS
         .map(p => ({ ...p, score: calcPersonScore(p, teamStats) }))
         .sort((a, b) => b.score - a.score);
@@ -977,7 +985,7 @@
       container.innerHTML = [
         renderPodium(podium),
         renderPerfectBracket(perfectBracket, teamStats),
-        renderOverlapSection(overlaps),
+        renderOverlapSection(overlaps, expandedName),
         renderBestWorstSection(best, worst),
       ].join('');
     }

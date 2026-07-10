@@ -54,6 +54,19 @@ test('renderOverlapSection shows dot meters, matched teams, and "No matches" whe
   assert.match(html, /No matches/);
 });
 
+test('renderOverlapSection marks only the matching card as expanded', () => {
+  const { renderOverlapSection } = loadTestable();
+  const overlaps = [
+    { name: 'Ian', count: 1, matched: ['France'] },
+    { name: 'Jay', count: 0, matched: [] },
+  ];
+  const html = renderOverlapSection(overlaps, 'Jay');
+  const ianCard = html.slice(html.indexOf('data-name="Ian"') - 40, html.indexOf('data-name="Ian"'));
+  const jayCard = html.slice(html.indexOf('data-name="Jay"') - 40, html.indexOf('data-name="Jay"'));
+  assert.doesNotMatch(ianCard, /expanded/);
+  assert.match(jayCard, /expanded/);
+});
+
 test('renderBestWorstSection shows both pick cards with scores and pickedBy', () => {
   const { renderBestWorstSection } = loadTestable();
   const html = renderBestWorstSection(
