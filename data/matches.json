@@ -6557,11 +6557,11 @@
       },
       "id": 537385,
       "utcDate": "2026-07-11T21:00:00Z",
-      "status": "IN_PLAY",
+      "status": "PAUSED",
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-11T23:30:07Z",
+      "lastUpdated": "2026-07-11T23:40:19Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -6911,5 +6911,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-11T23:30:22Z"
+  "_fetchedAt": "2026-07-11T23:40:20Z"
 }
