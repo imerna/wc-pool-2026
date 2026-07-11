@@ -6,7 +6,7 @@
     "count": 104,
     "first": "2026-06-11",
     "last": "2026-07-19",
-    "played": 98
+    "played": 97
   },
   "competition": {
     "id": 2000,
@@ -6083,11 +6083,11 @@
       },
       "id": 537378,
       "utcDate": "2026-07-06T01:00:00Z",
-      "status": "FINISHED",
+      "status": "2026-07-06 01:00:00Z",
       "matchday": null,
       "stage": "LAST_16",
       "group": null,
-      "lastUpdated": "2026-07-11T05:20:09Z",
+      "lastUpdated": "2026-07-11T21:11:56Z",
       "homeTeam": {
         "id": 769,
         "name": "Mexico",
@@ -6561,7 +6561,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-11T21:09:46Z",
+      "lastUpdated": "2026-07-11T21:19:57Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -6896,5 +6896,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-11T21:10:22Z"
+  "_fetchedAt": "2026-07-11T21:20:19Z"
 }
