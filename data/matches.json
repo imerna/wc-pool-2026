@@ -6635,7 +6635,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-12T03:08:46Z",
+      "lastUpdated": "2026-07-12T03:20:10Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6652,13 +6652,21 @@
       },
       "score": {
         "winner": "DRAW",
-        "duration": "REGULAR",
+        "duration": "EXTRA_TIME",
         "fullTime": {
           "home": 1,
           "away": 1
         },
         "halfTime": {
           "home": 1,
+          "away": 0
+        },
+        "regularTime": {
+          "home": null,
+          "away": null
+        },
+        "extraTime": {
+          "home": 0,
           "away": 0
         }
       },
@@ -6911,5 +6919,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-12T03:10:20Z"
+  "_fetchedAt": "2026-07-12T03:20:20Z"
 }
