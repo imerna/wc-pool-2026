@@ -6631,11 +6631,11 @@
       },
       "id": 537386,
       "utcDate": "2026-07-12T01:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-12T01:56:46Z",
+      "lastUpdated": "2026-07-12T02:19:33Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6911,5 +6911,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-12T02:10:21Z"
+  "_fetchedAt": "2026-07-12T02:20:22Z"
 }
