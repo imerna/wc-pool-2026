@@ -6561,7 +6561,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-11T23:53:31Z",
+      "lastUpdated": "2026-07-12T05:52:40Z",
       "homeTeam": {
         "id": 8872,
         "name": "Norway",
@@ -6635,7 +6635,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-12T03:51:58Z",
+      "lastUpdated": "2026-07-12T05:52:40Z",
       "homeTeam": {
         "id": 762,
         "name": "Argentina",
@@ -6919,5 +6919,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-12T05:50:18Z"
+  "_fetchedAt": "2026-07-12T06:00:24Z"
 }
