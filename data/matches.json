@@ -6709,7 +6709,7 @@
       "matchday": null,
       "stage": "SEMI_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-14T19:40:07Z",
+      "lastUpdated": "2026-07-14T19:50:07Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6926,5 +6926,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-14T19:40:21Z"
+  "_fetchedAt": "2026-07-14T19:50:22Z"
 }
