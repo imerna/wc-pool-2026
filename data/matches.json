@@ -6705,11 +6705,11 @@
       },
       "id": 537387,
       "utcDate": "2026-07-14T19:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "SEMI_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-14T19:57:16Z",
+      "lastUpdated": "2026-07-14T20:20:00Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6926,5 +6926,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-14T20:10:25Z"
+  "_fetchedAt": "2026-07-14T20:20:23Z"
 }
