@@ -6775,7 +6775,7 @@
       "matchday": null,
       "stage": "SEMI_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-15T20:29:46Z",
+      "lastUpdated": "2026-07-15T20:39:58Z",
       "homeTeam": {
         "id": 770,
         "name": "England",
@@ -6933,5 +6933,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-15T20:30:27Z"
+  "_fetchedAt": "2026-07-15T20:40:22Z"
 }
