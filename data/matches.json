@@ -6429,7 +6429,7 @@
       "matchday": null,
       "stage": "QUARTER_FINALS",
       "group": null,
-      "lastUpdated": "2026-07-17T05:20:06Z",
+      "lastUpdated": "2026-07-17T08:25:01Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6933,5 +6933,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-17T06:50:15Z"
+  "_fetchedAt": "2026-07-17T16:00:19Z"
 }
