@@ -6841,7 +6841,7 @@
       "matchday": null,
       "stage": "THIRD_PLACE",
       "group": null,
-      "lastUpdated": "2026-07-18T22:19:24Z",
+      "lastUpdated": "2026-07-18T22:29:36Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6860,7 +6860,7 @@
         "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 1,
+          "home": 2,
           "away": 4
         },
         "halfTime": {
@@ -6940,5 +6940,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-18T22:20:12Z"
+  "_fetchedAt": "2026-07-18T22:30:15Z"
 }
