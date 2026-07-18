@@ -6871,7 +6871,14 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 28805,
+          "name": "Jesús Valenzuela",
+          "type": "REFEREE",
+          "nationality": "Venezuela"
+        }
+      ]
     },
     {
       "area": {
@@ -6933,5 +6940,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-18T18:50:15Z"
+  "_fetchedAt": "2026-07-18T19:00:16Z"
 }
