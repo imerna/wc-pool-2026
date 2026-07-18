@@ -6837,11 +6837,11 @@
       },
       "id": 537389,
       "utcDate": "2026-07-18T21:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "THIRD_PLACE",
       "group": null,
-      "lastUpdated": "2026-07-18T21:56:00Z",
+      "lastUpdated": "2026-07-18T22:19:24Z",
       "homeTeam": {
         "id": 773,
         "name": "France",
@@ -6860,7 +6860,7 @@
         "winner": "AWAY_TEAM",
         "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 4
         },
         "halfTime": {
@@ -6940,5 +6940,5 @@
       "referees": []
     }
   ],
-  "_fetchedAt": "2026-07-18T22:10:14Z"
+  "_fetchedAt": "2026-07-18T22:20:12Z"
 }
