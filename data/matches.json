@@ -6903,11 +6903,11 @@
       },
       "id": 537390,
       "utcDate": "2026-07-19T19:00:00Z",
-      "status": "IN_PLAY",
+      "status": "LIVE",
       "matchday": null,
       "stage": "FINAL",
       "group": null,
-      "lastUpdated": "2026-07-19T21:39:52Z",
+      "lastUpdated": "2026-07-19T21:50:10Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -6923,10 +6923,10 @@
         "crest": "https://crests.football-data.org/762.png"
       },
       "score": {
-        "winner": "DRAW",
-        "duration": "EXTRA_TIME",
+        "winner": "HOME_TEAM",
+        "duration": "REGULAR",
         "fullTime": {
-          "home": 0,
+          "home": 1,
           "away": 0
         },
         "halfTime": {
@@ -6955,5 +6955,5 @@
       ]
     }
   ],
-  "_fetchedAt": "2026-07-19T21:40:15Z"
+  "_fetchedAt": "2026-07-19T21:50:13Z"
 }
