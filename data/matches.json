@@ -6903,11 +6903,11 @@
       },
       "id": 537390,
       "utcDate": "2026-07-19T19:00:00Z",
-      "status": "PAUSED",
+      "status": "IN_PLAY",
       "matchday": null,
       "stage": "FINAL",
       "group": null,
-      "lastUpdated": "2026-07-19T20:02:21Z",
+      "lastUpdated": "2026-07-19T20:29:57Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -6947,5 +6947,5 @@
       ]
     }
   ],
-  "_fetchedAt": "2026-07-19T20:20:12Z"
+  "_fetchedAt": "2026-07-19T20:30:18Z"
 }
