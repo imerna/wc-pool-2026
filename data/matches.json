@@ -6937,8 +6937,15 @@
       "odds": {
         "msg": "Activate Odds-Package in User-Panel to retrieve odds."
       },
-      "referees": []
+      "referees": [
+        {
+          "id": 9351,
+          "name": "Slavko Vinčič",
+          "type": "REFEREE",
+          "nationality": "Slovenia"
+        }
+      ]
     }
   ],
-  "_fetchedAt": "2026-07-19T16:50:14Z"
+  "_fetchedAt": "2026-07-19T17:00:20Z"
 }
