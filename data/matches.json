@@ -6907,7 +6907,7 @@
       "matchday": null,
       "stage": "FINAL",
       "group": null,
-      "lastUpdated": "2026-07-19T21:29:52Z",
+      "lastUpdated": "2026-07-19T21:39:52Z",
       "homeTeam": {
         "id": 760,
         "name": "Spain",
@@ -6924,12 +6924,20 @@
       },
       "score": {
         "winner": "DRAW",
-        "duration": "REGULAR",
+        "duration": "EXTRA_TIME",
         "fullTime": {
           "home": 0,
           "away": 0
         },
         "halfTime": {
+          "home": 0,
+          "away": 0
+        },
+        "regularTime": {
+          "home": null,
+          "away": null
+        },
+        "extraTime": {
           "home": 0,
           "away": 0
         }
@@ -6947,5 +6955,5 @@
       ]
     }
   ],
-  "_fetchedAt": "2026-07-19T21:30:17Z"
+  "_fetchedAt": "2026-07-19T21:40:15Z"
 }
